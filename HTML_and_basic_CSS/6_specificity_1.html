@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* Specificity  10*/
+        .wide {
+            border: 1px solid red;
+            color: red;
+        }
+
+        /* Specificity  10*/
+        .narrow{
+            border: 1px dotted green;
+            color:green;
+        }
+
+        /* Specificity  100*/
+        #special {
+            font-style: italic;
+            text-decoration: underline;
+            color: blue;
+        }
+
+        /* Specificity  11*/
+        .wide span{
+            color: black;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <p class="wide">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum esse eligendi fuga laborum dolor repellat pariatur! Vero exercitationem voluptatum autem. Fugit unde autem accusantium! In, <span id="special">temporibus ex. Nesciunt, ducimus eum.</span>
+    Quisquam eaque ut necessitatibus iste illum reprehenderit laboriosam corporis aspernatur nostrum nesciunt expedita voluptas ab mollitia ratione earum, odit provident obcaecati perferendis. Provident incidunt nemo obcaecati quo voluptates et labore?
+    Ipsam repellat eveniet quae commodi blanditiis esse quo error, optio recusandae, fugiat aliquid possimus aliquam iste et. Repudiandae voluptas sunt nobis quibusdam fugit explicabo ipsum, totam, doloribus quas laboriosam impedit.
+    Atque voluptatibus officiis quod architecto est, dolore provident consectetur omnis quas neque nisi sint earum non cupiditate? Debitis, quod, temporibus architecto amet earum in mollitia, fugiat ipsa nostrum ratione expedita.
+    Libero dolorem cumque consequatur veritatis exercitationem. Rerum consectetur maiores earum facilis rem laudantium accusantium omnis et ipsam expedita! Provident mollitia, sequi natus rerum tempora eius iure rem excepturi. Minima, aliquid.</p>
+
+    <p class="narrow">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam unde doloribus, doloremque eligendi cupiditate quae sapiente nostrum obcaecati enim autem vero. Fugiat voluptatem neque perspiciatis rerum ipsam fugit assumenda tempora?</p>
+
+    <p class="wide">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi error veniam aut sequi. <span>Obcaecati sapiente quaerat saepe id esse explicabo tempore, natus quae</span> repellendus, possimus dignissimos a molestiae magni voluptate.</p>
+</body>
+</html>

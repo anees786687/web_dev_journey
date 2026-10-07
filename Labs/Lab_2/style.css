@@ -1,0 +1,65 @@
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+label>span {
+    float: left;
+    width: 120px;
+}
+
+.form_buttons {
+    margin-left: 120px;
+}
+
+.form_buttons button{
+    background-color: burlywood;
+    border-radius: 10px;
+
+}
+
+.form_buttons button[type="reset"]:hover {
+    background-color: red;
+}
+
+.form_components #required {
+    color: red;
+}
+
+.form_components label {
+    color: rgb(122, 7, 228);
+    text-shadow: 2px 2px 4px black;
+}
+
+.form_components input {
+    box-shadow: 3px 3px ;
+    background-color: rgb(207, 237, 147);
+    border: 2px solid black;
+}
+
+.form_components input:focus{
+    background-color: white;
+}
+
+fieldset {
+    background-color: rgb(143, 244, 244);
+    border-radius: 1.5em;
+}
+
+fieldset legend {
+    background-color: rgb(143, 244, 244);
+    font-style: oblique;
+    border-radius: inherit;
+    width: 5em;
+    margin-left: 20px;
+}
+
+select {
+    width: 180px;
+    height: 25px;
+    border-radius: 5px;
+    box-shadow: 3px 3px ;
+    color: blue;
+    background-color: rgb(207, 237, 147);
+
+}

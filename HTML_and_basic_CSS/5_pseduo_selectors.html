@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a:link{
+            color: black;
+            text-decoration: none;
+            font-style: italic;
+            font-weight: bold;
+            display: block;
+            width: 100px;
+        }
+
+        
+        a:visited {
+            color: green;
+            background-color: aqua;
+            font-style: normal;
+        }
+        a:hover{
+            color: red;
+            background-color: yellow;
+        }
+
+        li:nth-child(even){
+            color: blue;
+        }
+
+        li:nth-child(odd){
+            color: green;
+        }
+
+        input:hover {
+            background-color: blue;
+            border: 2px solid black;
+        }
+
+        input:focus {
+            background-color: green;
+            color: white;
+            border: 2px dotted red;
+        }
+
+        input::placeholder {
+            text-indent: 10%;
+            color: red;
+        }
+
+        ::selection {
+            background: black;
+            color: white;
+        }
+
+        p::first-line{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>TEST</h1>
+    <nav>
+        <a href="/html">HTML</a>
+        <a href="/CSS">CSS</a>
+        <a href="/JS">JS</a>
+        <a href="jQuery">jQuery</a>
+        <a href="https://www.google.com">google</a>
+        <a href="https://www.instagram.com">insta</a>
+    </nav>
+
+    <ul>
+        <li>XML</li>
+        <li>SHML</li>
+        <li>W3C</li>
+        <li>DOM</li>
+        <li>SAX</li>
+        <li>WWW</li>
+        <li>HTTP</li>
+        <li>FTP</li>
+        <li>SMPS</li>
+        <li>ES</li>
+    </ul>
+
+    <form action="">
+        <p>
+            Yor name:
+            <input type="text" placeholder="Enter your name">
+        </p>
+    </form>
+
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia itaque consequatur laboriosam provident, sint ducimus nemo ipsum earum suscipit maxime eos aspernatur ipsam officiis asperiores. Quidem laboriosam corporis debitis aut?
+    Assumenda hic soluta earum quos officia, tempore vitae quae natus vel sapiente a ea amet alias culpa possimus, nulla ad doloremque nemo veritatis nisi. Facere quaerat laudantium est libero? Laborum.</p>
+</body>
+</html>

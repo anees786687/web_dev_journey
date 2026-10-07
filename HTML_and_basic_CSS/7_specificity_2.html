@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div{
+            color: blue;
+        }
+
+        body div p{
+            color: brown;
+        }
+
+        div p{
+            color: red;
+        }
+
+        div ul li{
+            color: green;
+        }
+
+        #outer li{
+            color: red
+        }
+    </style>
+</head>
+<body>
+    
+    <div style="width: 700px; color: green; border: 2px dotted green;">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam dignissimos tenetur molestiae sequi rem illo dolores consectetur laudantium distinctio explicabo dolorum vel, soluta non exercitationem natus aut incidunt nobis! Nesciunt.
+    </div>
+
+    <div>
+        This is outside paragraph element
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi, facilis, sint iste laboriosam repellendus tempore voluptatibus hic unde quo vero quasi laborum ipsa mollitia neque nulla vitae possimus, expedita cupiditate.
+        </p>
+
+        <div>
+            <div id="outer" class="container">
+                <ul>
+                    <li class="nav">One</li>
+                    <li class="nav">Two</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

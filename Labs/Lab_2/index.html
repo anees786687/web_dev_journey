@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="">
+        <fieldset>
+            <legend>Personal</legend>
+            <div class="form_components">
+                <label for="name"><span>Name <span id="required">*</span>: </span> 
+                    <input type="text" name="name" id="name" required>
+                </label>
+
+                <label for="email"><span>Email <span id="required">*</span>: </span> 
+                    <input type="email" name="email" id="email">
+                </label>
+
+                <label for="department"><span>Department </span>
+                    <select name="department" id="department">
+                        <option value="CS">Computer Science</option>
+                        <option value="EXTC">EXTC</option>
+                        <option value="DS">Data Science</option>
+                    </select>
+                </label>
+
+                <div class="form_buttons">
+                    <button type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

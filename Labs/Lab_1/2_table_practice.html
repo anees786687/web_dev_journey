@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        caption {
+            text-align: center; font-weight: bold; text-decoration: underline;
+            font-size: xx-large;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 2px solid black;
+            width: 100%;
+        }
+
+        th, td {
+            border: 2px solid black;
+            padding: 20px;
+        }
+
+        thead tr{
+            background-color: rgb(25, 145, 25);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption>Student Information</caption>
+
+        <thead> 
+            <tr>
+                <th>Sr No.</th>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Department</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>1995-08-15</td>
+                <td>Male</td>
+                <td>Computer Science</td>
+                <td>johndoe@example.com</td>
+                <td>123</td>
+            </tr>
+
+              <tr>
+                <td>2</td>
+                <td>Jane Smite</td>
+                <td>1998-04-22</td>
+                <td>Female</td>
+                <td>Engineering</td>
+                <td>janesmith@example.com</td>
+                <td>234</td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>Alice Johnson</td>
+                <td>1997-10-03</td>
+                <td>Female</td>
+                <td rowspan="2">Physics</td>
+                <td>alicejohnson@example.com</td>
+                <td>345</td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td>Bob Williams</td>
+                <td>1996-12-18</td>
+                <td>Male</td>
+                <td>bobwilliams@example.com</td>
+                <td>456</td>
+            </tr>
+
+            <tr>
+                <td>5</td>
+                <td>Eve Brown</td>
+                <td>1999-02-25</td>
+                <td>Female</td>
+                <td>Chemistry</td>
+                <td>evebrown@example.com</td>
+                <td>567</td>
+            </tr>
+
+            <tr>
+                <td>6</td>
+                <td>David Miller</td>
+                <td>1994-06-07</td>
+                <td>Feale</td>
+                <td>HistoryScience</td>
+                <td>davidmiller@example.com</td>
+                <td>678</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

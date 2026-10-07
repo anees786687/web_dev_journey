@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- The student information to be collected is as follows.
+
+Name: 
+
+Date of birth:
+
+Gender:
+
+Department:
+
+Email:
+
+Mobile number:
+
+Address:
+
+City:
+
+Country:
+
+Username:
+
+Password: -->
+    <form action="" method="post">
+       <fieldset>
+        <legend>Student Information</legend>
+
+        <fieldset>
+            <legend>Personal Information</legend>
+            
+            <label for="student_name">Name: </label>
+            <input type="text" name="student_name" id="student_name">
+            <br><br>
+            
+            <label for="student_dob">Date of Birth: </label>
+            <input type="date" name="student_dob" id="student_dob">
+            <br><br>
+            
+            <label for="student_gender">Gender</label>
+            <input type="radio" name="student_gender" id="student_gender" value="Male" required>
+            <label>Male</label>
+            <input type="radio" name="student_gender" id="student_gender" value="Female">
+            <label>Female</label>    
+            <br><br>
+            
+            <label for="student_department">Department: </label>
+            <select name="student_department" id="student_department">
+                <option value="CS">Computer Science</option>
+                <option value="EXTC">Electronics and Telecommunication</option>
+                <option value="DS">Data Science</option>
+            </select>
+            <br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Contact Information</legend>
+            
+            <label for="student_email">Email: </label>
+            <input type="email" name="student_email" id="student_email">
+            <br><br>
+            
+            <label for="student_contact">Mobile: </label>
+            <input type="tel" name="student_contact" id="student_contact">
+            <br><br>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Address Information</legend>
+            <label for="student_addy">Address: </label>
+            <textarea name="student_addy" id="student_addy" rows="5" cols="50"></textarea>
+            <br><br>
+            
+            <label for="student_city">City: </label>
+            <input type="text" name="student_city" id="student_city">
+            <br><br>
+            
+            <label for="student_country">Country: </label>
+            <input type="text" name="student_country" id="student_country">
+            <br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Login Details</legend>
+            <label for="student_uname">Username: </label>
+            <input type="text" name="student_uname" id="student_uname" required>
+            <br><br>
+            
+            <label for="student_pass">Password: </label>
+            <input type="text" name="student_pass" id="student_pass" required>
+            <br><br>
+        </fieldset>
+        <br><br>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </fieldset>
+    </form>
+</body>
+</html>

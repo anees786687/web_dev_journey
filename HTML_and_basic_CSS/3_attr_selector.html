@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [data] {
+            color: green;
+        }
+
+        [data="WT"] {
+            background-color: yellow;
+        }
+
+        [data~="WT"] {
+            font-style: italic;
+        }
+
+        [data^="W"] {
+            text-decoration: underline;
+        }
+
+        [data$="kup"]{
+            font-weight: 900;
+        }
+
+        [data*="wt java" i] {
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li data="WT">HTML</li>
+        <li data="WT JavaScript">DOM</li>
+        <li data="web server">Node.js</li>
+        <li data="markup">XML</li>
+        <li>Images</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,54 @@
+.nav_container {
+    background-color: rgb(48, 47, 47);
+    color: white;
+    text-align: center;
+    height: 75;
+    padding: 25px 50px;
+}
+
+.box {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    align-content: center;
+    margin: 20px 0px 0px 20px;
+    background-color: rgb(70, 70, 247);
+}
+
+.static_box {
+    position: static;
+}
+
+.realtive_box {
+    position: relative;
+    left: 200px;
+    background-color: aqua;
+}
+
+.absolute_container {
+    position: relative;
+    border: 2px solid black;
+    height: 250px;
+    width: 500px;
+}
+
+.absolute_box {
+    position: absolute;
+    left:   50px;
+    top: 100px;
+    background-color: red;
+}
+
+.fixed_box{
+    position: fixed;
+    background-color: green;
+    bottom: 20px;
+    right: 20px;
+}
+
+.sticky_box{
+    position: sticky;
+    background-color: blueviolet;
+    left: 50px;
+    top: 0px;
+}
