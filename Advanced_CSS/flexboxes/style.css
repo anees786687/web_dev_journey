@@ -1,0 +1,110 @@
+.container{
+    padding: 0;
+    margin: 0;
+    height: 500px;
+    display: flex;
+    border: 2px solid black;
+    /* 
+    ·   Definition
+            o	The flex-direction property specifies which direction the main axis runs.
+    ·	Why It Matters
+            o	The main axis determines the direction in which flex items are laid out.
+            o	Setting a direction with flex-direction makes the flex items follow that same direction.
+    ·	Possible Values
+            o	There are four possible values: row, row-reverse, column, and column-reverse.
+
+    
+    */
+    flex-direction: column-reverse;
+
+    /* 
+        flexwrap - allows flex items to warped; add flexibility
+        and support for various screen size
+     */
+    /* flex-wrap: nowrap; */
+    /* flex-wrap: wrap; */
+    /* flex-wrap: wrap-reverse; */
+
+    /* 
+        flex-flow - shortcut that combines flex direction and flex wrap
+        first mention direction then mention wrap
+    */
+    /* flex-flow: row wrap; */
+
+    /* 
+        justify-content 
+            o	Defines how flex items align along the main axis, distributing any extra space.
+            o	Examples: 
+                §	space-around: equal space around each item, giving a visually balanced layout.
+                §	center: centers the items along the main axis.
+
+    */
+    /* justify-content: space-around; */
+
+    /*
+        align-items
+            o	Determines the default alignment of flex items along the cross axis.
+            o	Like justify-content, it can align items at the start, end, or center, or distribute them evenly, using values such as flex-end, center, or stretch.
+
+    */
+    /* align-items: start; */
+
+
+}
+
+.flex-item{
+    background-color: lightgreen;
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    padding: 2px;
+    margin: 10px;
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+/* The order property in CSS specifies the visual arrangement of items inside a flex or grid container. It allows you to change the order in which elements appear on the screen without modifying the actual HTML source code.
+
+The order of the atricles will be reversed
+
+*/
+/* #a_1{
+ order: 7;   
+
+}
+
+
+#a_2{
+ order: 6;   
+    
+}
+
+
+#a_3{
+ order: 5;   
+    
+}
+
+
+#a_4{
+ order: 4;   
+    
+}
+
+
+#a_5{
+ order: 3;   
+    
+}
+
+
+#a_6{
+ order: 2;   
+    
+}
+
+
+#a_7{
+ order: 1;   
+} */

@@ -11,6 +11,9 @@
 }
 
 #box1 {
+    /* A float property without width does not make sense, always use width property 
+        with float to see the effects.
+    */
     float: right;
 }
 
@@ -26,6 +29,6 @@
 }
 
 #box4{
+    /* Use clear to ensure elements do not overlap */
     clear: right;
-
 }

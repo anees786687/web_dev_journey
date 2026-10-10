@@ -1,0 +1,55 @@
+.container{
+    border: 2px solid black;
+    display: grid;
+    /* With pixels - remaining viewport will be empty */
+    /* grid-template-columns: 200px 200px 200px; */
+
+    /* With fractional units */
+    /*THis will occupy the whole viewport*/
+    /* grid-template-columns: 1fr 1fr 1fr; */
+
+    /* With fractional units using repeat notation*/
+    grid-template-columns: repeat(3, 1fr);
+
+    /* tried this with fr but it dont work; px works */
+    /* grid-template-rows: repeat(3, 200px); */
+
+    /*  using grid-auto-rows without minmax will cause
+        the content of a div to overflow
+    */
+    /* grid-auto-rows: 100px; */
+
+    /* using minmax function to solve the overflow problem */
+    grid-auto-rows: minmax(100px, auto);
+
+    /* Playing with grid gap - two ways to do it
+       1st way use gap property; row first then column
+
+       PS dont use grid-gap, it is obsolete
+    */
+    /* gap: 10px 20px; */
+
+    /* 2nd way to add grid gap
+       PS dont use grid-row-gap and grid-column-gap as 
+       they are obsolete 
+    */
+    row-gap: 10px;
+    column-gap: 20px;
+    
+}
+
+.grid_items {
+    border-radius: 5px;
+    padding: 10px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}
+
+#box_9{
+    display: flex;
+    flex-direction: column;
+    background-color: blanchedalmond;
+}
