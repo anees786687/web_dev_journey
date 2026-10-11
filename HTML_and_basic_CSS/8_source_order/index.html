@@ -1,34 +1,53 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: Source Order + the 3 ways to add CSS
+    -------------------------------------------
+    The 3 ways to add CSS to a page:
+        1. INTERNAL  -> a <style> block inside <head>        (used below)
+        2. EXTERNAL  -> <link rel="stylesheet" href="...">   (style.css)
+        3. INLINE    -> style="..." attribute on an element  (the green div)
+    External files are the usual choice in real projects: one file can style many pages.
+
+    SOURCE ORDER RULE: if two rules have the SAME specificity, the one the
+    browser reads LAST wins. The browser reads the page top to bottom, so here
+    style.css (linked AFTER the <style> block) overrides it.
+
+    TRY IT: Move the <link> tag ABOVE the <style> block and refresh.
+    The h1 turns white and the paragraph turns red again.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    
-    
+
+
+    <!-- 1st: internal stylesheet (read first) -->
     <style>
         h1 {
-            font-family: Arial;
-            color: white;
+            font-family: Arial;   /* style.css doesn't set font-family, so this STILL applies */
+            color: white;         /* overridden by style.css (blue), which is read later */
         }
-        
+
         p{
-            border: 1px solid red;
-            color: red;
+            border: 1px solid red; /* still applies; style.css doesn't touch border */
+            color: red;            /* overridden by style.css (purple) */
         }
-        
+
         body {
             background-color: black;
         }
     </style>
 
-    
+
+    <!-- 2nd: external stylesheet (read last, so it wins ties) -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>LOREM IPSUM</h1>
 
+    <!-- 3rd: inline style. It beats both stylesheets for this element. -->
     <div style="width: 700px; color: green; border: 2px dotted green;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum esse eligendi fuga laborum dolor repellat pariatur! Vero exercitationem voluptatum autem. Fugit unde autem accusantium! In, <span>temporibus ex. Nesciunt, ducimus eum.</span>
     Quisquam eaque ut necessitatibus iste illum reprehenderit laboriosam corporis aspernatur nostrum nesciunt expedita voluptas ab mollitia ratione earum, odit provident obcaecati perferendis. Provident incidunt nemo obcaecati quo voluptates et labore?
     Ipsam repellat eveniet quae commodi blanditiis esse quo error, optio recusandae, fugiat aliquid possimus aliquam iste et. Repudiandae voluptas sunt nobis quibusdam fugit explicabo ipsum, totam, doloribus quas laboriosam impedit.

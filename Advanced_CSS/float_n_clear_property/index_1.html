@@ -1,11 +1,26 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: float and clear (example 2 - a classic 2-column layout)
+    --------------------------------------------------------------
+    Before Flexbox and Grid, this is how websites built a page with a header,
+    two side-by-side columns and a footer:
+        1. Float both columns to the left so they sit next to each other.
+        2. Give them widths that add up to 100% (20% + 80%).
+        3. Add an empty "clearing" element after them so the footer starts
+           below BOTH columns.
+
+    TRY IT: Delete the <div class="clear"></div> line and refresh. The footer
+    slides up behind the columns.
+
+    For comparison, the same layout using Grid is in ../grids/index_2.html.
+-->
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floating Layout</title>
-    <link rel="stylesheet" href="style_1.css"  > 
+    <link rel="stylesheet" href="style_1.css"  >
 </head>
 
 <body>
@@ -13,6 +28,7 @@
         <div id="box1" class="box">
             <h3>Heading</h3>
         </div>
+        <!-- Two floated columns: 20% + 80% = 100% of the container -->
         <div class="column column1">
             <h2>Column 1</h2>
             <p>This is the content of the first column.
@@ -29,6 +45,8 @@
                 libero tempor, ac pulvinar ligula dapibus.
             </p>
         </div>
+        <!-- The "clearfix" element: an empty div that clears the floats above it,
+             so everything after it starts on a fresh line below both columns. -->
         <div class="clear"></div>
         <div id="box4" class="box">
             <h3>Footer</h3>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+    LAB 3: Responsive Navigation Bar
+    --------------------------------
+    A university home page header with a navigation menu that:
+        - on WIDE screens (over 1024px) shows the links in a row, spread out evenly
+        - on NARROW screens (1024px or less) stacks the links in a centered column
+
+    Concepts combined: centering with margin: auto, em units, Flexbox,
+    and media queries (see style.css).
+
+    TRY IT: Resize the browser window across 1024px, or use DevTools device mode
+    (Ctrl+Shift+M), and watch the menu switch layouts.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                University Home Page
+            </h1>
+        </header>
+        <!-- A navigation menu is a LIST of links, so <ul>/<li> is the standard markup.
+             Tip: wrapping the list in <nav> tells screen readers "this is the main menu". -->
+        <ul>
+            <!-- href="" is a placeholder; in a real site it would be "about.html" etc. -->
+            <li><a href="">About</a></li>
+            <li><a href="">Academics</a></li>
+            <li><a href="">Departments</a></li>
+            <li><a href="">Admissions</a></li>
+            <li><a href="">Research</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </div>
+</body>
+</html>

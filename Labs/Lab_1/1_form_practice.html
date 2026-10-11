@@ -1,4 +1,24 @@
 <!DOCTYPE html>
+<!--
+    LAB 1 (part 1): HTML Forms
+    --------------------------
+    Concepts covered:
+        <form>               -> wraps all inputs; "action" = where to send the data,
+                                "method" = how to send it (GET puts it in the URL, POST in the request body)
+        <fieldset>/<legend>  -> group related fields under a titled box (fieldsets can be nested)
+        <label for="id">     -> ties the label text to an input with the same id.
+                                Clicking the label focuses the input, and screen readers read it out.
+        <input type="...">   -> text, date, radio, email, tel, password, checkbox, number, ...
+                                Using the right type gives free validation and the right
+                                keyboard on phones (e.g. type="tel" shows a number pad).
+        <select>/<option>    -> dropdown list; "value" is what gets sent, the text is what users see
+        <textarea>           -> multi-line text input
+        required             -> the browser won't submit the form until this field is filled
+        name="..."           -> the KEY the value is sent under. Without a name, the field is NOT submitted!
+
+    TRY IT: Click "Submit" with the Username field empty and see the browser's
+    built-in validation message.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +28,7 @@
 <body>
     <!-- The student information to be collected is as follows.
 
-Name: 
+Name:
 
 Date of birth:
 
@@ -29,28 +49,39 @@ Country:
 Username:
 
 Password: -->
+    <!-- action="" submits to the current page; method="post" keeps the data out of the URL -->
     <form action="" method="post">
        <fieldset>
         <legend>Student Information</legend>
 
+        <!-- Nested fieldsets split one long form into readable sections -->
         <fieldset>
             <legend>Personal Information</legend>
-            
+
             <label for="student_name">Name: </label>
             <input type="text" name="student_name" id="student_name">
+            <!-- <br><br> works for spacing, but in real projects use CSS (margin, flex or grid) for layout instead -->
             <br><br>
-            
+
+            <!-- type="date" shows a date picker in modern browsers -->
             <label for="student_dob">Date of Birth: </label>
             <input type="date" name="student_dob" id="student_dob">
             <br><br>
-            
+
+            <!-- RADIO BUTTONS: buttons with the SAME name form a group, so only one can be selected.
+                 "required" on one radio makes the whole group required.
+                 ⚠️ Common mistake: ids must be UNIQUE on a page. Both radios use id="student_gender".
+                    Better: id="gender_male" / id="gender_female", and give each option label a
+                    matching for="", e.g. <label for="gender_male">Male</label>, so clicking the
+                    word "Male" selects the button. -->
             <label for="student_gender">Gender</label>
             <input type="radio" name="student_gender" id="student_gender" value="Male" required>
             <label>Male</label>
             <input type="radio" name="student_gender" id="student_gender" value="Female">
-            <label>Female</label>    
+            <label>Female</label>
             <br><br>
-            
+
+            <!-- The value ("CS") is sent to the server; the text ("Computer Science") is shown to the user -->
             <label for="student_department">Department: </label>
             <select name="student_department" id="student_department">
                 <option value="CS">Computer Science</option>
@@ -62,26 +93,29 @@ Password: -->
 
         <fieldset>
             <legend>Contact Information</legend>
-            
+
+            <!-- type="email" checks for an @ before the form can be submitted -->
             <label for="student_email">Email: </label>
             <input type="email" name="student_email" id="student_email">
             <br><br>
-            
+
+            <!-- type="tel" shows a phone keypad on mobile. Add pattern="[0-9]{10}" to require 10 digits. -->
             <label for="student_contact">Mobile: </label>
             <input type="tel" name="student_contact" id="student_contact">
             <br><br>
         </fieldset>
-        
+
         <fieldset>
             <legend>Address Information</legend>
+            <!-- rows/cols set the visible size of the textarea (in lines and characters) -->
             <label for="student_addy">Address: </label>
             <textarea name="student_addy" id="student_addy" rows="5" cols="50"></textarea>
             <br><br>
-            
+
             <label for="student_city">City: </label>
             <input type="text" name="student_city" id="student_city">
             <br><br>
-            
+
             <label for="student_country">Country: </label>
             <input type="text" name="student_country" id="student_country">
             <br><br>
@@ -92,12 +126,15 @@ Password: -->
             <label for="student_uname">Username: </label>
             <input type="text" name="student_uname" id="student_uname" required>
             <br><br>
-            
+
+            <!-- ⚠️ Use type="password" for passwords: it hides the characters as dots.
+                 type="text" (used here) shows the password on screen. -->
             <label for="student_pass">Password: </label>
             <input type="text" name="student_pass" id="student_pass" required>
             <br><br>
         </fieldset>
         <br><br>
+        <!-- type="submit" sends the form; type="reset" clears every field back to its starting value -->
         <button type="submit">Submit</button>
         <button type="reset">Reset</button>
     </fieldset>

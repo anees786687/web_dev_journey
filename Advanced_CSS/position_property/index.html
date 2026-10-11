@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: The position property
+    ----------------------------
+    "position" decides HOW an element is placed. The offset properties
+    top / right / bottom / left then move it, except for static.
+
+        static   -> DEFAULT. Normal document flow. top/left/... are ignored.
+        relative -> stays in the normal flow, but is SHIFTED from where it would be.
+                    Its original space stays reserved (other elements don't move).
+        absolute -> REMOVED from the flow (takes no space). Positioned relative to
+                    the nearest ancestor that has a position other than static.
+                    If there is none, it is positioned relative to the page itself.
+        fixed    -> removed from the flow and pinned to the VIEWPORT (browser window).
+                    It doesn't move when you scroll.
+        sticky   -> acts like relative UNTIL you scroll past a threshold (top: 0),
+                    then sticks like fixed, but only while its parent is on screen.
+
+    COMMON PATTERN: put "position: relative" on a parent and
+    "position: absolute" on the child to position the child inside the parent.
+
+    TRY IT: Scroll down the page and watch the fixed (green) and sticky (purple) boxes.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,16 +37,18 @@
     <div class="box static_box">Static box</div>
     <div class="box realtive_box">Relative box</div>
     <div class="absolute_container">
-        <!-- Absolute positionin inside a parent container -->
+        <!-- Absolute positioning inside a parent container:
+             the parent has position: relative, so top/left are measured from the parent's edges -->
         <div class="box absolute_box">Absolute box</div>
     </div>
-    <!-- Absolute positionin without a parent container
-        realtive to viewport 
+    <!-- Absolute positioning without a positioned parent container:
+        top/left are measured from the top-left corner of the PAGE (it scrolls away with the page)
     -->
     <div class="box absolute_box">Absolute box</div>
     <div class="box fixed_box">Fixed box</div>
     <div class="box sticky_box">Sticky box</div>
 
+    <!-- Long text so the page scrolls, which lets you test fixed and sticky -->
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi distinctio, ratione aspernatur nobis repellat dolorem doloremque minima cum earum sint voluptate voluptates harum obcaecati praesentium placeat amet impedit ea non.
     Dicta ducimus sit numquam praesentium fugiat aspernatur, ipsa reprehenderit nam dignissimos sed? Atque cumque unde eveniet repellendus eos aperiam et mollitia dolorum similique. Ullam aut esse earum sapiente non expedita.
     Aspernatur minima reiciendis incidunt, quidem ea mollitia nostrum quae vitae, officiis, quam quis sit laborum distinctio ratione nulla cumque. Illum quisquam dicta neque asperiores iure sunt dolore, laboriosam obcaecati fugit.

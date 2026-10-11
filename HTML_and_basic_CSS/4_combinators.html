@@ -1,4 +1,20 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: CSS Combinators
+    ----------------------
+    Combinators describe the RELATIONSHIP between two selectors.
+
+        A B     (space)  Descendant  -> B anywhere inside A (child, grandchild, ...)
+        A > B            Child       -> B is a DIRECT child of A
+        A + B            Adjacent sibling -> B comes IMMEDIATELY after A (same parent)
+        A ~ B            General sibling  -> B comes ANYWHERE after A (same parent)
+
+    This file uses a table because tables have a clear nested structure
+    (table > thead/tbody/tfoot > tr > th/td), which makes combinators easy to see.
+
+    TRY IT: Before opening the page, guess the color of each cell.
+    Then open it and see if you were right. Try changing "+" to "~".
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,32 +23,45 @@
 
     <style>
         table {
+            /* "font" is a shorthand: here it sets font-size (1em) and font-family (sans-serif) */
             font: 1em sans-serif;
+            /* collapse: neighbouring cell borders merge into ONE border instead of two */
             border-collapse: collapse;
+            /* gap between cells; has no effect when border-collapse is "collapse" */
             border-spacing: 0;
         }
 
+        /* DESCENDANT combinator (space): every td inside a table */
         table td{
             border: 2px solid black;
+            /* 2 values = top/bottom, left/right (same as just "padding: 10px") */
             padding: 10px 10px ;
             color: purple;
         }
 
+        /* Descendant chain: th inside thead inside table -> the header row */
         table thead th {
             background-color: black;
             color: white;
         }
 
 
+        /* ADJACENT SIBLING combinator (+): a td that comes right after another td.
+           In each body row this matches the 2nd and 3rd cells (the 1st has no td before it),
+           so product names stay purple and Qty/Price become blue. */
         table tbody td + td {
             color: blue;
         }
 
+        /* :last-child is a pseudo-class (see file 5). It wins over the rule above because
+           a pseudo-class counts like a class in specificity: (0,1,3) beats (0,0,4).
+           Result: the Price column is red and right-aligned. */
         table tbody td:last-child {
             color: red;
             text-align: right;
         }
 
+        /* CHILD combinator (>): th that is a DIRECT child of tr, which is a direct child of tfoot */
         tfoot > tr > th  {
             text-decoration: underline;
             text-align: right;
@@ -40,6 +69,7 @@
 
         }
 
+        /* Adjacent sibling inside the footer: the td right after the "Total:" th */
         tfoot th + td {
             background-color: black;
             color: white;
@@ -91,6 +121,7 @@
         
         <tfoot>
             <tr>
+                <!-- colspan="2" makes this one cell stretch across 2 columns -->
                 <th colspan="2">Total:</th>
                 <td>148.55</td>
             </tr>

@@ -1,4 +1,28 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: CSS Grid (example 2 - a real page layout)
+    ------------------------------------------------
+    A typical blog layout built with Grid:
+
+        +-----------------------------------+
+        |              header               |
+        +-----------+-----------------------+
+        |  sidebar  |        content        |
+        +-----------+-----------------------+
+        |              footer               |
+        +-----------------------------------+
+
+    style_2.css shows TWO ways to place items:
+        1. Line-based placement (commented out): grid-column: 1 / 5;
+        2. Named template areas (active):        grid-template-areas + grid-area
+
+    It also uses SEMANTIC HTML5 tags (header, aside, article, footer) instead
+    of plain divs. They describe what each part IS, which helps screen readers
+    and search engines.
+
+    Compare with ../float_n_clear_property/index_1.html: the same idea built with
+    floats. Grid needs much less code.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,10 +31,12 @@
 </head>
 <body>
     <div class="container">
-        
+
         <header>
             <h1>Personal Blog</h1>
             <p>This my lovely blog</p>
+            <!-- ⚠️ Best practice: <link rel="stylesheet"> belongs inside <head>.
+                 It works here, but the browser may briefly show the page unstyled. -->
             <link rel="stylesheet" href="style_2.css">
         </header>
         

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+    TOPIC: Media Queries (Responsive Design)
+    ----------------------------------------
+    A media query applies CSS ONLY when a condition about the device/screen is true.
+    This is how one page adapts to phones, tablets and desktops.
+
+        @media (max-width: 500px) { ... }   -> viewport is 500px wide OR LESS
+        @media (min-width: 1024px) { ... }  -> viewport is 1024px wide OR MORE
+        @media (min-width: 501px) and (max-width: 768px) { ... } -> a RANGE
+        @media screen and (...)             -> only on screens (not when printing)
+        @media (orientation: landscape)     -> width is greater than height
+
+    Rules inside a media query have NORMAL specificity. They win only because they
+    come LATER in the file. That's why media queries usually go at the bottom.
+
+    TRY IT: Open the page, press F12, and click the "Toggle device toolbar"
+    icon (Ctrl+Shift+M). Drag the width and watch the color and heading change.
+
+    ⚠️ Notice the GAPS in these ranges:
+        769px - 1023px -> no query matches: gray background and NO heading.
+        "Landscape"    -> no rule ever shows it.
+       Challenge: fix both. Hint: use min-width: 769px, and @media (orientation: landscape).
+
+    Tip: many developers write "mobile-first" CSS. The base styles are for small
+    screens, then min-width queries add changes for bigger screens.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- REQUIRED for responsive pages: without this tag, phones pretend to be
+         ~980px wide and zoom out, so your max-width queries would never match. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Base styles: apply at every screen size */
+        body {
+            color: honeydew;
+            background-color: gray;
+            text-align: center;
+        }
+
+        /* Hide every heading by default; each media query shows only one */
+        h1 {
+            display: none;
+        }
+
+        /* Phones: 0 - 500px */
+        @media(max-width: 500px){
+            body {
+                background-color: blue;
+            }
+
+            #Smartphones h1{
+                display: block;
+            }
+        }
+
+        /* Tablets: 501px - 768px ("and" = both conditions must be true) */
+        @media(min-width: 501px) and (max-width: 768px){
+            body {
+                background-color: red;
+            }
+
+            #Tablet h1{
+                display: block;
+            }
+        }
+
+        /* Desktops: 1024px and up */
+        @media(min-width: 1024px){
+            body {
+                background-color: yellow;
+            }
+
+            #Widescreen h1{
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div id="Smartphones">
+            <h1>Smartphones</h1>
+        </div>
+        <div id="Widescreen">
+            <h1>Widescreen</h1>
+        </div>
+        <div id="Tablet">
+            <h1>Tablet</h1>
+        </div>
+        <div id="Landscape">
+            <h1>Landscape</h1>
+        </div>
+    </div>
+</body>
+</html>

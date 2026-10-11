@@ -1,3 +1,15 @@
+/*
+    Styles for index.html (float and clear, example 1).
+
+    ⚠️ "Collapsing parent" problem: a floated element is taken out of the normal
+    flow, so its parent does not grow to contain it. If ALL children of a
+    container are floated, the container's height becomes 0 and its background
+    disappears. Fixes:
+        .container { display: flow-root; }   <- modern, recommended
+        .container { overflow: auto; }       <- older trick
+        an empty <div style="clear: both">   <- see index_1.html
+*/
+
 .container {
     background-color: gray;
 }
@@ -11,24 +23,33 @@
 }
 
 #box1 {
-    /* A float property without width does not make sense, always use width property 
+    /* A float property without width does not make sense, always use width property
         with float to see the effects.
     */
+    /* Why: a floated element without a width "shrink-wraps" to its content.
+       With a long paragraph inside, that is almost the full width, so the
+       float looks like it did nothing. */
     float: right;
 }
 
 #box2 {
+    /* Narrow left float: the content that follows can sit to its right */
     float: left;
     width: 20%;
 }
 
 #box3{
     float: right;
+    /* Without this, #box3 would sit right next to #box2.
+       clear: left moves it down below #box2 (the left float). */
     clear: left;
     width: 40%;
 }
 
 #box4{
     /* Use clear to ensure elements do not overlap */
+    /* #box4 is NOT floated. Without clear, its box would slide up underneath
+       the floats and only its text would wrap around them.
+       clear: right pushes it below the right floats (#box1 and #box3). */
     clear: right;
 }

@@ -1,23 +1,40 @@
+/*
+    LAB 2 styles - lining up a form with float
+
+    THE ALIGNMENT TRICK:
+      1. Each <label> is display: block, so every field gets its own line.
+      2. The label text (<span>) floats left with a FIXED width of 120px.
+      3. The input flows in right after it, so every input starts 120px from the left.
+      4. The buttons get margin-left: 120px so they line up with the inputs.
+
+    Modern alternative: make the form a grid, e.g.
+        label { display: grid; grid-template-columns: 120px 1fr; }
+*/
+
 label {
-    display: block;
+    display: block;          /* labels are inline by default; block puts each one on its own line */
     margin-bottom: 10px;
 }
 
+/* Child combinator: only the span DIRECTLY inside a label
+   (not the nested * span) */
 label>span {
     float: left;
-    width: 120px;
+    width: 120px;            /* the same width for every label = inputs line up */
 }
 
 .form_buttons {
-    margin-left: 120px;
+    margin-left: 120px;      /* matches the label width above */
 }
 
 .form_buttons button{
     background-color: burlywood;
-    border-radius: 10px;
+    border-radius: 10px;     /* rounded corners */
 
 }
 
+/* Attribute selector + pseudo-class: only the Reset button, only on hover.
+   A red "danger" color warns that this clears the form. */
 .form_buttons button[type="reset"]:hover {
     background-color: red;
 }
@@ -28,15 +45,19 @@ label>span {
 
 .form_components label {
     color: rgb(122, 7, 228);
+    /* text-shadow: x-offset y-offset blur-radius color */
     text-shadow: 2px 2px 4px black;
 }
 
 .form_components input {
+    /* box-shadow: x-offset y-offset [blur] [spread] [color].
+       With no color given, the shadow uses the element's text color (currentColor). */
     box-shadow: 3px 3px ;
     background-color: rgb(207, 237, 147);
     border: 2px solid black;
 }
 
+/* :focus -> while the user is typing in this input */
 .form_components input:focus{
     background-color: white;
 }
@@ -47,8 +68,10 @@ fieldset {
 }
 
 fieldset legend {
+    /* The same background as the fieldset, so the legend looks like a tab on the border */
     background-color: rgb(143, 244, 244);
     font-style: oblique;
+    /* inherit -> copies the parent fieldset's 1.5em radius (border-radius is not inherited by default) */
     border-radius: inherit;
     width: 5em;
     margin-left: 20px;

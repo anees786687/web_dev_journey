@@ -1,25 +1,39 @@
+/* Styles for index.html (Grid basics) */
+
 .container{
     border: 2px solid black;
+    /* Turns the div into a grid container; its direct children become grid items */
     display: grid;
     /* With pixels - remaining viewport will be empty */
     /* grid-template-columns: 200px 200px 200px; */
 
     /* With fractional units */
     /*THis will occupy the whole viewport*/
+    /* 1fr 1fr 1fr = three equal columns. "1fr 2fr" would make the 2nd column twice as wide. */
     /* grid-template-columns: 1fr 1fr 1fr; */
 
     /* With fractional units using repeat notation*/
+    /* repeat(3, 1fr) is just a shorter way to write 1fr 1fr 1fr */
     grid-template-columns: repeat(3, 1fr);
 
     /* tried this with fr but it dont work; px works */
+    /* WHY: fr shares out FREE space. The container's width is fixed by the page,
+       so fr columns have space to share. Its height is NOT fixed: it grows with
+       the content, so there is no free height and fr rows just fit their content.
+       Give .container a height (e.g. height: 600px) and fr rows start working. */
     /* grid-template-rows: repeat(3, 200px); */
 
     /*  using grid-auto-rows without minmax will cause
         the content of a div to overflow
     */
+    /* grid-auto-rows sets the size of rows the browser creates automatically
+       (the "implicit grid"). We never said how many rows to make; the items
+       simply flow into new rows, 3 per row. */
     /* grid-auto-rows: 100px; */
 
     /* using minmax function to solve the overflow problem */
+    /* minmax(MIN, MAX): each row is at least 100px, but can grow ("auto")
+       to fit taller content like Box 9's paragraph. */
     grid-auto-rows: minmax(100px, auto);
 
     /* Playing with grid gap - two ways to do it
@@ -30,16 +44,19 @@
     /* gap: 10px 20px; */
 
     /* 2nd way to add grid gap
-       PS dont use grid-row-gap and grid-column-gap as 
-       they are obsolete 
+       PS dont use grid-row-gap and grid-column-gap as
+       they are obsolete
     */
     row-gap: 10px;
     column-gap: 20px;
-    
+
 }
 
+/* A grid item can also be a flex container. Here flexbox centers each box's
+   text both horizontally (justify-content) and vertically (align-items).
+   Grid for the page layout plus flex inside the items is a very common combination. */
 .grid_items {
-    border-radius: 5px;
+    border-radius: 5px;   /* rounded corners */
     padding: 10px;
     border: 2px solid black;
     display: flex;
@@ -48,6 +65,9 @@
     background-color: aqua;
 }
 
+/* Box 9 stacks its heading text and paragraph vertically.
+   This rule comes later and has higher specificity (an id), so it overrides
+   the background-color from .grid_items. */
 #box_9{
     display: flex;
     flex-direction: column;

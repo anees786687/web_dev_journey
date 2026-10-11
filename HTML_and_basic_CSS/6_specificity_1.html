@@ -1,4 +1,29 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: CSS Specificity (part 1)
+    -------------------------------
+    When two rules set the SAME property on the SAME element, the browser picks
+    the rule with the higher SPECIFICITY. Think of it as a 3-digit score (a, b, c):
+
+        a = number of ID selectors              #special
+        b = number of classes, attributes,      .wide  [type="text"]  :hover
+            and pseudo-classes
+        c = number of element (type) selectors  p  span  div
+            and pseudo-elements
+
+    Compare left to right, like version numbers: (1,0,0) beats (0,9,9).
+    The numbers below like "10", "100" and "11" are this score written without commas:
+        .wide        -> (0,1,0) = "10"
+        #special     -> (1,0,0) = "100"
+        .wide span   -> (0,1,1) = "11"
+
+    Special cases:
+        inline style="..."  beats every selector
+        !important          beats everything (avoid it; it makes CSS hard to maintain)
+        If specificity ties, the rule written LATER wins (see file 8).
+
+    TRY IT: Look at the two <span>s. Why is one blue and the other black?
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +44,8 @@
         }
 
         /* Specificity  100*/
+        /* The first span has BOTH #special and ".wide span" applying to it.
+           100 > 11, so its color is blue (from here), not black. */
         #special {
             font-style: italic;
             text-decoration: underline;
@@ -26,6 +53,7 @@
         }
 
         /* Specificity  11*/
+        /* Only the second span (the one with no id) ends up black. */
         .wide span{
             color: black;
             text-decoration: underline;

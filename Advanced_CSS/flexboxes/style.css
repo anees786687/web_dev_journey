@@ -1,55 +1,82 @@
+/*
+    FLEXBOX - how to use this file
+    ------------------------------
+    The live properties are uncommented. The rest are commented out so you can
+    switch them on one at a time and see what each one does.
+
+    Properties for the CONTAINER: display, flex-direction, flex-wrap, flex-flow,
+                                  justify-content, align-items, align-content, gap
+    Properties for the ITEMS:     order, flex-grow, flex-shrink, flex-basis, flex, align-self
+*/
+
 .container{
     padding: 0;
     margin: 0;
+    /* A fixed height gives the items room to move along a vertical axis */
     height: 500px;
+    /* This one line turns the section into a flex container.
+       Its direct children become flex items automatically. */
     display: flex;
     border: 2px solid black;
-    /* 
-    ·   Definition
-            o	The flex-direction property specifies which direction the main axis runs.
-    ·	Why It Matters
-            o	The main axis determines the direction in which flex items are laid out.
-            o	Setting a direction with flex-direction makes the flex items follow that same direction.
-    ·	Possible Values
-            o	There are four possible values: row, row-reverse, column, and column-reverse.
-
-    
+    /*
+        flex-direction
+        - Definition:     sets which direction the MAIN axis runs.
+        - Why it matters: items are laid out along the main axis, so changing
+                          the direction changes the whole layout.
+        - Values:
+              row            -> left to right (DEFAULT)
+              row-reverse    -> right to left
+              column         -> top to bottom
+              column-reverse -> bottom to top (used here: Article 1 is at the BOTTOM)
     */
     flex-direction: column-reverse;
 
-    /* 
-        flexwrap - allows flex items to warped; add flexibility
-        and support for various screen size
+    /*
+        flex-wrap - controls what happens when the items don't fit on one line.
+              nowrap       -> (DEFAULT) items stay on one line and shrink to fit
+              wrap         -> extra items move onto a new line/column; good for
+                              supporting different screen sizes
+              wrap-reverse -> wraps, but the new lines are added in the opposite direction
+        TRY IT: with column-reverse and height 500px, 7 items of ~126px each
+        (100 height + 4 padding + 2 border + 20 margin) don't fit, so with
+        nowrap they get squashed. Turn on "wrap" and they form extra columns instead.
      */
     /* flex-wrap: nowrap; */
     /* flex-wrap: wrap; */
     /* flex-wrap: wrap-reverse; */
 
-    /* 
-        flex-flow - shortcut that combines flex direction and flex wrap
-        first mention direction then mention wrap
+    /*
+        flex-flow - shortcut that combines flex-direction and flex-wrap.
+        Write the direction first, then the wrap.
     */
     /* flex-flow: row wrap; */
 
-    /* 
-        justify-content 
-            o	Defines how flex items align along the main axis, distributing any extra space.
-            o	Examples: 
-                §	space-around: equal space around each item, giving a visually balanced layout.
-                §	center: centers the items along the main axis.
-
+    /*
+        justify-content - aligns items along the MAIN axis and shares out the extra space.
+              flex-start    -> packed at the start (DEFAULT)
+              flex-end      -> packed at the end
+              center        -> packed in the middle
+              space-between -> first and last items touch the edges, equal gaps between items
+              space-around  -> equal space around each item (so the gaps at the edges are half-size)
+              space-evenly  -> all gaps, including the edges, are exactly equal
     */
     /* justify-content: space-around; */
 
     /*
-        align-items
-            o	Determines the default alignment of flex items along the cross axis.
-            o	Like justify-content, it can align items at the start, end, or center, or distribute them evenly, using values such as flex-end, center, or stretch.
-
+        align-items - aligns items along the CROSS axis.
+              stretch    -> (DEFAULT) items stretch to fill the cross axis
+                            (only if they have no fixed width/height in that direction)
+              flex-start / start -> at the start of the cross axis
+              flex-end / end     -> at the end
+              center             -> in the middle
+              baseline           -> lines up the first line of text in each item
     */
     /* align-items: start; */
 
-
+    /*
+        gap - space BETWEEN items (not at the outer edges). Easier than using margins.
+    */
+    /* gap: 10px; */
 }
 
 .flex-item{
@@ -64,47 +91,57 @@
     font-size: 1em;
 }
 
-/* The order property in CSS specifies the visual arrangement of items inside a flex or grid container. It allows you to change the order in which elements appear on the screen without modifying the actual HTML source code.
+/*
+    order - changes the VISUAL order of flex (or grid) items without changing the HTML.
+    Every item starts with order: 0. Items with a smaller order come first.
 
-The order of the atricles will be reversed
+    Uncomment the block below and the order of the articles will be reversed.
 
+    ⚠️ Screen readers and the Tab key still follow the HTML order, so don't use
+    "order" to rearrange content that has a meaningful reading order.
+
+    Bonus (flex item sizing):
+        flex-grow: 1    -> the item grows to fill extra space
+        flex-shrink: 0  -> the item never shrinks below its size
+        flex-basis      -> the starting size before growing/shrinking
+        flex: 1         -> common shorthand meaning "grow and share space equally"
 */
 /* #a_1{
- order: 7;   
+ order: 7;
 
 }
 
 
 #a_2{
- order: 6;   
-    
+ order: 6;
+
 }
 
 
 #a_3{
- order: 5;   
-    
+ order: 5;
+
 }
 
 
 #a_4{
- order: 4;   
-    
+ order: 4;
+
 }
 
 
 #a_5{
- order: 3;   
-    
+ order: 3;
+
 }
 
 
 #a_6{
- order: 2;   
-    
+ order: 2;
+
 }
 
 
 #a_7{
- order: 1;   
+ order: 1;
 } */

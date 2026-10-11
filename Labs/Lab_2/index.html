@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+<!--
+    LAB 2: Styling a Form with CSS
+    ------------------------------
+    The goal is a neat form where all the input boxes line up in one column,
+    even though the label texts have different lengths. See style.css for how.
+
+    HTML concepts used here:
+      - Wrapping the <input> INSIDE its <label> associates the two automatically,
+        so the for="" attribute is optional. (Lab 1 uses for="" + id instead; both work.)
+      - The inner <span> holds the label text, so CSS can give it a fixed width.
+      - The red * marks a required field.
+
+    Concepts covered in style.css: float, box-shadow, text-shadow, border-radius,
+    :focus / :hover, and attribute selectors.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,11 +26,16 @@
         <fieldset>
             <legend>Personal</legend>
             <div class="form_components">
-                <label for="name"><span>Name <span id="required">*</span>: </span> 
+                <!-- ⚠️ Common mistake: an id must be UNIQUE, but id="required" is used twice.
+                     For styles you want to reuse, use a class instead: <span class="required">*</span>
+                     (and ".form_components .required" in the CSS). -->
+                <label for="name"><span>Name <span id="required">*</span>: </span>
                     <input type="text" name="name" id="name" required>
                 </label>
 
-                <label for="email"><span>Email <span id="required">*</span>: </span> 
+                <!-- The * says Email is required, but the input has no "required" attribute,
+                     so the browser will still submit the form with it empty. -->
+                <label for="email"><span>Email <span id="required">*</span>: </span>
                     <input type="email" name="email" id="email">
                 </label>
 

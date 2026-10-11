@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<!--
+    LAB 1 (part 2): HTML Tables
+    ---------------------------
+    Table structure:
+        <table>
+          <caption>  -> the table's title (must be the FIRST child of <table>)
+          <thead>    -> header row(s)
+          <tbody>    -> the data rows
+          <tfoot>    -> footer/summary row(s) (optional; see ../../HTML_and_basic_CSS/4_combinators.html)
+            <tr>     -> a table row
+              <th>   -> a header cell (bold and centered by default)
+              <td>   -> a data cell
+
+    Merging cells:
+        rowspan="2" -> the cell stretches DOWN over 2 rows
+        colspan="2" -> the cell stretches ACROSS 2 columns
+
+    ⚠️ Only use tables for TABULAR DATA (rows and columns of information), never for page layout.
+
+    TRY IT: Find the "Physics" cell. Because of rowspan="2", the NEXT row has
+    one fewer <td>, since the Department cell is already filled from above.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,27 +33,33 @@
         }
 
         table {
+            /* Merge the double borders between cells into single lines */
             border-collapse: collapse;
             border: 2px solid black;
             width: 100%;
         }
 
+        /* Selector list: the same rules for header cells AND data cells */
         th, td {
             border: 2px solid black;
             padding: 20px;
         }
 
+        /* Style the whole header row */
         thead tr{
             background-color: rgb(25, 145, 25);
             color: white;
         }
+
+        /* Idea to try: zebra stripes using a pseudo-class (see 5_pseduo_selectors.html)
+           tbody tr:nth-child(even) { background-color: #eee; } */
     </style>
 </head>
 <body>
     <table>
         <caption>Student Information</caption>
 
-        <thead> 
+        <thead>
             <tr>
                 <th>Sr No.</th>
                 <th>Name</th>
@@ -69,6 +97,7 @@
                 <td>Alice Johnson</td>
                 <td>1997-10-03</td>
                 <td>Female</td>
+                <!-- rowspan="2": this cell also fills the Department column of the next row -->
                 <td rowspan="2">Physics</td>
                 <td>alicejohnson@example.com</td>
                 <td>345</td>
@@ -79,6 +108,7 @@
                 <td>Bob Williams</td>
                 <td>1996-12-18</td>
                 <td>Male</td>
+                <!-- No Department <td> here: it's covered by the rowspan above -->
                 <td>bobwilliams@example.com</td>
                 <td>456</td>
             </tr>

@@ -1,7 +1,32 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: Margin Collapsing (+ overflow)
+    -------------------------------------
+    When two BLOCK elements are stacked vertically, the bottom margin of the first
+    and the top margin of the second do NOT add up. They COLLAPSE into one margin
+    equal to the LARGER of the two.
+
+        .box1 margin-bottom = 50px
+        .box2 margin-top    = 20px
+        Gap you might expect: 70px     Actual gap: max(50, 20) = 50px
+
+    Margin collapsing only happens:
+        - VERTICALLY (top/bottom), never left/right
+        - between BLOCK elements in normal flow
+          (not inline/inline-block, not flex/grid items, not floats or absolute elements)
+
+    The two <img> tags at the bottom are INLINE elements, so their horizontal margins
+    do NOT collapse: the gap between them is 10 + 10 = 20px (plus a small space
+    from the line break in the HTML).
+
+    TRY IT: In DevTools, hover over .box1 and .box2 and look at the orange margin
+    areas. They overlap instead of sitting side by side.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- ⚠️ Common mistake: this should be content="width=device-width, initial-scale=1.0".
+         "width=\" is a typo, so mobile browsers ignore the width part. -->
     <meta name="viewport" content="width=\, initial-scale=1.0">
     <title>Document</title>
 
@@ -9,18 +34,24 @@
         .box1 {
             background-color: lightblue;
             border: 1px solid black;
-            margin-bottom: 50px;
+            margin-bottom: 50px;   /* collapses with .box2's margin-top -> 50px gap, not 70px */
             padding: 20px;
             width: 300px;
             height: 100px;
+            /* overflow controls what happens when content is too big for the box:
+                 visible (default) -> spills outside the box
+                 hidden            -> cut off
+                 scroll            -> always shows scrollbars
+                 auto              -> scrollbars only when needed (used here) */
             overflow: auto;
         }
 
         .box2{
             border: 1px solid black;
-            margin-top: 20px;
+            margin-top: 20px;      /* "swallowed" by the bigger 50px margin above */
             padding: 20px;
         }
+        /* Images are inline: horizontal margins add up (10 + 10). They never collapse. */
         img {
             border: 1px solid black;
             margin: 10px;
@@ -35,6 +66,8 @@
 
     </div>
 
+    <!-- Always write a meaningful alt="" text (e.g. alt="BITS logo") so screen
+         readers can describe the image. Leave it empty only for purely decorative images. -->
     <img src="bits.png" alt="">
     <img src="bits.png" alt="">
 

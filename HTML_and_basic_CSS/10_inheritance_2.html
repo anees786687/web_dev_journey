@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: Inheritance (part 2) - the special keywords
+    --------------------------------------------------
+    Every CSS property accepts these keywords:
+
+        inherit  -> use the PARENT's value
+        initial  -> use the property's DEFAULT value from the CSS spec
+                    (not the browser's default stylesheet!)
+        unset    -> "inherit" if the property is normally inherited (like color),
+                    otherwise "initial" (like margin)
+        revert   -> go back to the browser's default style for that element
+
+    TRY IT: Change "unset" to "inherit" and "initial" in the "section p" rule
+    and watch the margin and color change.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +25,9 @@
             color: red;
         }
 
+        /* Without this rule, <strong> would inherit red from the <p>.
+           "initial" resets color to its spec default (normally black),
+           so the bold text is black even though its parent is red. */
         p strong {
             color: initial;
         }
@@ -19,12 +37,16 @@
             border: 1px solid black;
         }
 
-                       
+
         section p{
+            /* margin is NOT inherited, so unset = initial = 0.
+               This removes the paragraph's default top/bottom margin. */
             margin: unset;
+            /* color IS inherited, so unset = inherit = blue (from <section>).
+               This overrides the "p { color: red }" rule above. */
             color: unset;
-        } 
-        
+        }
+
     </style>
 </head>
 <body>

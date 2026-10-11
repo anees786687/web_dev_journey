@@ -1,4 +1,25 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: float and clear (example 1 - how they behave)
+    ----------------------------------------------------
+    FLOAT pushes an element to the left or right side of its container and lets
+    the content after it wrap around it, like a picture in a newspaper article.
+        float: left | right | none
+
+    CLEAR says "do not sit next to a float; move down below it instead".
+        clear: left   -> go below any LEFT floats before me
+        clear: right  -> go below any RIGHT floats before me
+        clear: both   -> go below ALL floats before me
+
+    Floats were the main way to build multi-column layouts before Flexbox and Grid.
+    Today they are mostly used to wrap text around images, but you will still
+    see them in older code.
+
+    Read style.css next to this file: it explains what happens to each box.
+
+    TRY IT: Remove "clear" from #box3 or #box4 in style.css and watch the
+    boxes overlap or squeeze next to each other.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">

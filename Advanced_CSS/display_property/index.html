@@ -1,10 +1,34 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: The display property
+    ---------------------------
+    "display" controls how an element takes up space on the page.
+
+        block         -> starts on a NEW line and takes the FULL width available.
+                         width/height/margin/padding all work.
+                         Default for: div, p, h1-h6, ul, li, section, header ...
+        inline        -> flows inside a line of text, like a word.
+                         width/height are IGNORED; top/bottom margins don't push other lines away.
+                         Default for: span, a, strong, em, img* ...
+        inline-block  -> flows inline like text, BUT respects width/height/margin/padding.
+                         A mix of the two (used here).
+        none          -> removes the element completely (it takes no space at all).
+                         Compare: visibility: hidden hides it but keeps its space.
+        flex / grid   -> turns the element into a layout container (see flexboxes/ and grids/).
+
+    TRY IT: Change "display: inline-block" in .disp to each value listed in the
+    comment and refresh:
+        - inline : the span's 100px width/height are ignored
+        - block  : the <p> and <span> each break onto their own line
+        - none   : both disappear
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <!-- The styles for this page are written here in a <style> block, so style.css is empty. -->
     <style>
         p{
             color: red;
@@ -13,8 +37,11 @@
             color: blue;
         }
 
+        /* Two rules with the same selector are merged. Both "span" rules apply. */
         span {
-            width: 100px; 
+            /* A span is inline by default, so width/height do nothing
+               UNTIL .disp makes it inline-block. */
+            width: 100px;
             height: 100px;
             padding: 1px;
             border: 1px solid blue;
@@ -33,6 +60,7 @@
 <body>
     <h1>The display property</h1>
     <div>
+        <!-- A <p> is normally a block (it would break the line). With inline-block it sits inside the sentence. -->
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. <p class="disp">Veritatis, quasi cum mollitia accusantium, quidem</p> quis odit porro quisquam veniam <span class="disp">velit non dolor sed sunt, sapiente doloribus consequatur cumque autem ab!</span>
     </div>
 </body>

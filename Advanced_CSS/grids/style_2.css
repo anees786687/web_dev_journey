@@ -1,10 +1,24 @@
+/* Styles for index_2.html (Grid page layout) */
+
 body {
     width: 90%;
-    max-width: 900px;
-    margin: 2em auto;
+    max-width: 900px;      /* readable line length on big screens */
+    margin: 2em auto;      /* auto left/right centers the page */
+    /* font shorthand: size then family list (fallbacks if the first isn't installed) */
     font: .9em Arial, Helvetica, sans-serif;
 }
 
+/*
+    METHOD 1: LINE-BASED PLACEMENT
+    Grid lines are numbered starting at 1. With 4 columns there are 5 vertical lines:
+
+        line: 1     2     3     4     5
+              | c1  | c2  | c3  | c4  |
+
+    "grid-column: 1 / 5" means "start at line 1, end at line 5" = span all 4 columns.
+    "grid-column: 2 / 5" = columns 2-4.  A single number ("grid-column: 1") = just that one column.
+    (Note: footer uses grid-row: 5, so the browser creates empty rows 3 and 4 to reach it.)
+*/
 /* .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -33,12 +47,20 @@ footer {
 } */
 
 /* The above commented region is line-based placement replaced using the grid template area method */
+/*
+    METHOD 2: NAMED TEMPLATE AREAS
+    You "draw" the layout with strings. Each string is a row, and each word is a cell.
+    Repeating a name makes that area span several cells. The area must be a rectangle.
+    Then each item picks its area with "grid-area: <name>".
+    This is easier to read, and easy to rearrange for mobile inside a media query.
+*/
 .container {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
     "header header header"
     "sidebar content content"
     "footer footer footer";
+    /* 3 columns: sidebar = 1fr, content = 2fr + 1fr = 3fr (3x wider than the sidebar) */
     grid-template-columns: 1fr 2fr 1fr;
     gap: 20px;
 }
@@ -61,6 +83,7 @@ footer {
     grid-area: footer;
 }
 
+/* Selector list (comma): applies the same styles to header AND footer */
 header, footer {
     border: 2px solid blue;
     border-radius: 0.5em;

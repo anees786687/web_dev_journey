@@ -1,4 +1,24 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: Flexbox
+    --------------
+    Flexbox is a ONE-dimensional layout system: it arranges items in a single
+    row OR a single column, and handles spacing and alignment for you.
+
+    Two roles:
+        FLEX CONTAINER -> the parent with "display: flex" (the <section>)
+        FLEX ITEMS     -> its DIRECT children (the <article>s)
+
+    Two axes:
+        MAIN axis  -> the direction items are placed in (set by flex-direction)
+        CROSS axis -> perpendicular to the main axis
+        justify-content aligns along the MAIN axis, align-items along the CROSS axis.
+
+    All the explanations are in style.css. Uncomment one property at a time
+    and refresh to see what it does.
+
+    Interactive practice: https://flexboxfroggy.com
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,9 +27,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- this is out flex container -->
+    <!-- this is our flex container -->
     <section class="container">
         <!-- these are the flex items -->
+        <!-- ⚠️ Small HTML mistake: put a space between attributes, e.g. id="a_1" class="flex-item".
+             Browsers still understand it, but it is invalid HTML. -->
         <article id = "a_1"class="flex-item">Article 1</article>
         <article id = "a_2"class="flex-item">Article 2</article>
         <article id = "a_3"class="flex-item">Article 3</article>

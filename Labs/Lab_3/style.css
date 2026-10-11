@@ -1,0 +1,54 @@
+/* LAB 3 styles - responsive navigation bar */
+
+.container {
+    /* At most 90% of the parent's width, so there's always a little space at the sides */
+    max-width: 90%;
+    background-color: orange;
+    color: navy;
+    /* em is RELATIVE to the parent's font size: 2em = twice the default (16px -> 32px).
+       Every em value inside .container (padding, margins) is now based on 32px. */
+    font-size: 2em;
+    /* 2 values = top/bottom, left/right:
+         top & bottom = 0.5em (16px here), left & right = 1em (32px here).
+       Note: padding does NOT accept "auto"; only margin does. */
+    padding: 0.5em 1em;
+    /* Centers the block horizontally: 0 top/bottom, auto left/right.
+       "auto" splits the leftover width equally on both sides. */
+    margin: 0 auto;
+}
+
+.container h1{
+    text-align: center;
+}
+.container a {
+    text-decoration: none;    /* removes the link underline */
+}
+
+.container ul {
+    list-style: none;         /* removes the bullet points */
+    /* Flexbox puts the <li>s in a ROW (the default flex-direction) */
+    display: flex;
+    /* Equal space between items AND at both ends of the row */
+    justify-content: space-evenly;
+}
+
+/*
+    MEDIA QUERY: these rules apply only when the viewport is 1024px wide or less.
+    They come last in the file, so they override the rules above.
+    "screen and" means: only on screens (not when the page is printed).
+*/
+@media screen and (max-width: 1024px){
+    .container ul {
+        /* Switch the main axis to vertical: the links stack on top of each other */
+        flex-direction: column;
+        /* In a column, the CROSS axis is horizontal, so align-items: center
+           centers the links left-to-right (not justify-content!). */
+        align-items: center;
+    }
+
+    /* Space between the stacked links (1em = 32px here, because of the font-size above).
+       "gap: 1em" on the ul would do the same job without adding space after the last item. */
+    .container ul li{
+        margin-bottom: 1em;
+    }
+}

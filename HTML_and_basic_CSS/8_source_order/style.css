@@ -1,8 +1,19 @@
+/*
+    External stylesheet for 8_source_order/index.html.
+
+    This file is linked AFTER the <style> block in index.html. Both files use
+    the same selectors (h1, p), so the specificity is equal and the rule read
+    later (this file) wins for any property that both set.
+
+    Properties that only ONE rule sets are not a conflict; they simply apply.
+    Rules are merged property by property, not replaced as a whole.
+*/
+
 h1{
-    color: blue;
-    background-color: yellow;
+    color: blue;               /* overrides "color: white" from the <style> block */
+    background-color: yellow;  /* new property; no conflict */
 }
 
-p { 
-    color: purple;
+p {
+    color: purple;             /* overrides "color: red"; the red border still applies */
 }

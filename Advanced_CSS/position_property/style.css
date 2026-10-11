@@ -1,7 +1,12 @@
+/* Styles for position_property/index.html */
+
 .nav_container {
     background-color: rgb(48, 47, 47);
     color: white;
     text-align: center;
+    /* ⚠️ Common mistake: numbers other than 0 need a unit (75px, 5em ...).
+       "75" on its own is INVALID, so the browser ignores this whole line.
+       DevTools shows invalid declarations crossed out with a warning icon. */
     height: 75;
     padding: 25px 50px;
 }
@@ -9,22 +14,29 @@
 .box {
     width: 150px;
     height: 150px;
-    text-align: center;
-    align-content: center;
+    text-align: center;      /* centers text horizontally */
+    align-content: center;   /* centers content vertically in a normal block (newer CSS, supported by modern browsers) */
+    /* 4 values go clockwise: top, right, bottom, left */
     margin: 20px 0px 0px 20px;
     background-color: rgb(70, 70, 247);
 }
 
+/* static is the default, so writing it changes nothing. It's here for comparison. */
 .static_box {
     position: static;
 }
 
+/* (class name is misspelled "realtive" in both files, so it still matches) */
 .realtive_box {
     position: relative;
+    /* Moves the box 200px to the RIGHT, measured from its normal left edge.
+       "left: 200px" means "200px away from the left", not "move left". */
     left: 200px;
     background-color: aqua;
 }
 
+/* position: relative here (with no offsets) does not move the container.
+   It makes the container the reference point for absolute children. */
 .absolute_container {
     position: relative;
     border: 2px solid black;
@@ -34,11 +46,15 @@
 
 .absolute_box {
     position: absolute;
+    /* For the first box: 50px from the container's left edge and 100px from its top.
+       For the second box (no positioned parent): measured from the page. */
     left:   50px;
     top: 100px;
     background-color: red;
 }
 
+/* Pinned 20px from the bottom-right corner of the WINDOW. It stays there while
+   you scroll. Commonly used for "back to top" or chat buttons. */
 .fixed_box{
     position: fixed;
     background-color: green;
@@ -46,6 +62,10 @@
     right: 20px;
 }
 
+/* Scrolls normally until its top edge reaches 0px from the top of the window,
+   then sticks there. Common for headers and table headings.
+   Sticky needs at least one offset (top/bottom/left/right) to work.
+   "left: 50px" only matters when the page scrolls sideways. */
 .sticky_box{
     position: sticky;
     background-color: blueviolet;

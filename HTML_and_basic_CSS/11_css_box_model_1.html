@@ -1,4 +1,36 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: The CSS Box Model
+    ------------------------
+    Every element is a rectangle made of 4 layers, from the inside out:
+
+        +-------------------------------- margin --------------------------------+
+        |   +---------------------------- border ----------------------------+   |
+        |   |   +------------------------ padding -----------------------+   |   |
+        |   |   |                                                        |   |   |
+        |   |   |                CONTENT (width x height)                |   |   |
+        |   |   |                                                        |   |   |
+        |   |   +--------------------------------------------------------+   |   |
+        |   +----------------------------------------------------------------+   |
+        +------------------------------------------------------------------------+
+
+        content -> the text or image itself
+        padding -> space INSIDE the border (it shows the background color)
+        border  -> the line around the padding
+        margin  -> space OUTSIDE the border (always transparent)
+
+    By default (box-sizing: content-box), width and height set only the CONTENT.
+    Padding and border are ADDED on top of them:
+        .box1 rendered width  = 500 + 20 + 20 (padding) + 1 + 1 (border) = 542px
+        .box1 rendered height = 100 + 20 + 20 + 1 + 1                     = 142px
+
+    Many developers use "box-sizing: border-box" so that width/height include
+    padding and border. That makes sizes much easier to predict.
+
+    TRY IT: Open DevTools (F12) -> select .box1 -> look at the box-model diagram
+    in the "Computed" tab. Then shrink the window: max-width lets the box get
+    narrower than 500px, but never wider.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,12 +40,17 @@
         .box1 {
             background-color: lightblue;
             border: 1px solid black;
-            margin: 40px;
+            margin: 40px;          /* one value = same margin on all 4 sides */
             padding: 20px;
+            /* A fixed height can be too short for the text, especially on narrow
+               screens. The extra text then overflows the box (see file 12 for
+               "overflow"). */
             height: 100px;
-            max-width: 500px;
+            max-width: 500px;      /* never wider than 500px, but can shrink */
         }
 
+        /* No width set: a block element fills the full width of its parent
+           (minus its own margin). No height set: it grows to fit its content. */
         .box2{
             background-color: lightblue;
             border: 1px solid black;

@@ -1,4 +1,24 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: Inheritance (part 1)
+    ---------------------------
+    Some CSS properties are passed down from a parent to its children automatically.
+
+    Usually INHERITED (mostly text-related):
+        color, font-family, font-size, font-weight, line-height, text-align,
+        visibility, cursor, list-style
+
+    Usually NOT inherited (mostly box/layout-related):
+        width, height, margin, padding, border, background, display, position
+
+    Rule of thumb: if children inherited the parent's border, every nested element
+    would get a border, which you almost never want. So layout properties are not inherited.
+
+    You can force inheritance with the keyword "inherit" (see #box2).
+
+    TRY IT: Open DevTools (F12), select "Child Div 1", and look at the
+    "Computed" tab to see which values were inherited.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +28,7 @@
     <style>
         #box1 {
             /* inherited by child elements */
-            color: red; 
+            color: red;
             /* Not inherited by child elements
             child has to explicitly mention to inherit this property */
             height: 100px;
@@ -17,17 +37,22 @@
 
         #box2 {
             border: 1px solid green;
+            /* "inherit" copies the parent's value (100px).
+               Two children of 100px each are taller than the 100px parent,
+               so they spill out of #box1's border. That is "overflow". */
             height: inherit;
         }
 
 
+        /* #box3 doesn't set height, so it is only as tall as its text.
+           Its text is still red, because color is inherited from #box1. */
         #box3 {
             border: 1px solid red;
         }
     </style>
 </head>
 <body>
-    
+
     <div id="box1">
         Parent div
         <div id="box2">Child Div 1</div>

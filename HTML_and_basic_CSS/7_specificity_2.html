@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+<!--
+    TOPIC: CSS Specificity (part 2) - counting longer selectors
+    -----------------------------------------------------------
+    Score = (IDs, classes/attributes/pseudo-classes, elements).
+    Every rule below sets "color". Work out which one wins for each element,
+    then open the page to check.
+
+    KEY LESSONS:
+      1. More element selectors = higher score (body div p beats div p),
+         even if the weaker rule is written later.
+      2. A single ID beats ANY number of element selectors.
+      3. Inline style="" beats all selectors in a <style> block.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,34 +19,42 @@
     <title>Document</title>
 
     <style>
+        /* (0,0,1) -> text that sits directly in a div is blue */
         div{
             color: blue;
         }
 
+        /* (0,0,3) -> WINS for the <p>: brown */
         body div p{
             color: brown;
         }
 
+        /* (0,0,2) -> loses to "body div p" even though it comes later.
+           Source order only breaks a TIE in specificity. */
         div p{
             color: red;
         }
 
+        /* (0,0,3) -> loses to #outer li below */
         div ul li{
             color: green;
         }
 
+        /* (1,0,1) -> WINS for the <li>s: red. One ID outweighs any number of elements. */
         #outer li{
             color: red
         }
     </style>
 </head>
 <body>
-    
+
+    <!-- Inline style beats the "div { color: blue }" rule, so this text is green -->
     <div style="width: 700px; color: green; border: 2px dotted green;">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam dignissimos tenetur molestiae sequi rem illo dolores consectetur laudantium distinctio explicabo dolorum vel, soluta non exercitationem natus aut incidunt nobis! Nesciunt.
     </div>
 
     <div>
+        <!-- This text is directly inside a div, so only "div { color: blue }" applies -->
         This is outside paragraph element
         <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi, facilis, sint iste laboriosam repellendus tempore voluptatibus hic unde quo vero quasi laborum ipsa mollitia neque nulla vitae possimus, expedita cupiditate.
