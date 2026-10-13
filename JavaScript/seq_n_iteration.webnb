@@ -1,0 +1,38 @@
+```{javascript}
+// basic array
+const students = ["Alice","Bob","Charlie","Dana"];
+
+console.log(students[0]);
+console.log(students[1]);
+console.log(students[2]);
+console.log(students[3]);
+console.log(students.length);
+
+
+const score = [98,95,95,100];
+```
+```+default
+const students = ["Alice","Bob","Charlie","Dana"];
+
+console.log(students[0]);
+console.log(students[1]);
+console.log(students[2]);
+console.log(students[3]);
+console.log(students.length);
+
+```
+
+```{javascript}
+// while loop
+```
+```+default
+```
+
+```{javascript}
+```
+
+```{javascript}
+```
+
+```{javascript}
+```
