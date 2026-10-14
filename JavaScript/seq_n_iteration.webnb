@@ -24,14 +24,76 @@ console.log(students.length);
 
 ```{javascript}
 // while loop
+let idx = 0;
+const students = ["Alice","Bob","Charlie","Dana"];
+const score = [98,95,95,100];
+
+while(idx < students.length){
+    console.log(`Student ${students[idx]} Score: ${score[idx]}`);
+    idx += 1;
+}
 ```
 ```+default
+// while loop
 ```
 
 ```{javascript}
+let i = 0;
+while(i < 10){
+    if(i === 3){
+        i++;
+      continue;  
+    } 
+    if(i === 8) {
+        break;
+    }
+    console.log(i);
+    i+=1;
+}
+```
+```+default
+let i = 0;
+while(i < 10){
+    if(i == 3) continue;
+    if(i == 8) break;
+    console.log(i);
+    i+=1;
+}
 ```
 
 ```{javascript}
+// for loops
+const students = ["Alice","Bob","Charlie","Dana"];
+
+for(let i = students.length - 1; i >= 0; i--){
+    console.log(students[i]);
+}
+```
+```+default
+// for loops
+const students = ["Alice","Bob","Charlie","Dana"];
+
+for(let i = students.length - 1; i >= 0; i++){
+    console.log(students[i]);
+}
+```
+
+```{javascript}
+// for of loops
+const students = ["Alice","Bob","Charlie","Dana"];
+
+
+for(const student of students){
+    console.log(student);
+}
+```
+```+default
+const students = ["Alice","Bob","Charlie","Dana"];
+
+
+for(student of students){
+    console.log(student);
+}
 ```
 
 ```{javascript}
