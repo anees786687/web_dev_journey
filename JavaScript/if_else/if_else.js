@@ -53,3 +53,29 @@ else if (flour) {
 else {
     console.log("Cannot make anything!");
 }
+
+/**
+ * A "truthy" value is a value that is considered true when encountered in a Boolean context. 
+ * In JavaScript, you don't need to explicitly convert a value to a Boolean before using it in a conditional.
+ * 
+ * Common truthy values include:
+
+    true
+    42 (any number that isn't 0)
+    "hello" (any non-empty string)
+    [] (an empty array)
+    {} (an empty object)
+    function() {} (an empty function)
+
+* A "falsy" value works the same way, but for values that evaluate to false.
+
+* Common falsy values include:
+
+    false
+    0
+    "" (an empty string)
+    null
+    undefined
+    NaN (Not a Number)
+
+ */
