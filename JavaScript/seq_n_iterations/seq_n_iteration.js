@@ -11,8 +11,9 @@
  *   3. break and continue
  *   4. Classic for loops (counting backwards)
  *   5. for...of loops
+ *   6. Spread syntax (...) and destructuring
  *
- * Each section ends with a ⚠️ buggy version of the same code, commented out.
+ * Sections 3-5 end with a ⚠️ buggy version of the same code, commented out.
  * Read it and work out what goes wrong before you try running it.
  *
  * HOW TO RUN: open index.html in a browser and open the Console (F12),
@@ -111,3 +112,38 @@ for (const student of students) {
 // for (student of students) {
 //     console.log(student);
 // }
+
+
+// ============================================================
+// 6. SPREAD SYNTAX AND DESTRUCTURING
+// ============================================================
+// SPREAD (...arr) unpacks the items of an array in place.
+const arr = [1, 2, 3, 4, 5];
+
+// The items of `arr` are inserted where ...arr is written: one flat array.
+const withSpread = [10, 20, ...arr, 30, 40, 50];
+console.log(`With spread syntax: ${withSpread}`);    // 10,20,1,2,3,4,5,30,40,50
+console.log(`withSpread[2]: ${withSpread[2]}`);       // 1
+console.log(`withSpread.length: ${withSpread.length}`); // 10
+
+// Without the dots, the whole array is inserted as ONE item (a nested array).
+const withoutSpread = [10, 20, arr, 30, 40, 50];
+console.log(`Without spread syntax: ${withoutSpread}`);   // looks the same when printed as text...
+console.log(`withoutSpread[2]: ${withoutSpread[2]}`);     // ...but index 2 is the whole array 1,2,3,4,5
+console.log(`withoutSpread.length: ${withoutSpread.length}`); // 6, not 10
+// TRY IT: console.log(withoutSpread) (no template literal) to see the nesting.
+
+// Spread is also the easy way to COPY an array.
+// `copy` is a new array, so changing it doesn't change `arr`.
+const copy = [...arr];
+copy.push(6);
+console.log(`arr: ${arr} | copy: ${copy}`);   // arr: 1,2,3,4,5 | copy: 1,2,3,4,5,6
+// ⚠️ `const alias = arr;` would NOT copy: both names would point to the same array.
+
+// DESTRUCTURING pulls items out of an array into separate variables, by position.
+// Here ... is called the REST element: it collects everything that's left
+// into a new array. It must be the last item.
+const [firstElement, secondElement, ...remainingElements] = arr;
+console.log(`firstElement: ${firstElement}`);           // 1
+console.log(`secondElement: ${secondElement}`);         // 2
+console.log(`remainingElements: ${remainingElements}`); // 3,4,5

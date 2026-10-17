@@ -10,7 +10,7 @@ This folder is all reading. Each note has code you can paste into the browser co
 
 | # | File | What you'll learn |
 |---|------|-------------------|
-| 1 | [var_n_let.md](var_n_let.md) | `var` vs `let` vs `const`: scope, redeclaring, reassigning, the "`const` isn't immutable" trap, and the classic loop bug |
+| 1 | [var_n_let_n_const.md](var_n_let_n_const.md) | `var` vs `let` vs `const`: scope, redeclaring, reassigning, the "`const` isn't immutable" trap, and the classic loop bug |
 | 2 | [scope.md](scope.md) | Global, module, function and block scope; the scope chain; shadowing; a first look at closures |
 | 3 | [hoisting.md](hoisting.md) | Why some names work before their line runs, and the Temporal Dead Zone (TDZ) |
 

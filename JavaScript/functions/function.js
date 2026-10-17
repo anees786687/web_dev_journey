@@ -10,6 +10,7 @@
  *   3. Too few / too many arguments
  *   4. Calling a function vs. referencing it
  *   5. IIFE: Immediately Invoked Function Expression
+ *   6. Rest parameters (...) and spread in function calls
  *
  * HOW TO RUN: open index.html in a browser and open the Console (F12),
  * or run `node function.js` in a terminal.
@@ -106,3 +107,36 @@ const result = (function add(a, b) {
 })(1, 2);
 
 console.log(`IIFE result: ${result}`);   // 3
+
+
+// ============================================================
+// 6. REST PARAMETERS (...) AND SPREAD IN FUNCTION CALLS
+// ============================================================
+// The same three dots do two OPPOSITE jobs depending on where they are:
+//   in a function DEFINITION -> REST: gathers many arguments INTO one array
+//   in a function CALL       -> SPREAD: unpacks one array OUT INTO arguments
+
+// REST parameter: accepts any number of arguments.
+// Inside the function, `nums` is a real array.
+function printNums(...nums) {
+    // typeof says "object" because arrays are objects in JS.
+    // Array.isArray() is the reliable way to check for an array.
+    console.log(`Nums: ${nums}, typeof: ${typeof nums}, isArray: ${Array.isArray(nums)}`);
+}
+
+printNums(1, 2, 3, 4, 5, 6);   // Nums: 1,2,3,4,5,6
+printNums();                   // Nums: (an empty array, no error)
+
+// SPREAD in a call: each item of the array becomes a separate argument.
+const arr = [1, 2, 3, 4, 5];
+printNums(...arr);             // same as printNums(1, 2, 3, 4, 5)
+
+// A rest parameter can follow normal parameters, but it must come LAST.
+function introduce(greeting, ...names) {
+    console.log(`${greeting}, ${names.join(' and ')}!`);
+}
+introduce('Hello', 'Sam', 'Bam');   // Hello, Sam and Bam!
+// ⚠️ function bad(...names, greeting) {} is a SyntaxError.
+
+// TRY IT: Math.max(1, 5, 3) gives 5. How would you get the largest number
+// in `arr` using spread?

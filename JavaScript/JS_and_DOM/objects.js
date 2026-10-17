@@ -25,9 +25,10 @@
  *     other objects, functions).
  *   - Each key: value pair is a PROPERTY. Properties are separated by commas.
  *   - A function stored as a property is called a METHOD.
+ *   - The spread syntax {...obj} copies an object's properties (section 7).
  *
  * HOW TO RUN: open index.html in a browser and open the Console (F12),
- * or run `node dom_n_objs.js`.
+ * or run `node objects.js`.
  */
 
 
@@ -104,3 +105,31 @@ const itemArray = [
 for (const item of itemArray) {
     console.log(`Item: ${item.name} Price: ${item.price}`);
 }
+
+
+// ============================================================
+// 7. SPREAD SYNTAX ON OBJECTS
+// ============================================================
+// {...obj} copies all of obj's properties into a NEW object.
+// The original object is not changed.
+const user = { name: 'Anees', theme: 'dark' };
+
+// Copy user's properties, then add a new one.
+// (false without quotes is a boolean. 'false' in quotes would be a
+// non-empty string, which is TRUTHY, so `if (user.isAdmin)` would pass!)
+const updatedUser = { ...user, isAdmin: false };
+console.log(user);          // { name: 'Anees', theme: 'dark' }  (unchanged)
+console.log(updatedUser);   // { name: 'Anees', theme: 'dark', isAdmin: false }
+
+// Properties are applied left to right, so anything written AFTER the
+// spread overrides the copied value. This is how you "update" an object
+// without modifying the original.
+const user2 = { ...user, isAdmin: false, theme: 'light' };
+console.log(user2);         // { name: 'Anees', theme: 'light', isAdmin: false }
+// TRY IT: move `theme: 'light'` BEFORE ...user. Which theme wins now?
+
+// ⚠️ The copy is SHALLOW: nested objects are shared, not copied.
+const original = { name: 'Sam', address: { city: 'Pune' } };
+const shallowCopy = { ...original };
+shallowCopy.address.city = 'Delhi';
+console.log(original.address.city);   // Delhi (the original changed too!)

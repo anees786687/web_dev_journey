@@ -7,7 +7,7 @@ An **array** is an ordered list of values. A **loop** runs the same code once fo
 
 | File | What it is |
 |------|------------|
-| [seq_n_iteration.js](seq_n_iteration.js) | Array indexing and `.length`, `while`, `break` / `continue`, a backwards `for` loop, and `for...of` |
+| [seq_n_iteration.js](seq_n_iteration.js) | Array indexing and `.length`, `while`, `break` / `continue`, a backwards `for` loop, `for...of`, spread (`...arr`), copying arrays, and destructuring |
 | [index.html](index.html) | Loads the script so you can run it in the browser |
 
 ## How to run
@@ -21,6 +21,8 @@ An **array** is an ordered list of values. A **loop** runs the same code once fo
 - Every loop needs the same three parts: **start** a counter, **check** a condition, **update** the counter.
 - `continue` skips to the next iteration. `break` exits the loop.
 - Use `for...of` when you just need each item, and a classic `for` loop when you need the index or a custom order.
+- `[...a, ...b]` **spreads** arrays into a new, flat array. `[...arr]` makes a copy.
+- `const [first, second, ...rest] = arr;` **destructures** an array into variables by position. `...rest` collects whatever is left.
 
 | Loop | Best for |
 |------|----------|
@@ -36,11 +38,14 @@ uncomment the first two.** They are infinite loops and will freeze the tab.
 1. Using `continue` before updating the counter, so the counter never changes.
 2. Using `k++` instead of `k--` when counting down, so the condition is always true.
 3. Writing `for (student of students)` without `const`, which creates an accidental global variable.
+4. Writing `const copy = arr;` and expecting a copy. Both names point to the **same** array. Use `[...arr]` instead.
 
 ## Try it
 
 1. Use a `for` loop to print only the students whose score is `100`.
 2. Use a `while` loop to add up all the scores, then print the average.
+3. Combine `students` and `['Eve', 'Frank']` into one new array using spread, without changing `students`.
+4. Use destructuring to put the first student in `topStudent` and the rest in `others`.
 
 ---
 

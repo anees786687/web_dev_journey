@@ -1,22 +1,25 @@
-# 5. Objects and the DOM
+# 5. Objects, the DOM and events
 
 When a browser loads a page, it turns every HTML element into a **JavaScript object**. That
 tree of objects is the **DOM** (Document Object Model). To change a page with JavaScript, you
-first need to be comfortable with objects.
+first need to be comfortable with objects. Once you can find and change elements, **events** let
+your code react when the user does something, such as clicking a button.
 
 ## Files (in order)
 
 | # | File | What you'll learn |
 |---|------|-------------------|
-| 1 | [dom_n_objs.js](dom_n_objs.js) | What the DOM is; creating objects; reading, adding, editing and deleting properties; methods; nested objects; arrays of objects |
-| 2 | [dom_basics.js](dom_basics.js) | A first DOM example: `document.querySelector`, changing `textContent` and `style` |
-| | [index.html](index.html) | Loads both scripts with `defer` and has the elements that `dom_basics.js` changes |
+| 1 | [objects.js](objects.js) | What the DOM is; creating objects; reading, adding, editing and deleting properties; methods; nested objects; arrays of objects; copying and updating with object spread `{...obj}` |
+| 2 | [dom_basics.js](dom_basics.js) | The `window` object (`innerWidth`, `location`, `prompt`, `alert`), the `document` object, changing elements with `textContent` and `style`, `querySelector` vs `querySelectorAll`, NodeLists, `innerHTML` / `innerText`, `setAttribute`, and `classList` (`add`, `remove`, `toggle`) |
+| 3 | [click_events.js](click_events.js) | Making a button work with `addEventListener('click', callback)`, and why you pass `callback`, not `callback()` |
+| | [index.html](index.html) | Loads all three scripts with `defer`, and has the elements and the `.red` / `.blue_text` classes they use |
 
 ## How to run
 
-- **Browser:** open `index.html`. The heading and paragraph change as soon as the page loads.
-  Press `F12` → *Console* to see the object examples.
-- **Node.js:** `node dom_n_objs.js` works. `dom_basics.js` needs a browser, because `document` only exists there.
+- **Browser:** open `index.html`. The first heading and paragraph change as soon as the page loads,
+  and the **Click me** button at the bottom switches the paragraph between red and blue.
+  Press `F12` → *Console* to see everything the scripts print.
+- **Node.js:** `node objects.js` works. `dom_basics.js` and `click_events.js` need a browser, because `document` only exists there.
 
 ## Key ideas
 
@@ -24,15 +27,28 @@ first need to be comfortable with objects.
 - `obj.key` and `obj['key']` do the same thing. Use brackets when the key is stored in a variable.
 - Reading a missing property gives `undefined`. Reading a property **of** `undefined` throws an error (see [6. Nullish coalescing](../nullish_coalescing/) for the fix).
 - `const` stops you from replacing the object, but you can still change its properties.
+- `{ ...obj, key: value }` makes a **new** object. Later properties override earlier ones. The copy is **shallow**: nested objects are still shared.
+- `window` is the browser's **global object**. Globals like `alert`, `prompt`, `location` and `document` all live on it, so you can leave out the `window.` prefix.
+- `document` (`window.document`) is the loaded page and the entry point to the DOM.
+- `querySelector` returns the **first** match or `null`. `querySelectorAll` returns a **NodeList** of every match, which is empty if there are none.
+  A NodeList works with `.length` and `for...of`, but it isn't a real array (use `[...list]` to get one).
+- Calling `querySelector` on an **element** instead of `document` searches only inside that element.
+- Prefer switching CSS classes with `classList.add` / `remove` / `toggle` over setting `element.style` by hand.
+- `element.addEventListener('click', fn)` runs `fn` on every click. Pass the function (`fn`), not its result (`fn()`).
 - A script in `<head>` runs before `<body>` exists. Add `defer` (or put the `<script>` at the end of `<body>`) so the elements are there when it runs.
 - Changing the DOM changes what's **on screen**, not the `.html` file on disk.
 
 ## Try it
 
-1. In `dom_n_objs.js`, add a `hobbies` array to `person` and print the second hobby.
+1. In `objects.js`, add a `hobbies` array to `person` and print the second hobby.
+   Then use object spread to make `olderPerson`, a copy of `person` with `age` increased by 1.
 2. In `dom_basics.js`, make the heading's text colour blue and its font size `40px`.
    (Hint: `style.color`, `style.fontSize`.)
-3. Remove `defer` from the `dom_basics.js` script tag, refresh, and read the error in the console.
+3. Uncomment the `prompt`/`alert` lines in `dom_basics.js` and press *Cancel*. What gets displayed? Use `??` to show `'Guest'` instead.
+4. Use `querySelectorAll('li')` and a `for...of` loop to add the `blue_text` class to every list item.
+5. In `click_events.js`, delete the `isRed` variable and check `para.classList.contains('red')` instead. Can you shorten the callback with `classList.toggle`?
+6. Add a second button that counts how many times it's been clicked and shows the count in a `<p>`.
+7. Remove `defer` from the `dom_basics.js` script tag, refresh, and read the error in the console.
 
 ---
 

@@ -19,7 +19,7 @@ web_dev_journey/
 ├── HTML_and_basic_CSS/   1. Selectors, specificity, inheritance, the box model
 ├── Advanced_CSS/         2. Layout: display, position, float, Flexbox, Grid, media queries
 ├── Labs/                 3. Small projects that combine the HTML and CSS topics
-└── JavaScript/           4. Variables, conditionals, loops, functions, objects, the DOM
+└── JavaScript/           4. Variables, conditionals, loops, functions, objects, the DOM, events
     └── README.md            ← its own learning path and cheat sheet
 ```
 
@@ -100,9 +100,9 @@ README with key ideas and practice exercises.
 |---|--------|-------------------|
 | 1 | [basics/](JavaScript/basics/) | `var` vs `let` vs `const`, scope, hoisting and the Temporal Dead Zone |
 | 2 | [if_else/](JavaScript/if_else/) | `if` / `else if` / `else`, logical operators, truthy and falsy values |
-| 3 | [seq_n_iterations/](JavaScript/seq_n_iterations/) | Arrays, `while`, `for`, `for...of`, `break` and `continue` |
-| 4 | [functions/](JavaScript/functions/) | Defining and calling functions, IIFEs, callbacks, higher-order functions, closures |
-| 5 | [JS_and_DOM/](JavaScript/JS_and_DOM/) | Objects, methods, what the DOM is, and changing the page with `querySelector` |
+| 3 | [seq_n_iterations/](JavaScript/seq_n_iterations/) | Arrays, `while`, `for`, `for...of`, `break` and `continue`, spread `...` and destructuring |
+| 4 | [functions/](JavaScript/functions/) | Defining and calling functions, IIFEs, rest parameters, callbacks, higher-order functions, closures |
+| 5 | [JS_and_DOM/](JavaScript/JS_and_DOM/) | Objects and object spread, the `window` and `document` objects, finding and changing elements (`querySelector`, `classList`), and click events |
 | 6 | [nullish_coalescing/](JavaScript/nullish_coalescing/) | `??`, optional chaining `?.`, `??=`, and default parameters |
 
 > 💡 The JavaScript examples print to the **Console**. Open a folder's `index.html`,
@@ -177,7 +177,9 @@ While adding comments I marked real mistakes with ⚠️, so you can learn from 
 - **Undeclared variables.** `for (x of arr)` without `const` creates an accidental global. (`seq_n_iterations/`)
 - **Optional chaining on only one step.** `user?.address.city` still crashes. (`nullish_coalescing/`)
 - **`||` for defaults** replaces a valid `0` or `""`. Use `??`. (`if_else/truthy_falsy.md`)
+- **Thinking `=` or `{...obj}` makes a full copy.** `copy = arr` shares the same array, and spread only copies one level deep. (`seq_n_iterations/`, `JS_and_DOM/objects.js`)
 - **DOM code that runs too early.** A script in `<head>` without `defer` can't find the elements. (`JS_and_DOM/`)
+- **`addEventListener('click', fn())`.** The `()` calls `fn` once on page load instead of on every click. Pass `fn`. (`JS_and_DOM/click_events.js`)
 
 ---
 
@@ -193,4 +195,4 @@ While adding comments I marked real mistakes with ⚠️, so you can learn from 
 
 ---
 
-*This repo is a work in progress. More JavaScript topics (events, DOM manipulation, async code) will be added as I learn them.*
+*This repo is a work in progress. More JavaScript topics (more events, forms, async code) will be added as I learn them.*
