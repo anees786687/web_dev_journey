@@ -1,37 +1,41 @@
 /**
- * What is DOM?
- * JS represents every element of the webpage as an object and can reach into these objects to change them.
- * 
- * HTML code is converted to a tree of objects by the browser; the browser achieves this by parsing the HTML code
- * 
- * So, essentialy 
- * 
- * Document is the page itself
- * Object is the representation of every element in the HTML code, the object type has the properties that can be read or written to
- * Model is the tree representation of the page that JS can work with
- * 
- * So the page displayed follows the DOM, thus JS can change the objects element and that change will appear on the screen; the html code 
- * on disk is untouched. Further, any element on the page can be reached using the DOM. Even CSS selectors are represented as objects and can be changed
- *  
- */
-
-/**
+ * TOPIC: JavaScript objects (and why they matter for the DOM)
+ * ----------------------------------------------------------
+ * WHAT IS THE DOM?
+ *   When the browser loads a page, it parses the HTML and builds a TREE of
+ *   OBJECTS from it, one object per element. That tree is the DOM:
+ *
+ *     Document -> the page itself
+ *     Object   -> each element, as a JS object whose properties you can
+ *                 read and change (text, attributes, styles...)
+ *     Model    -> the tree structure that connects them
+ *
+ *   When JS changes one of these objects, the page on screen updates.
+ *   The .html file on disk stays the same. Styles are objects too
+ *   (element.style), so JS can change CSS as well.
+ *
+ *   Because every element is an object, you need to understand OBJECTS
+ *   first. That's what this file covers. dom_basics.js then puts it to use.
+ *
  * JS OBJECTS
- * 
- *  way putting related data and functionality in one place; most important building block of JS, quite ubiquitous
- * 
- * Object is a collection of key-value pairs - keys are string and value can be any JS type. Idea is to look up a value by its key, similar to a dictionary
- * 
- * each key-value pair is called a property, these pairs are separated by a comma.
- * 
- * a function bound to a key is called a method i.e. a method is a function that belongs to an object
- * 
- * a property can have other objects as it value as well
- * 
- * 
+ *   - An object groups related data and behaviour in one place. Objects are
+ *     the most important building block in JS.
+ *   - An object is a collection of KEY: VALUE pairs, like a dictionary.
+ *     Keys are strings, values can be anything (numbers, strings, arrays,
+ *     other objects, functions).
+ *   - Each key: value pair is a PROPERTY. Properties are separated by commas.
+ *   - A function stored as a property is called a METHOD.
+ *
+ * HOW TO RUN: open index.html in a browser and open the Console (F12),
+ * or run `node dom_n_objs.js`.
  */
 
-// creating an object
+
+// ============================================================
+// 1. CREATING AN OBJECT
+// ============================================================
+// `const` means the variable can't point to a different object.
+// The object's properties can still be changed (see below).
 const person = {
     name: 'Anees',
     age: 34
@@ -39,46 +43,64 @@ const person = {
 
 console.log(person);
 
-// we can ask for individual properties
+
+// ============================================================
+// 2. READING PROPERTIES
+// ============================================================
+console.log(`Name: ${person.name}`);     // dot notation (most common)
+console.log(`Age: ${person['age']}`);    // bracket notation (needed when the key is in a variable)
+
+// Reading a property that doesn't exist gives undefined (no error).
+console.log(`Address: ${person.address}`);   // undefined
+
+
+// ============================================================
+// 3. ADDING, EDITING AND DELETING PROPERTIES
+// ============================================================
+person.address = 'Andheri, Mumbai';           // add
+console.log(`Address: ${person.address}`);
+
+person.name = 'Anees Alwani';                 // edit
 console.log(`Name: ${person.name}`);
-console.log(`Age: ${person['age']}`);
-// a property that does not exist will give undefined
-console.log(`Address ${person.address}`);
 
-// we can add a new property
-person.address = 'Andheri, Mumbai';
-console.log(`Address ${person.address}`);
-
-// we can edit a property
-person.name = 'Anees Alwani';
-console.log(`Name: ${person.name}`);
+delete person.address;                        // delete
+console.log(`Address after delete: ${person.address}`);   // undefined
 
 
-// we can delete a property
-delete person.address;
-console.log(`Address ${person.address}`);
-
-// add a method to obj
+// ============================================================
+// 4. METHODS (functions stored on an object)
+// ============================================================
 person.greet = function () {
-    console.log('Hi');
-}
+    // Inside a regular function used as a method, `this` is the object
+    // the method was called on (here: person).
+    console.log(`Hi, I'm ${this.name}`);
+};
 person.greet();
 
-// adding object to an object
+
+// ============================================================
+// 5. NESTED OBJECTS (an object as a property value)
+// ============================================================
 person.address = {
     district: 'Andheri',
     city: 'Mumbai'
 };
 
+// Chain the dots to go deeper.
 console.log(`District: ${person.address.district} City: ${person.address.city}`);
 
-// array of objects
-const itemArray = [
-    {name: 'Pen', price: 10},
-    {name: 'Pencil', price: 5},
-    {name: 'Book', price: 25},
-]; // we can use a for..of loops to access these objects
 
-for(const item of itemArray){
+// ============================================================
+// 6. AN ARRAY OF OBJECTS
+// ============================================================
+// A very common shape for real data (for example, a list of products from an API).
+const itemArray = [
+    { name: 'Pen', price: 10 },
+    { name: 'Pencil', price: 5 },
+    { name: 'Book', price: 25 },
+];
+
+// for...of gives you each object in turn.
+for (const item of itemArray) {
     console.log(`Item: ${item.name} Price: ${item.price}`);
 }

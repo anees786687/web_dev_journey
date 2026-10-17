@@ -143,7 +143,7 @@ setTimeout(() => greet("Anees"), 1000);
 
 1. Is `map` a first-class function, a higher-order function, or both? What about the arrow function you pass into it?
 2. What's the difference between `button.addEventListener("click", save)` and `button.addEventListener("click", save())`?
-3. Remember the `increase()` exercise, where `clicks` reset to `0` on every call and wasn't visible outside? Using what you now know about **returning functions** and closures, how could you write a `makeCounter()` that produces a counter which actually remembers its count between calls?
+3. Imagine a function `increase()` that does `let clicks = 0; clicks++;` every time it's called. Its count resets to `0` on every call and isn't visible outside. Using what you now know about **returning functions** and closures, how could you write a `makeCounter()` that produces a counter which actually remembers its count between calls? (Check your answer against [firstClass_n_higherOrder_functions.js](firstClass_n_higherOrder_functions.js).)
 
 Sources:
 - [First-class function - Glossary | MDN](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function)

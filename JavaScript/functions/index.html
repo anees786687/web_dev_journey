@@ -1,15 +1,25 @@
 <!DOCTYPE html>
+<!--
+    HOW TO USE THIS PAGE
+    --------------------
+    Open this file in a browser, then open the Console (F12 -> "Console" tab)
+    to see the output.
+
+    Only ONE script is loaded at a time. Both files declare something called
+    `greet`, and the browser treats classic scripts on one page as sharing a
+    single global scope, so loading both would cause:
+        SyntaxError: Identifier 'greet' has already been declared
+    To switch files, comment out one <script> line and uncomment the other.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>JS Functions</title>
     <script src="function.js"></script>
     <!-- <script src="firstClass_n_higherOrder_functions.js"></script> -->
-
-
 </head>
 <body>
-    
+    <p>Open the browser console (F12) to see the output.</p>
 </body>
 </html>

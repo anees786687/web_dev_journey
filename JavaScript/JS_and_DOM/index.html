@@ -1,14 +1,24 @@
 <!DOCTYPE html>
+<!--
+    Open this file in a browser, then open the Console (F12 -> "Console" tab).
+
+    - dom_n_objs.js only prints to the console (objects practice).
+    - dom_basics.js changes the heading and paragraph below.
+
+    `defer` tells the browser to download the scripts now but run them only
+    after the whole HTML document has been parsed, so the elements exist.
+    Deferred scripts run in the order they appear.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <script src="dom_n_objs.js"></script> -->
-    <script src="nullish_coalescing.js"></script>
-
+    <title>JS Objects and the DOM</title>
+    <script src="dom_n_objs.js" defer></script>
+    <script src="dom_basics.js" defer></script>
 </head>
 <body>
-    
+    <h1 id="title">Original heading from the HTML file</h1>
+    <p class="note">Original paragraph from the HTML file.</p>
 </body>
 </html>

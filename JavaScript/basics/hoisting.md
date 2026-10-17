@@ -63,7 +63,7 @@ console.log(zzz); // ReferenceError: zzz is not defined
 
 The two error messages differ: "before initialization" means the variable exists but is locked, while "not defined" means it doesn't exist anywhere.
 
-This is exactly why the block example from earlier threw an error:
+This explains a classic surprise, where a block throws an error even though an outer `x` exists:
 
 ```js
 let x = 1;

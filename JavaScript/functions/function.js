@@ -1,78 +1,108 @@
-
 /**
- * // DEFINING FUNCTIONS
+ * TOPIC: Functions (the basics)
+ * -----------------------------
+ * A function is a reusable block of code. You DEFINE it once and then
+ * CALL (invoke) it as many times as you like.
+ *
+ * This file covers:
+ *   1. Defining functions (with and without parameters / return values)
+ *   2. Calling a function
+ *   3. Too few / too many arguments
+ *   4. Calling a function vs. referencing it
+ *   5. IIFE: Immediately Invoked Function Expression
+ *
+ * HOW TO RUN: open index.html in a browser and open the Console (F12),
+ * or run `node function.js` in a terminal.
  */
-// defining a function without parameters and no return value; a function with out a specific return, returns undefined 
-function doGreet(){
+
+
+// ============================================================
+// 1. DEFINING FUNCTIONS
+// ============================================================
+
+// No parameters and no `return`.
+// A function without a `return` statement gives back `undefined`.
+function doGreet() {
     console.log("Hello");
-    console.log("World!")
+    console.log("World!");
 }
 
-// defining a function with parameters and a return value
-// parameters help us customize how a function runs
-function myFunc(x,y,z){
-    return x+y+z;
+// Parameters let the caller customise what the function does.
+// `return` sends a value back to whoever called the function.
+function addThree(x, y, z) {
+    return x + y + z;
 }
 
-function greet(name){
-    return (`Hello ${name}`);
+function greet(name) {
+    return `Hello ${name}`;   // template literal: ${...} inserts a value into the string
 }
 
 
-/**
- * // INVOKING A FUNCTION
- * To invoke a function we need the function expression which is the function name
- * followed by parentheses (), this parentheses does the calling, the name is front of it 
- * is just an expression to identify the function
- */
+// ============================================================
+// 2. CALLING (INVOKING) A FUNCTION
+// ============================================================
+// The name `doGreet` just identifies the function.
+// The parentheses `()` are what actually run it.
 doGreet();
 
+
+// ============================================================
+// 3. ARGUMENTS: TOO FEW OR TOO MANY
+// ============================================================
+
+// Call addThree and store the value it returns in `sum`.
+const sum = addThree(1, 2, 3);
+console.log(`sum: ${sum}`);                                   // sum: 6
+
+// Too FEW arguments is not an error. Missing parameters become `undefined`.
+// 1 + 2 + undefined -> NaN ("Not a Number")
+const sumMissingArg = addThree(1, 2);
+console.log(`sumMissingArg: ${sumMissingArg}`);               // NaN
+
+console.log(`Passing no argument to greet: ${greet()}`);      // Hello undefined
+console.log(`Passing an argument to greet: ${greet('Anees')}`);
+
+// Too MANY arguments is not an error either. The extra ones are ignored.
+console.log(`Passing extra args: ${greet('Sam', 'Bam')}`);    // Hello Sam
+
+
+// ============================================================
+// 4. CALLING A FUNCTION vs. REFERENCING IT
+// ============================================================
+// Without (), you are not calling the function. You are just referring to it.
+// `sumFunc` now points to the same function as `addThree`.
+const sumFunc = addThree;
+
+console.log(`Calling through the reference: ${sumFunc(4, 5, 6)}`);  // 15
+console.log(sumFunc);   // prints the function itself, not a result
+
+// `sum` holds the RESULT of a call (a number); `sumFunc` holds the FUNCTION.
+console.log(`sum: ${typeof sum}, sumFunc: ${typeof sumFunc}`);      // number, function
+
+// TRY IT: change `const sumFunc = addThree;` to `const sumFunc = addThree();`
+// and see what happens. (Hint: now you're storing a result, not a function.)
+
+
+// ============================================================
+// 5. IIFE: IMMEDIATELY INVOKED FUNCTION EXPRESSION
+// ============================================================
 /**
- * // CALLING THE FUNCTION VS REFERENCING THE FUNCTION
+ * An IIFE is a function that runs as soon as it is defined:
+ *
+ *     (function name(a, b) {
+ *         // body
+ *     })(arg1, arg2);
+ *
+ * The first ( ) wraps the function so JS treats it as an expression.
+ * The second ( ) calls it straight away.
+ *
+ * Why use one?
+ *   - Scope:      variables inside it stay private and don't leak out.
+ *   - Expression: compute a value in one go (like `result` below).
+ *   - Async:      quickly run code inside an async function (covered later).
  */
-let sum = myFunc(1,2,3); // here we call the myFunc function with arguements which returns the sum and stores in into x
-console.log(`sum: ${sum}`);
-
-// to few arguments does not throw an error, the arguement that was not supplies is replaced by undefined
-let sum_1 = myFunc(1,2); // here the third arguement is undefined
-console.log(`sum_1: ${sum_1}`);
-// another example is
-console.log(`Passing no arguement to greet: ${greet()}`);
-console.log(`Passing an arguement to greet: ${greet('Anees')}`);
-
-// too many arguements is also not an error, the extra arguements are ignored
-console.log(`Passing more than required args: ${greet('Sam','Bam')}`);
-
-// this is just a reference to the function; here the function is not called
-let sum_func = myFunc; 
-
-console.log(`Calling function from reference: ${sum_func(4,5,6)}`); // we will have to use the reference to call the function
-console.log(sum_func); // this will print the entire function
-console.log(`sum: ${typeof sum}, sum_func: ${typeof sum_func}`); // both sum and sum_func are of different types
-
-/**
- * IMMEDIATE INVOKED FUNCTION EXPRESSION
- * 
- * we can immediately invoke a function after its definition; as soon as the function is defined it can be invoked there and there
- * 
- * (function somethn (a,b){
- *  // body
- * })(a,b);
- * 
- * looks nasty but good for certain cases
- * 
- * 
-
-    Scope: It has its own scope
-
-    Expression: Can be convenient for computing a value as a single expression (like above)
-
-    Async: Can be used to quickly run code in an async function (we'll cover this later)
-
- */
-
-const result = (function add(a,b){
+const result = (function add(a, b) {
     return a + b;
-})(1,2);
+})(1, 2);
 
-console.log(result);
+console.log(`IIFE result: ${result}`);   // 3

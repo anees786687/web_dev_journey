@@ -1,12 +1,27 @@
 # web_dev_journey
 
-My hands-on notes from learning web development (HTML and CSS so far), built while
+My hands-on notes from learning web development (**HTML, CSS and JavaScript**), built while
 taking the Web Programming course at BITS.
 
 Every file is a small, self-contained example. Each one starts with a **comment header**
 explaining the concept, and has **inline comments** explaining *why* each line does what
-it does. Most files also have a **"TRY IT"** section with an experiment to run.
-If you're learning web dev, you can follow this repo from top to bottom.
+it does. Most files also have a **"TRY IT"** section with an experiment to run, and real
+mistakes are marked with **⚠️** so you can learn from them.
+
+If you're new to web development, you can follow this repo from top to bottom.
+
+---
+
+## What's inside
+
+```
+web_dev_journey/
+├── HTML_and_basic_CSS/   1. Selectors, specificity, inheritance, the box model
+├── Advanced_CSS/         2. Layout: display, position, float, Flexbox, Grid, media queries
+├── Labs/                 3. Small projects that combine the HTML and CSS topics
+└── JavaScript/           4. Variables, conditionals, loops, functions, objects, the DOM
+    └── README.md            ← its own learning path and cheat sheet
+```
 
 ---
 
@@ -16,18 +31,20 @@ If you're learning web dev, you can follow this repo from top to bottom.
    ```bash
    git clone https://github.com/anees786687/web_dev_journey.git
    ```
-2. **Open any `.html` file in your browser.** No build tools or installs needed.
+2. **Open any `.html` file in your browser.** You don't need any build tools or installs.
    Tip: the VS Code extension **Live Server** reloads the page every time you save.
 3. **Read the comments in the file**, then **change things and refresh**.
    Breaking things on purpose is the fastest way to learn.
-4. **Use DevTools** (`F12` or right-click → *Inspect*). The *Elements* and *Computed*
-   tabs show which CSS rules apply, which are overridden (crossed out), and the box model.
+4. **Use DevTools** (`F12` or right-click → *Inspect*):
+   - *Elements* and *Computed* show which CSS rules apply, which are overridden (crossed out), and the box model.
+   - *Console* shows the output of the JavaScript examples, and lets you type and run JS yourself.
+5. **Optional:** install [Node.js](https://nodejs.org/) to run the JavaScript files from a terminal (`node file.js`).
 
 ---
 
 ## Learning path
 
-Go through the folders in this order. Each step builds on the previous one.
+Go through the sections in this order. Each step builds on the previous one.
 
 ### 1. HTML and basic CSS: [`HTML_and_basic_CSS/`](HTML_and_basic_CSS/)
 
@@ -64,7 +81,7 @@ How to put things **where you want them** on the page.
 
 ### 3. Lab exercises: [`Labs/`](Labs/)
 
-Small projects that combine the concepts above.
+Small projects that combine the HTML and CSS concepts above.
 
 | Lab | Files | What it builds |
 |-----|-------|----------------|
@@ -73,9 +90,27 @@ Small projects that combine the concepts above.
 | Lab 2 | [Lab_2/](Labs/Lab_2/index.html) | A styled form with aligned inputs (float trick), `box-shadow`, `text-shadow`, `:focus` |
 | Lab 3 | [Lab_3/](Labs/Lab_3/index.html) | A responsive navigation bar: Flexbox + a media query, centered with `margin: 0 auto` |
 
+### 4. JavaScript: [`JavaScript/`](JavaScript/)
+
+How to make a page **do things**. Start with the [JavaScript README](JavaScript/README.md),
+which explains how to run the code and has its own cheat sheet. Each folder also has a
+README with key ideas and practice exercises.
+
+| # | Folder | What you'll learn |
+|---|--------|-------------------|
+| 1 | [basics/](JavaScript/basics/) | `var` vs `let` vs `const`, scope, hoisting and the Temporal Dead Zone |
+| 2 | [if_else/](JavaScript/if_else/) | `if` / `else if` / `else`, logical operators, truthy and falsy values |
+| 3 | [seq_n_iterations/](JavaScript/seq_n_iterations/) | Arrays, `while`, `for`, `for...of`, `break` and `continue` |
+| 4 | [functions/](JavaScript/functions/) | Defining and calling functions, IIFEs, callbacks, higher-order functions, closures |
+| 5 | [JS_and_DOM/](JavaScript/JS_and_DOM/) | Objects, methods, what the DOM is, and changing the page with `querySelector` |
+| 6 | [nullish_coalescing/](JavaScript/nullish_coalescing/) | `??`, optional chaining `?.`, `??=`, and default parameters |
+
+> 💡 The JavaScript examples print to the **Console**. Open a folder's `index.html`,
+> press `F12`, and click the *Console* tab.
+
 ---
 
-## Quick reference cheat sheet
+## CSS quick reference
 
 ### Which CSS rule wins? (the cascade)
 1. `!important` (avoid it unless you really need it)
@@ -120,13 +155,15 @@ They work well together: Grid for the page layout, Flexbox inside each section.
 | `fixed` | ❌ | the browser window (viewport) |
 | `sticky` | ✅ until it sticks | the viewport, while its parent is visible |
 
+For the JavaScript cheat sheet, see [JavaScript/README.md](JavaScript/README.md#quick-reference-cheat-sheet).
+
 ---
 
 ## Common mistakes (marked with ⚠️ in the code)
 
-While adding comments I marked a few real mistakes with ⚠️ and left them in place, so you
-can learn from them:
+While adding comments I marked real mistakes with ⚠️, so you can learn from them.
 
+**HTML and CSS**
 - **Reusing an `id`.** IDs must be unique. Use a `class` for styles you reuse. (Lab 1, Lab 2)
 - **Missing units.** `height: 75;` is invalid and ignored. Write `75px`. (`position_property/style.css`)
 - **Passwords in `type="text"`.** Use `type="password"`. (Lab 1)
@@ -135,11 +172,19 @@ can learn from them:
 - **`<link>` outside `<head>`.** Stylesheets belong in `<head>`. (`grids/index_2.html`)
 - **No space between attributes** (`id="a_1"class="..."`) is invalid HTML. (`flexboxes/index.html`)
 
+**JavaScript**
+- **Infinite loops.** `continue` before the counter update, or `i++` when counting down. (`seq_n_iterations/`)
+- **Undeclared variables.** `for (x of arr)` without `const` creates an accidental global. (`seq_n_iterations/`)
+- **Optional chaining on only one step.** `user?.address.city` still crashes. (`nullish_coalescing/`)
+- **`||` for defaults** replaces a valid `0` or `""`. Use `??`. (`if_else/truthy_falsy.md`)
+- **DOM code that runs too early.** A script in `<head>` without `defer` can't find the elements. (`JS_and_DOM/`)
+
 ---
 
 ## Useful resources
 
 - [MDN Web Docs](https://developer.mozilla.org/): the best reference for HTML, CSS and JS
+- [javascript.info](https://javascript.info/): a free, beginner-friendly JavaScript tutorial
 - [Flexbox Froggy](https://flexboxfroggy.com/): a game for learning Flexbox
 - [Grid Garden](https://cssgridgarden.com/): a game for learning CSS Grid
 - [CSS-Tricks: A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
@@ -148,4 +193,4 @@ can learn from them:
 
 ---
 
-*This repo is a work in progress. More topics (JavaScript, DOM and more) will be added as I learn them.*
+*This repo is a work in progress. More JavaScript topics (events, DOM manipulation, async code) will be added as I learn them.*

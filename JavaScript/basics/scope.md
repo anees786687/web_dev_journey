@@ -4,7 +4,7 @@
 
 MDN describes **scope** as the current execution context in which values and expressions are visible and can be referenced. A variable that isn't in the current scope simply can't be used there.
 
-Scopes are **nested**: child scopes can reach their parents' variables, but parents can't reach into their children. This is the one-way, inside-out lookup rule you used in the `increase()` exercise.
+Scopes are **nested**: child scopes can reach their parents' variables, but parents can't reach into their children. Lookup only goes one way: from the inside out.
 
 ## The four kinds of scope
 
@@ -139,7 +139,7 @@ const fn = outer();
 fn();                      // "outer", even though fn is called from global code
 ```
 
-This is exactly why your `makeCounter()` worked: the returned arrow function was **written inside** `makeCounter`, so its scope chain permanently includes that `count`, wherever the function is called from later. That retained scope is a **closure**.
+This is exactly why `makeCounter()` in [functions/](../functions/firstClass_n_higherOrder_functions.js) works: the returned arrow function was **written inside** `makeCounter`, so its scope chain permanently includes that `count`, wherever the function is called from later. That retained scope is a **closure**.
 
 ## How this ties together the earlier topics
 

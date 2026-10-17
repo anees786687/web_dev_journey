@@ -66,7 +66,8 @@ const city = user?.address?.city ?? "Unknown";
 const firstTag = post?.tags?.[0] ?? "untagged";
 const result = api.fetchData?.() ?? null; // calls the method only if it exists
 ```
-Let's build it up one step at a time, starting with the problem it solves.
+
+The next few sections build `?.` up one step at a time, starting with the problem it solves.
 
 ## The problem: reading a property of something that doesn't exist
 
@@ -135,7 +136,6 @@ If `post` is missing, or `tags` is missing, you get `"untagged"` instead of a cr
 
 **Line 3:** `api.fetchData?.() ?? null`
 If `fetchData` isn't a function on `api`, it isn't called and you get `null`. If it exists, it's called normally. Note that `api` itself has no `?.`, so `api` must exist.
-
 
 
 ## Logical nullish assignment (`??=`)
