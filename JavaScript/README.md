@@ -46,6 +46,7 @@ Follow the folders in this order. Each one only uses ideas from the folders befo
 | 4 | [functions/](functions/) | Defining and calling functions, IIFEs, rest parameters, callbacks, higher-order functions, closures | [function.js](functions/function.js) |
 | 5 | [JS_and_DOM/](JS_and_DOM/) | Objects, object spread, `window` and `document`, `querySelector` / `querySelectorAll`, `classList`, click events | [objects.js](JS_and_DOM/objects.js) |
 | 6 | [nullish_coalescing/](nullish_coalescing/) | `??`, `?.`, `??=`, default parameters | [nullish_coalescing.js](nullish_coalescing/nullish_coalescing.js) |
+| 7 | [call_stacks/](call_stacks/) | The call stack, reading stack traces, `console.trace()`, the `debugger` statement and DevTools | [call_stacks.js](call_stacks/call_stacks.js) |
 
 Each folder has its own `README.md` with the file list, key ideas and practice exercises.
 
@@ -121,6 +122,67 @@ Use `===` and `!==` (strict). Avoid `==`: it converts types first, so `"0" == fa
 
 ---
 
+## Debugging with the call stack and the debugger
+
+### The call stack
+The **call stack** is the engine's list of functions that are currently running. When a function
+is called it is pushed onto the stack; when it returns it is popped off. The last function added
+is always the first one removed.
+
+When an error is thrown, the console prints the stack at that moment (a **stack trace**). Read it
+top to bottom: the top line is where it broke, and each line below is the function that called it.
+
+```
+Uncaught ReferenceError: doesNotExist is not defined
+    at multiply (call_stacks.js:42:17)     <- broke here
+    at square (call_stacks.js:47:12)       <- called by square
+    at printSquare (call_stacks.js:51:21)  <- called by printSquare
+    at call_stacks.js:55:1                 <- called from the top level of the file
+```
+
+`console.trace('label')` prints a message **plus** the current call stack, without throwing an error.
+
+### Pausing code with the debugger
+Instead of scattering `console.log`s, you can **pause** the code and inspect it line by line.
+
+1. Open the page and DevTools (`F12`), then go to the **Sources** tab (Chrome) or **Debugger** tab (Firefox).
+2. Pause the code in either of two ways:
+   - Click a **line number** in the file to set a **breakpoint**, then refresh the page.
+   - Write the `debugger;` statement in your code. It pauses execution there **only while DevTools is open**
+     (otherwise it is ignored). Remove it before you ship the code.
+3. While paused, you can:
+   - hover over a variable to see its current value,
+   - look at the **Scope** panel for every local and global variable,
+   - look at the **Call Stack** panel to see which functions led to this line,
+   - type expressions into the Console, which runs them in the paused scope.
+
+```js
+function square(n) {
+  debugger;              // execution pauses here while DevTools is open
+  return multiply(n, n);
+}
+```
+
+### Stepping through code
+Once paused, the step buttons move execution forward in different ways:
+
+![Step into, step over and step out of](call_stacks/images/debugger_step_controls.png)
+
+Suppose execution is paused on `innerFunction(1, 2);` inside `doThing()` (the circled arrow):
+
+| Button | Shortcut (Chrome) | What it does | Next line it stops on |
+|--------|-------------------|--------------|-----------------------|
+| **Resume** | `F8` | Keep running until the next breakpoint (or the end) | the next breakpoint |
+| **Step over** | `F10` | Run the whole function call on this line without going inside it | `console.log("next fn thing")` in `doThing` |
+| **Step into** | `F11` | Go *inside* the function being called on this line | `console.log(x, y)` in `innerFunction` |
+| **Step out of** | `Shift + F11` | Finish the current function and return to whoever called it | `console.log("next parent thing")` in `parentCall` |
+
+Use **step into** when you suspect the bug is inside the called function, **step over** when you trust
+it, and **step out** when you've seen enough of the current function. Watch the **Call Stack** panel
+as you step: it grows when you step into a function and shrinks when you step out.
+
+---
+
 ## Common mistakes covered in this folder
 
 | Mistake | Where |
@@ -138,6 +200,7 @@ Use `===` and `!==` (strict). Avoid `==`: it converts types first, so `"0" == fa
 | Writing `const copy = arr` (that's the same array, not a copy) | [seq_n_iteration.js](seq_n_iterations/seq_n_iteration.js) |
 | Expecting `{...obj}` to copy nested objects too (it's a shallow copy) | [objects.js](JS_and_DOM/objects.js) |
 | Storing `'false'` (a string, which is truthy) instead of `false` | [objects.js](JS_and_DOM/objects.js) |
+| Leaving a `debugger;` statement in finished code | [call_stacks.js](call_stacks/call_stacks.js) |
 
 ---
 
@@ -146,6 +209,7 @@ Use `===` and `!==` (strict). Avoid `==`: it converts types first, so `"0" == fa
 - [MDN JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide): the official reference
 - [javascript.info](https://javascript.info/): a free, beginner-friendly tutorial from start to finish
 - [MDN: Introduction to the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
+- [Chrome DevTools: Debug JavaScript](https://developer.chrome.com/docs/devtools/javascript)
 
 ---
 

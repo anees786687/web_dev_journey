@@ -78,6 +78,7 @@ function multiply(x, y) {
   return x * y;
 }
 
+// debugger; // add this to enable debugger in development tools
 function square(n) {
   return multiply(n, n);
 }
@@ -85,5 +86,5 @@ function square(n) {
 function printSquare(n) {
   console.log(square(n));
 }
-
+debugger;
 printSquare(6);
