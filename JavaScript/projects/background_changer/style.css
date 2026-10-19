@@ -1,0 +1,75 @@
+/* Centre the row of buttons in the middle of the screen with Flexbox */
+body {
+    margin: 0;
+    min-height: 100vh;      /* at least as tall as the window, so vertical centring works */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The row that holds the three coloured boxes */
+.button_holder {
+    display: flex;
+    justify-content: center;
+    height: 20em;
+    width: 100vw;
+}
+
+/* Each coloured box centres its own button */
+.button_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid black;
+    width: 15em;
+}
+
+/* border-width order is top, right, bottom, left.
+   The inner borders are 1px so that two neighbouring boxes add up to 2px,
+   matching the 2px outer edges. */
+.button_box.red_box {
+    border-width: 2px 1px 2px 2px;
+    background-color: red;
+}
+
+.button_box.blue_box {
+    border-width: 2px 1px 2px 1px;
+    background-color: blue;
+}
+
+.button_box.green_box {
+    border-width: 2px 2px 2px 1px;
+    background-color: green;
+}
+
+/* Button colours */
+.red_button {
+    background-color: red;
+}
+
+.blue_button {
+    background-color: blue;
+}
+
+.green_button {
+    background-color: green;
+}
+
+/* Background classes. script.js adds exactly one of these to <body>. */
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+
+button {
+    margin: 10px;
+    height: 3em;
+    color: white;
+}
