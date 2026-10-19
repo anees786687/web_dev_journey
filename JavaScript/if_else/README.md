@@ -7,7 +7,7 @@ what JavaScript treats as "true" when the condition isn't an actual boolean.
 
 | File | What it is |
 |------|------------|
-| [if_else.js](if_else.js) | Three runnable examples: a grade calculator, `&&` / `\|\|` with random numbers, and a "what can I cook?" chain |
+| [if_else.js](if_else.js) | Three runnable examples: a grade calculator, a cinema discount using `&&` / `\|\|` with random values, and a "what should I wear?" chain |
 | [index.html](index.html) | Loads `if_else.js` so you can run it in the browser |
 | [truthy_falsy.md](truthy_falsy.md) | The 8 falsy values, surprising truthy values, `&&`/`\|\|` short-circuiting, and common bugs |
 

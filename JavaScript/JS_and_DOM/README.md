@@ -9,9 +9,10 @@ your code react when the user does something, such as clicking a button.
 
 | # | File | What you'll learn |
 |---|------|-------------------|
-| 1 | [objects.js](objects.js) | What the DOM is; creating objects; reading, adding, editing and deleting properties; methods; nested objects; arrays of objects; copying and updating with object spread `{...obj}` |
+| 1 | [objects.js](objects.js) | What the DOM is; creating objects; reading, adding, editing and deleting properties; methods; nested objects; arrays of objects; copying and updating with object spread `{...obj}`; object destructuring; `bind()` for methods used as callbacks |
 | 2 | [dom_basics.js](dom_basics.js) | The `window` object (`innerWidth`, `location`, `prompt`, `alert`), the `document` object, changing elements with `textContent` and `style`, `querySelector` vs `querySelectorAll`, NodeLists, `innerHTML` / `innerText`, `setAttribute`, and `classList` (`add`, `remove`, `toggle`) |
 | 3 | [click_events.js](click_events.js) | Making a button work with `addEventListener('click', callback)`, and why you pass `callback`, not `callback()` |
+| 4 | [dom_intermediate/](dom_intermediate/) | A follow-up with its own page: the DOM vs your HTML, why script **timing** matters, guarding against `null`, `parentElement` and `children` |
 | | [index.html](index.html) | Loads all three scripts with `defer`, and has the elements and the `.red` / `.blue_text` classes they use |
 
 ## How to run
@@ -27,6 +28,8 @@ your code react when the user does something, such as clicking a button.
 - `obj.key` and `obj['key']` do the same thing. Use brackets when the key is stored in a variable.
 - Reading a missing property gives `undefined`. Reading a property **of** `undefined` throws an error (see [6. Nullish coalescing](../nullish_coalescing/) for the fix).
 - `const` stops you from replacing the object, but you can still change its properties.
+- `const { title, pages } = book;` **destructures** an object by **key name**. Use `{ title: bookTitle }` to pick a different variable name.
+- A method passed as a callback loses its `this`. Fix it with `obj.method.bind(obj)` or an arrow wrapper `() => obj.method()`.
 - `{ ...obj, key: value }` makes a **new** object. Later properties override earlier ones. The copy is **shallow**: nested objects are still shared.
 - `window` is the browser's **global object**. Globals like `alert`, `prompt`, `location` and `document` all live on it, so you can leave out the `window.` prefix.
 - `document` (`window.document`) is the loaded page and the entry point to the DOM.
@@ -42,6 +45,7 @@ your code react when the user does something, such as clicking a button.
 
 1. In `objects.js`, add a `hobbies` array to `person` and print the second hobby.
    Then use object spread to make `olderPerson`, a copy of `person` with `age` increased by 1.
+   Finally, destructure `name` and `age` out of `olderPerson` in one line.
 2. In `dom_basics.js`, make the heading's text colour blue and its font size `40px`.
    (Hint: `style.color`, `style.fontSize`.)
 3. Uncomment the `prompt`/`alert` lines in `dom_basics.js` and press *Cancel*. What gets displayed? Use `??` to show `'Guest'` instead.
@@ -52,4 +56,4 @@ your code react when the user does something, such as clicking a button.
 
 ---
 
-[← 4. Functions](../functions/) · **Next:** [6. Nullish coalescing →](../nullish_coalescing/)
+[← 4. Functions](../functions/) · **Next:** [5b. DOM in more depth →](dom_intermediate/) · [6. Nullish coalescing →](../nullish_coalescing/)

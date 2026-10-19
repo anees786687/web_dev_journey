@@ -26,6 +26,8 @@
  *   - Each key: value pair is a PROPERTY. Properties are separated by commas.
  *   - A function stored as a property is called a METHOD.
  *   - The spread syntax {...obj} copies an object's properties (section 7).
+ *   - Destructuring copies properties into variables (section 8).
+ *   - bind() fixes `this` when a method is used as a callback (section 9).
  *
  * HOW TO RUN: open index.html in a browser and open the Console (F12),
  * or run `node objects.js`.
@@ -133,3 +135,78 @@ const original = { name: 'Sam', address: { city: 'Pune' } };
 const shallowCopy = { ...original };
 shallowCopy.address.city = 'Delhi';
 console.log(original.address.city);   // Delhi (the original changed too!)
+
+
+
+// ============================================================
+// 8. DESTRUCTURING OBJECTS
+// ============================================================
+// Destructuring copies properties out of an object into variables.
+// Arrays are destructured by POSITION; objects are destructured by KEY NAME.
+const book = {
+    title: 'Clean Code',
+    pages: 464
+};
+
+// The variable names must match the keys.
+const { title, pages } = book;
+console.log('Destructuring objects');
+console.log(`title: ${title} pages: ${pages}`);                  // title: Clean Code pages: 464
+
+// To use DIFFERENT variable names, write  key: newName
+const { title: bookTitle, pages: pageCount } = book;
+console.log(`Book title: ${bookTitle} Page count: ${pageCount}`);  // Clean Code, 464
+
+// ⚠️ Common mistake: `const { bookTitle, pageCount } = book;`
+// JS looks for keys called "bookTitle" and "pageCount". book has no such
+// keys, so both variables are undefined (and no error is thrown).
+
+// You can give a default for a key that might be missing.
+const { language = 'English' } = book;
+console.log(`language (default used): ${language}`);              // English
+
+
+// ============================================================
+// 9. BINDING METHODS TO OBJECTS (bind)
+// ============================================================
+// Inside a regular method, `this` depends on HOW the function is called,
+// not on where it was written:
+//   student.introduce()  -> `this` is student (the object before the dot)
+//   introduce()          -> nothing before the dot, so `this` is lost
+// So a method is not permanently attached to its object.
+// (The this_keyword folder covers `this` in more detail.)
+const student = {
+    name: 'Riya',
+    course: 'Web Programming',
+    introduce() {
+        return `I'm ${this.name} and I study ${this.course}`;
+    },
+};
+
+console.log(student.introduce());   // I'm Riya and I study Web Programming
+
+// Copy the method into a variable, then call it on its own:
+const introduceAlone = student.introduce;
+console.log(introduceAlone());
+// -> "I'm undefined and I study undefined" (in a browser, `name` may come
+//    out empty instead, because it reads the global window.name).
+//    In strict mode or an ES module, `this` is undefined, so it throws:
+//    TypeError: Cannot read properties of undefined (reading 'name')
+
+// The same problem appears when a method is passed as a CALLBACK, because
+// the function that receives it calls it with nothing before the dot.
+function printTwice(callback) {
+    console.log(callback());
+    console.log(callback());
+}
+
+printTwice(student.introduce);   // ⚠️ "I'm undefined ..." twice
+
+// Fix 1: bind() returns a NEW function whose `this` is locked to the object
+// you give it, however it's called later.
+const boundIntroduce = student.introduce.bind(student);
+printTwice(boundIntroduce);      // I'm Riya and I study Web Programming (twice)
+
+// Fix 2: wrap the call in an arrow function, so it's still called as
+// student.introduce().
+printTwice(() => student.introduce());

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+    Open this file in a browser, then open the Console (F12 -> "Console" tab).
+
+    This page shows two things:
+      1. TIMING: when a script runs decides which elements exist yet.
+         (Compare the two inline <script> blocks below.)
+      2. dom_intermediate.js, loaded with `defer`, explores the DOM tree.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Intermediate</title>
+    <!-- `defer`: download now, but run only after the whole page is parsed -->
+    <script src="dom_intermediate.js" defer></script>
+    <style>
+        .card {
+            border: 2px solid black;
+            margin: 5px;
+            padding: 10px;
+        }
+
+        .veg {
+            background-color: lightgreen;
+        }
+    </style>
+
+    <script>
+        /*
+         * ⚠️ TIMING MATTERS. The browser builds the page from top to bottom,
+         * and a normal <script> runs the moment the browser reaches it.
+         * This script sits in <head>, before any <p> has been built, so
+         * querySelector finds nothing and returns null.
+         *
+         * Fixes:
+         *   - add the `defer` attribute to an external <script src="...">
+         *     (like dom_intermediate.js above), or
+         *   - move the <script> to the end of <body> (like the one at the bottom).
+         */
+        const earlyPara = document.querySelector('p');
+        console.log(earlyPara);   // null
+    </script>
+</head>
+<body>
+    <!-- Everything below is used by dom_intermediate.js -->
+
+    <!-- ⚠️ Broken on purpose: <em> is closed AFTER </p>, so the tags overlap.
+         The browser repairs this when it builds the DOM. Compare this line
+         with the Elements tab in DevTools. -->
+    <p>Cook the pasta <em>until soft</p></em>
+
+    <div class="recipe">
+        <p class="card">Pasta with vegetables</p>
+        <a href="#" class="veg">Why vegetables?</a>
+        <ul>
+            <li class="veg">Spinach</li>
+            <li>Pasta</li>
+            <li class="veg">Tomatoes</li>
+            <li>Cheese</li>
+        </ul>
+
+        <div class="veg card">Serves 2</div>
+    </div>
+
+    <!-- By the time the browser reaches this script, the <p> elements above
+         exist, so this time querySelector finds one. -->
+    <script>
+        const latePara = document.querySelector('p.card');
+        console.log(latePara);   // <p class="card">Pasta with vegetables</p>
+    </script>
+</body>
+</html>

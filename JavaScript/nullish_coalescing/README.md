@@ -39,4 +39,4 @@ let you read deeply nested values safely and fall back to a sensible default.
 
 ---
 
-[← 5. Objects, the DOM and events](../JS_and_DOM/) · [Back to the JavaScript overview](../)
+[← 5. Objects, the DOM and events](../JS_and_DOM/) · **Next:** [7. The call stack →](../call_stacks/)

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+    PROJECT: Picking favourites
+    Open this file in a browser and open the Console (F12). Tick some languages,
+    then click "Add to favorites".
+
+    Each checkbox is wrapped in its <label>, so clicking the language NAME also
+    ticks the box. (The for="..." / id="..." pair does the same job, and
+    lets script.js reach the label through input.parentNode.)
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick Favorites</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Which languages do you like?</h1>
+    <ul>
+        <li><label for="html"><input type="checkbox" name="language" id="html">HTML</label></li>
+        <li><label for="css"><input type="checkbox" name="language" id="css">CSS</label></li>
+        <li><label for="javascript"><input type="checkbox" name="language" id="javascript">JavaScript</label></li>
+        <li><label for="typescript"><input type="checkbox" name="language" id="typescript">TypeScript</label></li>
+        <li><label for="python"><input type="checkbox" name="language" id="python">Python</label></li>
+        <li><label for="java"><input type="checkbox" name="language" id="java">Java</label></li>
+        <li><label for="c"><input type="checkbox" name="language" id="c">C</label></li>
+        <li><label for="cpp"><input type="checkbox" name="language" id="cpp">C++</label></li>
+        <li><label for="go"><input type="checkbox" name="language" id="go">Go</label></li>
+    </ul>
+
+    <button>Add to favorites</button>
+</body>
+</html>

@@ -19,7 +19,9 @@ web_dev_journey/
 ├── HTML_and_basic_CSS/   1. Selectors, specificity, inheritance, the box model
 ├── Advanced_CSS/         2. Layout: display, position, float, Flexbox, Grid, media queries
 ├── Labs/                 3. Small projects that combine the HTML and CSS topics
-└── JavaScript/           4. Variables, conditionals, loops, functions, objects, the DOM, events
+└── JavaScript/           4. Variables, conditionals, loops, functions, objects, the DOM, events,
+    │                        debugging and `this`
+    ├── projects/            small complete JavaScript pages
     └── README.md            ← its own learning path and cheat sheet
 ```
 
@@ -101,9 +103,12 @@ README with key ideas and practice exercises.
 | 1 | [basics/](JavaScript/basics/) | `var` vs `let` vs `const`, scope, hoisting and the Temporal Dead Zone |
 | 2 | [if_else/](JavaScript/if_else/) | `if` / `else if` / `else`, logical operators, truthy and falsy values |
 | 3 | [seq_n_iterations/](JavaScript/seq_n_iterations/) | Arrays, `while`, `for`, `for...of`, `break` and `continue`, spread `...` and destructuring |
-| 4 | [functions/](JavaScript/functions/) | Defining and calling functions, IIFEs, rest parameters, callbacks, higher-order functions, closures |
-| 5 | [JS_and_DOM/](JavaScript/JS_and_DOM/) | Objects and object spread, the `window` and `document` objects, finding and changing elements (`querySelector`, `classList`), and click events |
+| 4 | [functions/](JavaScript/functions/) | Defining and calling functions, IIFEs, rest parameters, arrow functions, callbacks, higher-order functions, closures |
+| 5 | [JS_and_DOM/](JavaScript/JS_and_DOM/) | Objects, spread and destructuring, `bind()`, the `window` and `document` objects, finding and changing elements (`querySelector`, `classList`), click events, and moving around the DOM tree |
 | 6 | [nullish_coalescing/](JavaScript/nullish_coalescing/) | `??`, optional chaining `?.`, `??=`, and default parameters |
+| 7 | [call_stacks/](JavaScript/call_stacks/) | The call stack, reading stack traces, `console.trace()`, and pausing code with the debugger |
+| 8 | [this_keyword/](JavaScript/this_keyword/) | How `this` works in regular methods vs arrow functions |
+| 🛠️ | [projects/](JavaScript/projects/) | Small complete pages: a background changer and a favourites picker |
 
 > 💡 The JavaScript examples print to the **Console**. Open a folder's `index.html`,
 > press `F12`, and click the *Console* tab.
@@ -179,6 +184,8 @@ While adding comments I marked real mistakes with ⚠️, so you can learn from 
 - **`||` for defaults** replaces a valid `0` or `""`. Use `??`. (`if_else/truthy_falsy.md`)
 - **Thinking `=` or `{...obj}` makes a full copy.** `copy = arr` shares the same array, and spread only copies one level deep. (`seq_n_iterations/`, `JS_and_DOM/objects.js`)
 - **DOM code that runs too early.** A script in `<head>` without `defer` can't find the elements. (`JS_and_DOM/`)
+- **Destructuring with the wrong names.** `const { bookTitle } = book` is `undefined`, because the key is `title`. (`JS_and_DOM/objects.js`)
+- **Losing `this`.** Arrow functions as object methods, or methods passed as callbacks without `bind`. (`this_keyword/`, `JS_and_DOM/objects.js`)
 - **`addEventListener('click', fn())`.** The `()` calls `fn` once on page load instead of on every click. Pass `fn`. (`JS_and_DOM/click_events.js`)
 
 ---

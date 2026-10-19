@@ -55,45 +55,51 @@ console.log(`Marks: ${marks} Grade: ${grade}`);
 // ============================================================
 // EXAMPLE 2: combining conditions with || and &&
 // ============================================================
+// A cinema gives a discount to children (under 12) OR seniors (60+),
+// but only on weekdays.
 // Returns a random whole number between min and max (both included).
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const score = getRandomNumber(0, 100);
-const bonusPoints = getRandomNumber(0, 10);
-let message;
+const age = getRandomNumber(5, 80);
+const isWeekday = Math.random() < 0.5;   // true or false, at random
+let ticket;
 
-if (score > 80 || bonusPoints > 5) {
-    message = 'High score!';
+// ( ) group the || so it is checked first: (child OR senior) AND weekday.
+if ((age < 12 || age >= 60) && isWeekday) {
+    ticket = 'Discount ticket';
 } else {
-    // We only reach here if BOTH score <= 80 AND bonusPoints <= 5,
-    // so a plain `else` is enough. Writing that condition again
-    // as `else if (score <= 80 && bonusPoints <= 5)` would be redundant.
-    message = 'Keep trying';
+    // We only get here if the condition above is false, so a plain `else`
+    // is enough. Repeating the opposite condition in an `else if` would be
+    // redundant.
+    ticket = 'Full-price ticket';
 }
-console.log(`Score: ${score} Bonus Points: ${bonusPoints} Result: ${message}`);
+console.log(`Age: ${age} Weekday: ${isWeekday} Result: ${ticket}`);
+// ⚠️ Without the brackets, `age < 12 || age >= 60 && isWeekday` means
+// `age < 12 || (age >= 60 && isWeekday)`, because && is evaluated before ||.
+// Children would then get the discount at weekends too.
 
 
 // ============================================================
-// EXAMPLE 3: what can I cook? (most specific condition first)
+// EXAMPLE 3: what should I wear? (most specific condition first)
 // ============================================================
-const flour = true;
-const egg = true;
-const sugar = false;
+const isCold = true;
+const isRaining = true;
+const isWindy = false;
 
-// Cake needs all three ingredients, so it is checked FIRST.
-// If `flour` alone were checked first, we'd always stop at bread.
-if (flour && egg && sugar) {
-    console.log('Can make cake!');
-} else if (flour && egg) {
-    console.log('Can make pasta!');
-} else if (flour) {
-    console.log('Can make bread!');
+// The case that needs ALL three conditions is checked FIRST.
+// If `isCold` alone were checked first, we'd stop there every time it's cold.
+if (isCold && isRaining && isWindy) {
+    console.log('Wear a raincoat, a scarf and gloves!');
+} else if (isCold && isRaining) {
+    console.log('Wear a raincoat!');
+} else if (isCold) {
+    console.log('Wear a jumper!');
 } else {
-    console.log('Cannot make anything!');
+    console.log('A T-shirt is fine!');
 }
-// TRY IT: set sugar = true, then egg = false, then flour = false.
+// TRY IT: set isWindy = true, then isRaining = false, then isCold = false.
 
 
 // ============================================================

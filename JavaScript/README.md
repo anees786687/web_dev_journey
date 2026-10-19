@@ -43,10 +43,12 @@ Follow the folders in this order. Each one only uses ideas from the folders befo
 | 1 | [basics/](basics/) | `var` / `let` / `const`, scope, hoisting, the TDZ | [var_n_let_n_const.md](basics/var_n_let_n_const.md) |
 | 2 | [if_else/](if_else/) | `if` / `else if` / `else`, `&&` `\|\|` `!`, truthy and falsy values | [if_else.js](if_else/if_else.js) |
 | 3 | [seq_n_iterations/](seq_n_iterations/) | Arrays, `while`, `for`, `for...of`, `break` / `continue`, spread and destructuring | [seq_n_iteration.js](seq_n_iterations/seq_n_iteration.js) |
-| 4 | [functions/](functions/) | Defining and calling functions, IIFEs, rest parameters, callbacks, higher-order functions, closures | [function.js](functions/function.js) |
-| 5 | [JS_and_DOM/](JS_and_DOM/) | Objects, object spread, `window` and `document`, `querySelector` / `querySelectorAll`, `classList`, click events | [objects.js](JS_and_DOM/objects.js) |
+| 4 | [functions/](functions/) | Defining and calling functions, IIFEs, rest parameters, arrow functions, returning objects, callbacks, higher-order functions, closures | [function.js](functions/function.js) |
+| 5 | [JS_and_DOM/](JS_and_DOM/) | Objects, object spread and destructuring, `bind()`, `window` and `document`, `querySelector` / `querySelectorAll`, `classList`, click events, script timing, `parentElement` / `children` | [objects.js](JS_and_DOM/objects.js) |
 | 6 | [nullish_coalescing/](nullish_coalescing/) | `??`, `?.`, `??=`, default parameters | [nullish_coalescing.js](nullish_coalescing/nullish_coalescing.js) |
 | 7 | [call_stacks/](call_stacks/) | The call stack, reading stack traces, `console.trace()`, the `debugger` statement and DevTools | [call_stacks.js](call_stacks/call_stacks.js) |
+| 8 | [this_keyword/](this_keyword/) | `this` in regular methods vs arrow functions, and arrow callbacks inside methods | [script.js](this_keyword/script.js) |
+| 🛠️ | [projects/](projects/) | Small complete pages: a background changer and a favourites picker | [projects/README.md](projects/README.md) |
 
 Each folder has its own `README.md` with the file list, key ideas and practice exercises.
 
@@ -81,6 +83,8 @@ while (condition) { ... }                      // when you don't know how many t
 function add(a, b) { return a + b; }           // declaration (hoisted)
 const add2 = function (a, b) { return a + b; } // expression
 const add3 = (a, b) => a + b;                  // arrow function (implicit return)
+const point = () => ({ x: 1, y: 2 });          // arrow returning an object: wrap it in ( )
+return { total, average };                     // return several values in one object
 ```
 
 ### Objects
@@ -89,7 +93,19 @@ const user = { name: 'Sam', age: 20 };
 user.name;          // read  -> 'Sam'
 user.city = 'Pune'; // add
 delete user.age;    // remove
+const { name, city: town } = user;          // destructure by key name (city renamed to town)
+const fn = obj.method.bind(obj);            // lock `this` before passing a method around
 ```
+
+### `this`
+```js
+const obj = {
+  name: 'Sam',
+  hi() { return this.name; },              // regular method: this = obj        -> 'Sam'
+  bad: () => this.name,                    // arrow: this = the outer scope's   -> not 'Sam'
+};
+```
+
 
 ### Spread, rest and destructuring (`...`)
 ```js
@@ -125,61 +141,57 @@ Use `===` and `!==` (strict). Avoid `==`: it converts types first, so `"0" == fa
 ## Debugging with the call stack and the debugger
 
 ### The call stack
-The **call stack** is the engine's list of functions that are currently running. When a function
-is called it is pushed onto the stack; when it returns it is popped off. The last function added
-is always the first one removed.
+The **call stack** is the engine's record of which function is running and which ones are
+waiting for it. Calling a function pushes it on top; returning pops it off. The newest call
+always finishes first. See [call_stacks.js](call_stacks/call_stacks.js) for a worked example.
 
-When an error is thrown, the console prints the stack at that moment (a **stack trace**). Read it
-top to bottom: the top line is where it broke, and each line below is the function that called it.
+When an error isn't caught, the console prints a **stack trace**. Read it top to bottom: the top
+line is where it broke, and each line below is the function that called the one above.
 
 ```
-Uncaught ReferenceError: doesNotExist is not defined
-    at multiply (call_stacks.js:42:17)     <- broke here
-    at square (call_stacks.js:47:12)       <- called by square
-    at printSquare (call_stacks.js:51:21)  <- called by printSquare
-    at call_stacks.js:55:1                 <- called from the top level of the file
+Uncaught ReferenceError: milk is not defined
+    at addMilk (call_stacks.js:55:29)          <- broke here
+    at makeCappuccino (call_stacks.js:58:12)   <- called addMilk
+    at call_stacks.js:60:1                     <- called from the top level of the file
 ```
 
 `console.trace('label')` prints a message **plus** the current call stack, without throwing an error.
 
 ### Pausing code with the debugger
-Instead of scattering `console.log`s, you can **pause** the code and inspect it line by line.
+Instead of adding `console.log` everywhere, you can **pause** the code and look around.
 
 1. Open the page and DevTools (`F12`), then go to the **Sources** tab (Chrome) or **Debugger** tab (Firefox).
-2. Pause the code in either of two ways:
-   - Click a **line number** in the file to set a **breakpoint**, then refresh the page.
-   - Write the `debugger;` statement in your code. It pauses execution there **only while DevTools is open**
-     (otherwise it is ignored). Remove it before you ship the code.
-3. While paused, you can:
-   - hover over a variable to see its current value,
-   - look at the **Scope** panel for every local and global variable,
-   - look at the **Call Stack** panel to see which functions led to this line,
-   - type expressions into the Console, which runs them in the paused scope.
+2. Pause the code in one of two ways:
+   - Click a **line number** to set a **breakpoint**, then refresh the page.
+   - Write `debugger;` in your code. It pauses there **only while DevTools is open**, and is ignored otherwise.
+3. While paused you can hover over variables, read the **Scope** panel (every variable you can
+   reach) and the **Call Stack** panel (how you got here), and type expressions into the Console.
+
+### Stepping through code
+Take this code, paused on the marked line:
 
 ```js
-function square(n) {
-  debugger;              // execution pauses here while DevTools is open
-  return multiply(n, n);
+function brewCoffee(drink) {
+  const beans = grindBeans(18);   // <- paused here
+  return `a hot ${drink} made from ${beans}`;
+}
+
+function placeOrder(drink) {
+  const coffee = brewCoffee(drink);
+  console.log(`Order ready: ${coffee}`);
 }
 ```
 
-### Stepping through code
-Once paused, the step buttons move execution forward in different ways:
+| Button | Shortcut (Chrome) | What it does | Where it stops next |
+|--------|-------------------|--------------|---------------------|
+| **Resume** | `F8` | Run until the next breakpoint, or the end | the next breakpoint |
+| **Step over** | `F10` | Run `grindBeans(18)` completely, without going inside | the `return` line in `brewCoffee` |
+| **Step into** | `F11` | Go *inside* `grindBeans` | the first line of `grindBeans` |
+| **Step out** | `Shift + F11` | Finish `brewCoffee` and go back to its caller | `placeOrder`, just after the call to `brewCoffee` |
 
-![Step into, step over and step out of](call_stacks/images/debugger_step_controls.png)
-
-Suppose execution is paused on `innerFunction(1, 2);` inside `doThing()` (the circled arrow):
-
-| Button | Shortcut (Chrome) | What it does | Next line it stops on |
-|--------|-------------------|--------------|-----------------------|
-| **Resume** | `F8` | Keep running until the next breakpoint (or the end) | the next breakpoint |
-| **Step over** | `F10` | Run the whole function call on this line without going inside it | `console.log("next fn thing")` in `doThing` |
-| **Step into** | `F11` | Go *inside* the function being called on this line | `console.log(x, y)` in `innerFunction` |
-| **Step out of** | `Shift + F11` | Finish the current function and return to whoever called it | `console.log("next parent thing")` in `parentCall` |
-
-Use **step into** when you suspect the bug is inside the called function, **step over** when you trust
-it, and **step out** when you've seen enough of the current function. Watch the **Call Stack** panel
-as you step: it grows when you step into a function and shrinks when you step out.
+Use **step into** when you suspect the bug is inside the called function, **step over** when
+you trust it, and **step out** once you've seen enough of the current one. The **Call Stack**
+panel grows when you step in and shrinks when you step out.
 
 ---
 
@@ -201,6 +213,10 @@ as you step: it grows when you step into a function and shrinks when you step ou
 | Expecting `{...obj}` to copy nested objects too (it's a shallow copy) | [objects.js](JS_and_DOM/objects.js) |
 | Storing `'false'` (a string, which is truthy) instead of `false` | [objects.js](JS_and_DOM/objects.js) |
 | Leaving a `debugger;` statement in finished code | [call_stacks.js](call_stacks/call_stacks.js) |
+| Destructuring with names that don't match the keys (`const { bookTitle } = book` gives `undefined`) | [objects.js](JS_and_DOM/objects.js) |
+| Passing a method as a callback without `bind`, so it loses `this` | [objects.js](JS_and_DOM/objects.js) |
+| Using an arrow function as an object method that needs `this` | [this_keyword/script.js](this_keyword/script.js) |
+| Writing `() => { x: 1 }` to return an object (it returns `undefined`) | [function.js](functions/function.js) |
 
 ---
 
@@ -210,6 +226,7 @@ as you step: it grows when you step into a function and shrinks when you step ou
 - [javascript.info](https://javascript.info/): a free, beginner-friendly tutorial from start to finish
 - [MDN: Introduction to the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
 - [Chrome DevTools: Debug JavaScript](https://developer.chrome.com/docs/devtools/javascript)
+- [MDN: this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
 
 ---
 

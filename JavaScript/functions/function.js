@@ -11,6 +11,8 @@
  *   4. Calling a function vs. referencing it
  *   5. IIFE: Immediately Invoked Function Expression
  *   6. Rest parameters (...) and spread in function calls
+ *   7. Arrow functions
+ *   8. Returning multiple values in an object
  *
  * HOW TO RUN: open index.html in a browser and open the Console (F12),
  * or run `node function.js` in a terminal.
@@ -97,10 +99,9 @@ console.log(`sum: ${typeof sum}, sumFunc: ${typeof sumFunc}`);      // number, f
  * The first ( ) wraps the function so JS treats it as an expression.
  * The second ( ) calls it straight away.
  *
- * Why use one?
- *   - Scope:      variables inside it stay private and don't leak out.
- *   - Expression: compute a value in one go (like `result` below).
- *   - Async:      quickly run code inside an async function (covered later).
+ * You'll mostly see IIFEs in older code. Before `let` and `const` had
+ * block scope, wrapping code in an IIFE was the usual way to keep its
+ * variables from becoming globals. A `{ }` block does that job today.
  */
 const result = (function add(a, b) {
     return a + b;
@@ -140,3 +141,59 @@ introduce('Hello', 'Sam', 'Bam');   // Hello, Sam and Bam!
 
 // TRY IT: Math.max(1, 5, 3) gives 5. How would you get the largest number
 // in `arr` using spread?
+
+
+// ============================================================
+// 7. ARROW ("FAT ARROW") FUNCTIONS
+// ============================================================
+// `=>` gives a shorter way to write a function. Arrows are usually
+// stored in a `const`. Things to know before swapping every function for one:
+//   - Stored in a const, an arrow is NOT hoisted: you can't call it above
+//     the line where it's defined (see basics/hoisting.md).
+//   - An arrow has no `this` of its own (see the this_keyword folder).
+//   - An arrow can't be called with `new` (covered later).
+
+// The same function written three ways:
+function addDeclared(x, y) {
+    return x + y;
+}
+const addArrow = (x, y) => {
+    return x + y;
+};
+const addShort = (x, y) => x + y;   // one expression: no { } and no `return` needed
+
+console.log(addDeclared(2, 3), addArrow(2, 3), addShort(2, 3));   // 5 5 5
+
+// One parameter: the parentheses are optional.  No parameters: () is required.
+const square = n => n * n;
+const sayHello = () => 'Hello!';
+console.log(square(4), sayHello());   // 16 Hello!
+
+// ⚠️ Returning an object in the short form needs ( ) around it, otherwise
+// the { } are read as the function body:
+//     const makePoint = () => { x: 1 };    // returns undefined
+const makePoint = () => ({ x: 1, y: 2 });
+console.log(makePoint());             // { x: 1, y: 2 }
+
+
+// ============================================================
+// 8. RETURNING MULTIPLE VALUES (using an object)
+// ============================================================
+// `return` can only hand back ONE value. To give back several, put them
+// in an object (or an array) and return that.
+function getScoreStats(scores) {
+    const highest = Math.max(...scores);
+    const lowest = Math.min(...scores);
+    const average = scores.reduce((sum, s) => sum + s, 0) / scores.length;
+    // Shorthand: { highest } is the same as { highest: highest }
+    return { highest, lowest, average };
+}
+
+const stats = getScoreStats([72, 95, 88, 64]);
+console.log(`Highest: ${stats.highest} Lowest: ${stats.lowest} Average: ${stats.average}`);
+// Highest: 95 Lowest: 64 Average: 79.75
+
+// Even neater: destructure the returned object straight into variables.
+const { highest, average } = getScoreStats([50, 70, 90]);
+console.log(`highest: ${highest}, average: ${average}`);   // 90, 70
+// TRY IT: add a `range` property (highest - lowest) to the returned object.

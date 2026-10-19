@@ -98,30 +98,30 @@ note.style.padding = '8px';
 //   querySelector(sel)    -> the FIRST matching element, or null if none
 //   querySelectorAll(sel) -> a NodeList of ALL matches (empty if none)
 // Both take any CSS selector, exactly like in a stylesheet.
-// The elements used below are in the "Fruit" section of index.html.
+// The elements used below are in the "Shopping list" section of index.html.
 
-console.log(document.querySelector('p.box').innerText);             // "A paragraph in a box."
-// The first .highlight on the page is the <p>, not one of the <li>s.
-console.log(document.querySelector('.highlight').innerText);        // "A highlighted paragraph"
-console.log(document.querySelectorAll('.highlight').length);        // 3 (the <p> and two <li>s)
-// A descendant selector narrows the search: only .highlight INSIDE a <ul>.
-console.log(document.querySelectorAll('ul .highlight').length);     // 2
+console.log(document.querySelector('p.intro').innerText);           // "Things to buy this week."
+// The first .urgent on the page is the <p>, not one of the <li>s.
+console.log(document.querySelector('.urgent').innerText);           // "Buy the urgent ones first!"
+console.log(document.querySelectorAll('.urgent').length);           // 3 (the <p> and two <li>s)
+// A descendant selector narrows the search: only .urgent INSIDE a <ul>.
+console.log(document.querySelectorAll('ul .urgent').length);        // 2
 
 // Every ELEMENT also has querySelector/querySelectorAll. Called on an
 // element, they only search INSIDE that element.
 const list = document.querySelector('#list');
-const highlightedItems = list.querySelectorAll('.highlight');       // the two <li>s only
+const urgentItems = list.querySelectorAll('.urgent');               // the two <li>s only
 
 // A NodeList is "array-like": it has .length, indexes ([0]) and works
 // with for...of, but it is NOT a real array (no .map or .filter).
 // Use [...nodeList] or Array.from(nodeList) when you need array methods.
-for (const item of highlightedItems) {
-    console.log(`Highlighted: ${item.innerText}`);                  // Second item, Fourth item
+for (const item of urgentItems) {
+    console.log(`Urgent: ${item.innerText}`);                       // Milk, Eggs
 }
 
 // What each method returns
-console.log(document.querySelector('.highlight'));     // a single element
-console.log(document.querySelectorAll('.highlight'));  // NodeList(3) [p.highlight, li.highlight, li.highlight]
+console.log(document.querySelector('.urgent'));        // a single element
+console.log(document.querySelectorAll('.urgent'));     // NodeList(3) [p.urgent, li.urgent, li.urgent]
 
 // When nothing matches
 console.log(document.querySelector('.x'));             // null

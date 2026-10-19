@@ -1,90 +1,105 @@
 /**
- * call stack represents all the functions that are running at the moment 
- * understanding call stacks helps us understand how the code runs and this is first thing in the browser when anything goes wrong
- * 
- * Suppose we have three functions, 
- *   function multiply(x, y) {
-        return x * y;
-    }
-
-    function square(n) {
-        return multiply(n, n);
-    }
-
-    function printSquare(n) {
-        const squared = square(n);
-        console.log(squared);
-    }
-
-    printSquare(5);
- * 
- * 
- * 
- * the following occurs when they are run
- * - `printSquare` is added to the call stack, and the engine goes inside its body. Stack: `printSquare`.
- * - To evaluate `square(5)`, `square` is added and the engine goes inside it. Stack: `printSquare`, `square`.
- * - To evaluate `multiply(5, 5)`, `multiply` is added. Stack: `printSquare`, `square`, `multiply`.
- * - `multiply` returns `25` and is removed. Stack: `printSquare`, `square`.
- * - `square` returns that `25` and is removed. Stack: `printSquare`.
- * - `console.log(25)` is added, prints, and is removed.
- * - `printSquare` finishes and is removed. The stack is empty again.
- * 
- * Notice the shape of that: functions come off in the opposite order from how they went on. `multiply` was added last and removed first. At the deepest moment, the stack held all three, and it was the engine's record of what still had to be finished.
+ * TOPIC: The call stack, stack traces and the debugger
+ * ----------------------------------------------------
+ * The CALL STACK is how the JS engine keeps track of which function is
+ * running and which functions are waiting for it to finish.
+ *
+ *   - Calling a function PUSHES it onto the top of the stack.
+ *   - Returning from a function POPS it off the top.
+ *   - Last in, first out: the newest call always finishes first, like a
+ *     stack of plates.
+ *
+ * Example: placing a coffee order (the functions are defined in section 2)
+ *
+ *     placeOrder('latte')
+ *       -> calls brewCoffee('latte')
+ *            -> calls grindBeans(18)
+ *
+ *   What happens                                   Stack (bottom -> top)
+ *   placeOrder('latte') starts                     placeOrder
+ *   it calls brewCoffee                            placeOrder, brewCoffee
+ *   brewCoffee calls grindBeans                    placeOrder, brewCoffee, grindBeans
+ *   grindBeans returns 'ground beans' -> popped    placeOrder, brewCoffee
+ *   brewCoffee returns 'a hot latte'  -> popped    placeOrder
+ *   placeOrder logs the result, then finishes      (empty)
+ *
+ * placeOrder went on FIRST but came off LAST. While grindBeans runs, the
+ * other two are paused, waiting for the value they asked for.
+ *
+ * HOW TO RUN: open index.html, then open DevTools (F12). Keep DevTools open
+ * and refresh: the `debugger;` statement at the bottom pauses the code.
+ * (Node.js also works: `node call_stacks.js`. It ignores `debugger;`.)
  */
 
 
+// ============================================================
+// 1. READING A STACK TRACE
+// ============================================================
+// When an error is thrown and not caught, the console prints the error
+// AND the call stack at that moment. This is called a STACK TRACE:
+//
+//     Uncaught ReferenceError: milk is not defined
+//         at addMilk (call_stacks.js:LINE:COL)      <- the line that broke
+//         at makeCappuccino (call_stacks.js:LINE:COL) <- the function that called addMilk
+//         at call_stacks.js:LINE:COL                <- the top level of the file
+//
+// Read it TOP to BOTTOM: the top line is where the error happened, and each
+// line below it is the caller of the line above. In DevTools, click a
+// file:line link to jump to that line.
+//
+// TRY IT: uncomment the block below and reload. It throws on purpose, because
+// `milk` was never declared. The error stops the rest of the file, so comment
+// it out again afterwards.
 
-/**
- * Suppose some thing goes wrong with a function. We get the following error
- * 
- * call_stacks.js:42 Uncaught ReferenceError: doesNotExist is not defined
- * at multiply (call_stacks.js:42:17)
- * at square (call_stacks.js:47:12)
- * at printSquare (call_stacks.js:51:21)
- * at call_stacks.js:55:1
- * 
- * The console shows the error and the stack as well. it tells us what broke and how the engine got to the broken line.
- * The call stack shown reflects which function called which. 
- */
-
-// function multiply(x, y) {
-//     console.log(doesNotExist);
-//     return x * y;
+// function addMilk(drink) {
+//     return `${drink} with ${milk}`;   // ReferenceError: milk is not defined
 // }
-
-// function square(n) {
-//     return multiply(n, n);
+// function makeCappuccino() {
+//     return addMilk('espresso');
 // }
-
-// function printSquare(n) {
-//     const squared = square(n);
-//     console.log(squared);
-// }
-
-// printSquare(5);
+// makeCappuccino();
 
 
-/**
- * console.trace() works similar to a console.log(), it prints whatever you pass to it and additionally prints the current call stack
- * 
- * call_stacks.js:71 trace!
- * multiply	@	call_stacks.js:71
- * square	@	call_stacks.js:76
- * printSquare	@	call_stacks.js:80
- * (anonymous)	@	call_stacks.js:83
- */
-function multiply(x, y) {
-  console.trace('trace!');
-  return x * y;
+// ============================================================
+// 2. console.trace(): PRINT THE STACK WITHOUT AN ERROR
+// ============================================================
+// console.trace(message) prints the message like console.log, followed by
+// the current call stack. The program keeps running. In the browser you see:
+//
+//     Grinding now
+//     grindBeans    @ call_stacks.js:LINE
+//     brewCoffee    @ call_stacks.js:LINE
+//     placeOrder    @ call_stacks.js:LINE
+//     (anonymous)   @ call_stacks.js:LINE     <- the top level of the file
+
+function grindBeans(grams) {
+    console.trace('Grinding now');
+    return `${grams}g of ground beans`;
 }
 
-// debugger; // add this to enable debugger in development tools
-function square(n) {
-  return multiply(n, n);
+function brewCoffee(drink) {
+    const beans = grindBeans(18);
+    return `a hot ${drink} made from ${beans}`;
 }
 
-function printSquare(n) {
-  console.log(square(n));
+function placeOrder(drink) {
+    const coffee = brewCoffee(drink);
+    console.log(`Order ready: ${coffee}`);
 }
+
+
+// ============================================================
+// 3. THE debugger STATEMENT
+// ============================================================
+// `debugger;` is a breakpoint written into the code. While DevTools is OPEN,
+// the browser pauses on this line so you can:
+//   - hover over variables to see their values
+//   - read the Scope and Call Stack panels
+//   - step through the code one line at a time (see README.md)
+// When DevTools is closed, the statement does nothing.
+// ⚠️ Delete `debugger;` statements before you share your code.
 debugger;
-printSquare(6);
+placeOrder('latte');   // Order ready: a hot latte made from 18g of ground beans
+
+// TRY IT: while paused, press "Step into" (F11) until you reach grindBeans,
+// and watch the Call Stack panel grow to three functions.
