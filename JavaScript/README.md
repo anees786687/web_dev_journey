@@ -28,7 +28,8 @@ You only need a browser. [Node.js](https://nodejs.org/) is optional.
 cd JavaScript/functions
 node function.js
 ```
-Everything except `JS_and_DOM/dom_basics.js` runs in Node, because `document` only exists in the browser.
+The DOM files (`dom_basics.js`, `click_events.js`, and the scripts in `JS_and_DOM/`'s subfolders and in `projects/`) need a browser,
+because `document` only exists there. Everything else also runs in Node.
 
 **Option C: just experiment.** Type any snippet straight into the browser console and press Enter.
 
@@ -44,7 +45,7 @@ Follow the folders in this order. Each one only uses ideas from the folders befo
 | 2 | [if_else/](if_else/) | `if` / `else if` / `else`, `&&` `\|\|` `!`, truthy and falsy values | [if_else.js](if_else/if_else.js) |
 | 3 | [seq_n_iterations/](seq_n_iterations/) | Arrays, `while`, `for`, `for...of`, `break` / `continue`, spread and destructuring | [seq_n_iteration.js](seq_n_iterations/seq_n_iteration.js) |
 | 4 | [functions/](functions/) | Defining and calling functions, IIFEs, rest parameters, arrow functions, returning objects, callbacks, higher-order functions, closures | [function.js](functions/function.js) |
-| 5 | [JS_and_DOM/](JS_and_DOM/) | Objects, object spread and destructuring, `bind()`, `window` and `document`, `querySelector` / `querySelectorAll`, `classList`, click events, script timing, `parentElement` / `children` | [objects.js](JS_and_DOM/objects.js) |
+| 5 | [JS_and_DOM/](JS_and_DOM/) | Objects, object spread and destructuring, `bind()`, `window` and `document`, `querySelector` / `querySelectorAll`, click events, script timing, `parentElement` / `children`, `textContent` vs `innerHTML` vs `innerText`, `classList` (`add`, `remove`, `contains`, `toggle(class, force)`), attributes (`get` / `set` / `has` / `removeAttribute`) | [objects.js](JS_and_DOM/objects.js) |
 | 6 | [nullish_coalescing/](nullish_coalescing/) | `??`, `?.`, `??=`, default parameters | [nullish_coalescing.js](nullish_coalescing/nullish_coalescing.js) |
 | 7 | [call_stacks/](call_stacks/) | The call stack, reading stack traces, `console.trace()`, the `debugger` statement and DevTools | [call_stacks.js](call_stacks/call_stacks.js) |
 | 8 | [this_keyword/](this_keyword/) | `this` in regular methods vs arrow functions, and arrow callbacks inside methods | [script.js](this_keyword/script.js) |
@@ -121,9 +122,14 @@ const [first, ...rest] = arr;             // destructuring with a rest element
 ```js
 const btn   = document.querySelector('#save');      // first match, or null
 const items = document.querySelectorAll('li');      // NodeList of all matches
-btn.textContent = 'Saved!';                         // change the text
+btn.textContent = 'Saved!';                         // change the text (safe: plain text only)
+box.innerHTML = '<b>Hi</b>';                        // insert HTML (only HTML you wrote yourself!)
 btn.classList.add('active');                        // add / remove / toggle classes
+btn.classList.contains('active');                   // true if it has the class
+btn.classList.toggle('active', isOn);               // add if isOn is true, remove if false
 btn.setAttribute('disabled', '');                   // set any attribute
+btn.removeAttribute('disabled');                    // the only way to undo a boolean attribute
+parseInt(img.getAttribute('width'), 10);            // attribute values are strings: convert before maths
 btn.addEventListener('click', handleClick);         // run handleClick on every click
 ```
 
@@ -209,6 +215,9 @@ panel grows when you step in and shrinks when you step out.
 | Running DOM code in `<head>` before the elements exist | [JS_and_DOM/](JS_and_DOM/) |
 | Writing `addEventListener('click', fn())`, which calls `fn` once instead of on every click | [click_events.js](JS_and_DOM/click_events.js) |
 | Using a property on the `null` that `querySelector` returns when nothing matches | [dom_basics.js](JS_and_DOM/dom_basics.js) |
+| Writing `classList.add('.selected')` with a dot (the class name is `selected`), or `className = '...'`, which replaces every class | [modifying_classlist/](JS_and_DOM/modifying_classlist/) |
+| Doing maths on `getAttribute(...)` without converting (`'200' + 10` is `'20010'`), or `setAttribute('disabled', false)` (still disabled) | [changing_attributes/](JS_and_DOM/changing_attributes/) |
+| Putting user input into `innerHTML`, which allows cross-site scripting (XSS). Use `textContent` | [changing_text_n_html_content/](JS_and_DOM/changing_text_n_html_content/) |
 | Writing `const copy = arr` (that's the same array, not a copy) | [seq_n_iteration.js](seq_n_iterations/seq_n_iteration.js) |
 | Expecting `{...obj}` to copy nested objects too (it's a shallow copy) | [objects.js](JS_and_DOM/objects.js) |
 | Storing `'false'` (a string, which is truthy) instead of `false` | [objects.js](JS_and_DOM/objects.js) |
@@ -227,6 +236,7 @@ panel grows when you step in and shrinks when you step out.
 - [MDN: Introduction to the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
 - [Chrome DevTools: Debug JavaScript](https://developer.chrome.com/docs/devtools/javascript)
 - [MDN: this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+- [MDN: Cross-site scripting (XSS)](https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/XSS)
 
 ---
 

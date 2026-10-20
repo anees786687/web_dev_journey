@@ -13,6 +13,9 @@ your code react when the user does something, such as clicking a button.
 | 2 | [dom_basics.js](dom_basics.js) | The `window` object (`innerWidth`, `location`, `prompt`, `alert`), the `document` object, changing elements with `textContent` and `style`, `querySelector` vs `querySelectorAll`, NodeLists, `innerHTML` / `innerText`, `setAttribute`, and `classList` (`add`, `remove`, `toggle`) |
 | 3 | [click_events.js](click_events.js) | Making a button work with `addEventListener('click', callback)`, and why you pass `callback`, not `callback()` |
 | 4 | [dom_intermediate/](dom_intermediate/) | A follow-up with its own page: the DOM vs your HTML, why script **timing** matters, guarding against `null`, `parentElement` and `children` |
+| 5 | [changing_text_n_html_content/](changing_text_n_html_content/) | A follow-up with its own page: `textContent` vs `innerHTML` vs `innerText`, and why putting user input into `innerHTML` causes XSS |
+| 6 | [modifying_classlist/](modifying_classlist/) | A follow-up with its own page: `classList.add` / `remove` / `contains` / `toggle`, and building a list where only one item can be selected with `toggle(class, force)` |
+| 7 | [changing_attributes/](changing_attributes/) | A follow-up with its own page: `getAttribute` / `setAttribute` / `hasAttribute` / `removeAttribute`, why attribute values are strings, boolean attributes like `disabled`, and swapping an image's `src` and `alt` |
 | | [index.html](index.html) | Loads all three scripts with `defer`, and has the elements and the `.red` / `.blue_text` classes they use |
 
 ## How to run
@@ -36,6 +39,7 @@ your code react when the user does something, such as clicking a button.
 - `querySelector` returns the **first** match or `null`. `querySelectorAll` returns a **NodeList** of every match, which is empty if there are none.
   A NodeList works with `.length` and `for...of`, but it isn't a real array (use `[...list]` to get one).
 - Calling `querySelector` on an **element** instead of `document` searches only inside that element.
+- Use `textContent` to change text. Use `innerHTML` only for HTML **you** wrote: user input in `innerHTML` is a cross-site scripting (XSS) hole.
 - Prefer switching CSS classes with `classList.add` / `remove` / `toggle` over setting `element.style` by hand.
 - `element.addEventListener('click', fn)` runs `fn` on every click. Pass the function (`fn`), not its result (`fn()`).
 - A script in `<head>` runs before `<body>` exists. Add `defer` (or put the `<script>` at the end of `<body>`) so the elements are there when it runs.

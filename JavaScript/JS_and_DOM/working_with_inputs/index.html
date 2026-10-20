@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js"></script>
+    <style>
+        /*
+            The form is a 2-column grid: labels on the left, controls on the right.
+            Every label/control pair lands in the next row automatically, so all
+            the rows line up without fixed row widths, margins or <br>s.
+        */
+        .form-grid {
+            display: grid;
+            grid-template-columns: max-content 12rem; /* label column fits the longest label | controls */
+            gap: 1rem 1.5rem;                         /* row gap, column gap */
+            align-items: center;                      /* center each label vertically with its control */
+            width: max-content;                       /* the fieldset border hugs the form */
+        }
+
+        /* Text boxes and the drop-down fill the 12rem column.
+           border-box: the width includes padding + border (inputs and selects
+           count these differently by default, so this makes them match). */
+        .form-grid input:not([type="radio"]),
+        .form-grid select {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* The radio options sit side by side in the controls column */
+        .options {
+            display: flex;
+            gap: 1em;
+        }
+
+        /* Each option: radio + its text */
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Remove the radio's default margin so it starts at the same edge as the text boxes */
+        .options input {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <form action="#">
+        <fieldset class="form-grid">
+            <legend>Personal Information</legend>
+
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+
+            <label for="contact">Contact</label>
+            <input type="tel" name="contact" id="contact">
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
+
+            <label for="stream">Stream</label>
+            <select name="stream" id="stream">
+                <optgroup label="Humanities">
+                    <option value="phil">Philosophy</option>
+                    <option value="hv">Human Values</option>
+                </optgroup>
+
+                <optgroup label="Engineering">
+                    <option value="cs">Computer Science</option>
+                    <option value="extc">Electronics and Telecommunication</option>
+                </optgroup>
+            </select>
+
+            <!-- "Gender" names the whole group, not one control, so it is a <span>.
+                 role="radiogroup" + aria-labelledby tell screen readers that
+                 "Gender" is the question for both radios. -->
+            <span id="gender-label">Gender</span>
+            <div class="options" role="radiogroup" aria-labelledby="gender-label">
+                <!-- Wrapping the radio inside its label links them: clicking the text selects the radio -->
+                <label><input type="radio" name="gender" id="male" value="male"> Male</label>
+                <label><input type="radio" name="gender" id="female" value="female"> Female</label>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

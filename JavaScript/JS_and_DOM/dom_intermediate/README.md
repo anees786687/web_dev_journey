@@ -46,4 +46,4 @@ Also open the *Elements* tab and compare the first `<p>` with the broken line in
 
 ---
 
-[← Back to 5. Objects, the DOM and events](../)
+[← Back to 5. Objects, the DOM and events](../) · **Next:** [5c. Changing text and HTML →](../changing_text_n_html_content/)

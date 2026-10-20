@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+    Open this file in a browser and click the items. Open the Console (F12)
+    to see what script.js logs. Change DEMO at the top of script.js to try
+    each step.
+
+    The CSS only says what a selected item LOOKS like (.item.selected).
+    script.js decides WHICH item has the .selected class.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifying classList</title>
+    <script src="script.js" defer></script>
+
+    <style>
+        .item {
+            border: 1px solid gray;
+            padding: 6px;
+            margin: 4px 0;
+            list-style: none;
+            cursor: pointer;    /* show a hand cursor, so it's clear the items are clickable */
+        }
+
+        /* Matches an element that has BOTH classes: item AND selected */
+        .item.selected {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="item">Item 1</li>
+        <!-- Item 2 starts selected, straight from the HTML -->
+        <li class="item selected">Item 2</li>
+        <li class="item">Item 3</li>
+    </ul>
+</body>
+</html>

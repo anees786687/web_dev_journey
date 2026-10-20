@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+    Open this file in a browser, open the Console (F12), and click the button.
+    Each section below is used by the matching section of script.js.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changing Text and HTML</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- 1. textContent: the button swaps this text back and forth -->
+    <p id="para">Original text</p>
+    <button class="change_text">Click to change text!</button>
+    <hr>
+
+    <!-- 2. innerHTML vs textContent -->
+    <p id="para_2">this is <strong>bold text</strong></p>
+    <hr>
+
+    <!-- 3. XSS: an untrusted string is written here with textContent -->
+    <p id="safe_box"></p>
+    <hr>
+
+    <!-- 4. innerText vs textContent: the <span> is hidden with CSS -->
+    <p id="para_3">
+        Visible text
+        <span style="display: none">hidden text</span>
+    </p>
+</body>
+</html>
