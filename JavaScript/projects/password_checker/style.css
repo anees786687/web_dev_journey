@@ -1,0 +1,46 @@
+/* Centre the login box in the middle of the screen with Flexbox */
+body {
+    margin: 0px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#password_check_container > h2 {
+    text-align: center;
+}
+
+#password_check_container {
+    width: 20rem;
+    height: auto;
+}
+
+/* Two columns: labels take only the space they need (auto),
+   inputs fill the rest (1fr). Each label/input pair forms one row. */
+fieldset {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+    gap: 1rem 1rem;          /* row gap, column gap */
+    border: 2px solid grey;
+    border-radius: 0.5rem;
+}
+
+/* Stack the fieldset and the button vertically */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* A large, rounded submit button, centred under the fields */
+form > button[type="submit"] {
+    width: 200px;
+    box-sizing: border-box;
+    align-self: center;
+    margin: 2rem auto;
+    height: 4rem;
+    border-radius: 2rem;
+    background-color: blueviolet;
+    font-size: 1rem;
+}

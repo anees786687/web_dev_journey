@@ -1,10 +1,16 @@
 <!DOCTYPE html>
+<!--
+    Open this file in a browser, open the Console (F12), fill in the form and
+    click Submit. script.js reads every field and logs them as one object.
+    Click Submit with empty fields first to see the browser's own validation.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js"></script>
+    <title>Working with Inputs</title>
+    <!-- defer: run the script after the form below has been built -->
+    <script src="script.js" defer></script>
     <style>
         /*
             The form is a 2-column grid: labels on the left, controls on the right.
@@ -48,18 +54,25 @@
     </style>
 </head>
 <body>
-    <form action="#">
+    <form action="#" id="personal_info">
         <fieldset class="form-grid">
             <legend>Personal Information</legend>
 
             <label for="name">Name</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="full_name" id="name">
 
             <label for="contact">Contact</label>
-            <input type="tel" name="contact" id="contact">
+            <!-- required: the form can't be submitted while this is empty.
+                 minlength="10": at least 10 characters (a 10-digit phone number). -->
+            <input type="tel" name="contact" id="contact" required minlength="10">
 
             <label for="email">Email</label>
-            <input type="email" name="email" id="email">
+
+            <!-- type="email" does a loose format check; pattern adds a stricter one.
+                 The - inside [...] must be escaped as \- (see README.md, section 8). -->
+            <input type="email" name="email" id="email" required
+                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+
 
             <label for="stream">Stream</label>
             <select name="stream" id="stream">
@@ -80,9 +93,15 @@
             <span id="gender-label">Gender</span>
             <div class="options" role="radiogroup" aria-labelledby="gender-label">
                 <!-- Wrapping the radio inside its label links them: clicking the text selects the radio -->
-                <label><input type="radio" name="gender" id="male" value="male"> Male</label>
-                <label><input type="radio" name="gender" id="female" value="female"> Female</label>
+                <label><input type="radio" name="gender" id="male" value="male" required> Male</label>
+                <label><input type="radio" name="gender" id="female" value="female" required> Female</label>
             </div>
+
+            <!-- type="submit" validates and submits; type="reset" clears the form with no JS.
+                 Not called id="submit" / id="reset": that would hide form.submit() / form.reset(). -->
+            <button id="submit_btn" type="submit">Submit</button>
+            <button id="reset_btn" type="reset">Reset</button>
+
         </fieldset>
     </form>
 </body>

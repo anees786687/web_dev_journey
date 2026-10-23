@@ -3,43 +3,78 @@
     ------------------------------
     The live properties are uncommented. The rest are commented out so you can
     switch them on one at a time and see what each one does.
+    See README.md in this folder for a summary + when to use / avoid flexbox.
 
     Properties for the CONTAINER: display, flex-direction, flex-wrap, flex-flow,
                                   justify-content, align-items, align-content, gap
-    Properties for the ITEMS:     order, flex-grow, flex-shrink, flex-basis, flex, align-self
+    Properties for the ITEMS:     order, flex-grow, flex-shrink, flex-basis,
+                                  flex, align-self
+
+    order - Sometimes reversing the row or column order of a container is not enough.
+    In these cases, we can apply the order property to individual items.
+    By default, items have a value of 0, but we can use this property to also set it
+    to a positive or negative integer value (-2, -1, 0, 1, 2).
+
+    flex-grow - how much of the LEFTOVER space an item takes, compared to its siblings.
+    Default 0 (don't grow). If A has flex-grow: 1 and B has flex-grow: 2,
+    B gets twice as much of the extra space as A (not twice the total width!).
+
+    flex-shrink - how much an item gives up when there is NOT enough space.
+    Default 1 (all items shrink equally). 0 means "never shrink below my
+    flex-basis" - useful for logos, icons and sidebars that must keep their size.
+
+    flex-basis - the item's starting size along the MAIN axis, before any
+    growing or shrinking happens. Default auto (= use width/height, or the content size).
+    In a row it beats "width"; in a column it beats "height".
+
+    flex - shorthand for flex-grow, flex-shrink and flex-basis (in that order).
+        flex: 1        -> 1 1 0%   grow and share ALL space equally (equal columns)
+        flex: auto     -> 1 1 auto grow/shrink, but start from content size
+        flex: none     -> 0 0 auto rigid: never grows or shrinks
+        flex: 0 0 200px -> exactly 200px, no matter what
+    Prefer the shorthand - it sets sensible defaults for the parts you leave out.
+
+    align-self - Another property you can apply to individual items is align-self.
+    This property accepts the same values as align-items and overrides it for
+    that specific item only (e.g. push one item to the bottom of a row).
 */
 
 .container{
     padding: 0;
     margin: 0;
-    /* A fixed height gives the items room to move along a vertical axis */
-    height: 500px;
+    /* auto = as tall as the content. Set a fixed height (e.g. 500px) to give
+       items room to move along a vertical axis and see align-items / align-content work. */
+    height: auto;
     /* This one line turns the section into a flex container.
-       Its direct children become flex items automatically. */
+       Its direct children become flex items automatically.
+       (display: inline-flex does the same but the container itself behaves
+       like an inline element, sitting in a line of text.) */
     display: flex;
     border: 2px solid black;
     /*
         flex-direction
         - Definition:     sets which direction the MAIN axis runs.
         - Why it matters: items are laid out along the main axis, so changing
-                          the direction changes the whole layout.
+                          the direction changes the whole layout. It also SWAPS
+                          what justify-content and align-items control.
         - Values:
               row            -> left to right (DEFAULT)
               row-reverse    -> right to left
               column         -> top to bottom
-              column-reverse -> bottom to top (used here: Article 1 is at the BOTTOM)
+              column-reverse -> bottom to top (Article 1 ends up at the BOTTOM)
     */
-    flex-direction: column-reverse;
+    flex-direction: row;
 
     /*
         flex-wrap - controls what happens when the items don't fit on one line.
               nowrap       -> (DEFAULT) items stay on one line and shrink to fit
+                              (or overflow, if they can't shrink any further)
               wrap         -> extra items move onto a new line/column; good for
                               supporting different screen sizes
               wrap-reverse -> wraps, but the new lines are added in the opposite direction
-        TRY IT: with column-reverse and height 500px, 7 items of ~126px each
-        (100 height + 4 padding + 2 border + 20 margin) don't fit, so with
-        nowrap they get squashed. Turn on "wrap" and they form extra columns instead.
+        TRY IT: set flex-direction: column and height: 500px. Each item is ~126px
+        tall (100 height + 4 padding + 2 border + 20 margin), so only 3 fit.
+        With nowrap they get squashed; turn on "wrap" and they form extra columns instead.
      */
     /* flex-wrap: nowrap; */
     /* flex-wrap: wrap; */
@@ -48,8 +83,10 @@
     /*
         flex-flow - shortcut that combines flex-direction and flex-wrap.
         Write the direction first, then the wrap.
+        The line below means: flex-direction: row; flex-wrap: wrap;
+        (so it OVERRIDES the flex-direction written above).
     */
-    /* flex-flow: row wrap; */
+    flex-flow: row wrap;
 
     /*
         justify-content - aligns items along the MAIN axis and shares out the extra space.
@@ -59,11 +96,15 @@
               space-between -> first and last items touch the edges, equal gaps between items
               space-around  -> equal space around each item (so the gaps at the edges are half-size)
               space-evenly  -> all gaps, including the edges, are exactly equal
+
+        NOTE: it only has a visible effect when there is FREE space left on the line.
+        Here every item has flex-grow: 1, so the items eat all the free space and
+        justify-content seems to do nothing. Set flex-grow: 0 on .flex-item to see it.
     */
-    /* justify-content: space-around; */
+    justify-content: space-around;
 
     /*
-        align-items - aligns items along the CROSS axis.
+        align-items - aligns items along the CROSS axis (within their own line).
               stretch    -> (DEFAULT) items stretch to fill the cross axis
                             (only if they have no fixed width/height in that direction)
               flex-start / start -> at the start of the cross axis
@@ -71,10 +112,27 @@
               center             -> in the middle
               baseline           -> lines up the first line of text in each item
     */
-    /* align-items: start; */
+    /* align-items: baseline; */
+
+    /*
+        align-content - aligns the LINES (rows/columns) themselves along the cross axis.
+        Think of it as justify-content, but for whole wrapped lines.
+        - Only works when there is MORE THAN ONE line (i.e. flex-wrap: wrap)
+          and the container has extra cross-axis space (e.g. a fixed height).
+        - Values: flex-start, flex-end, center, space-between, space-around,
+                  space-evenly, stretch (DEFAULT)
+        align-items vs align-content:
+            align-items   -> moves items INSIDE each line
+            align-content -> moves the lines as a group inside the container
+        With height: auto there is no spare height, so this line has no visible
+        effect yet - give the container height: 600px to see the rows drop to the bottom.
+    */
+    align-content: flex-end;
 
     /*
         gap - space BETWEEN items (not at the outer edges). Easier than using margins.
+              gap: 10px;        -> same gap between rows and columns
+              gap: 20px 10px;   -> row-gap 20px, column-gap 10px
     */
     /* gap: 10px; */
 }
@@ -83,24 +141,60 @@
     background-color: lightgreen;
     border: 1px solid black;
     height: 100px;
+    /* ignored in this row layout, because flex-basis below wins over width */
     width: 100px;
     padding: 2px;
     margin: 10px;
     color: black;
     font-weight: bold;
     font-size: 1em;
+
+    /*
+        flex-basis: 20% -> each item STARTS at 20% of the container's width.
+        But the 20px of margin is added on top, so 5 items (5 x 20% + 100px)
+        don't fit on one line - only 4 do. Then flex-grow: 1 shares the leftover
+        space equally, so the 4 items on each line stretch to fill it.
+        The last line has only 2 items (14 = 4+4+4+2), and they grow to fill
+        the whole row - this is the classic "uneven last row" of flexbox.
+        If you need every column to line up, that is a job for CSS Grid.
+
+        Same thing with the shorthand:  flex: 1 1 20%;
+    */
+    flex-basis: 20%;
+    flex-grow: 1;
+    /* flex-shrink: 0; */   /* TRY IT with flex-wrap: nowrap - items overflow instead of squashing */
 }
+
+/*
+    align-self - overrides align-items for ONE item.
+    Uncomment, give .container a fixed height (e.g. 600px), and change
+    align-content to stretch: Article 3 sits at the bottom of its row
+    while the others stay at the top.
+*/
+/* #a_3{
+    align-self: flex-end;
+} */
+
+/*
+    flex-grow ratios - uncomment to make Article 1 take twice as much of the
+    leftover space as each of its neighbours.
+*/
+/* #a_1{
+    flex-grow: 2;
+} */
 
 /*
     order - changes the VISUAL order of flex (or grid) items without changing the HTML.
     Every item starts with order: 0. Items with a smaller order come first.
+    Items with the same order keep their HTML order.
 
-    Uncomment the block below and the order of the articles will be reversed.
+    Uncomment the block below and the order of articles 1-7 will be reversed.
+    (Articles 8-14 still have order: 0, so they will all come FIRST.)
 
     ⚠️ Screen readers and the Tab key still follow the HTML order, so don't use
     "order" to rearrange content that has a meaningful reading order.
 
-    Bonus (flex item sizing):
+    Quick recap (flex item sizing):
         flex-grow: 1    -> the item grows to fill extra space
         flex-shrink: 0  -> the item never shrinks below its size
         flex-basis      -> the starting size before growing/shrinking

@@ -108,7 +108,7 @@ README with key ideas and practice exercises.
 | 6 | [nullish_coalescing/](JavaScript/nullish_coalescing/) | `??`, optional chaining `?.`, `??=`, and default parameters |
 | 7 | [call_stacks/](JavaScript/call_stacks/) | The call stack, reading stack traces, `console.trace()`, and pausing code with the debugger |
 | 8 | [this_keyword/](JavaScript/this_keyword/) | How `this` works in regular methods vs arrow functions |
-| 🛠️ | [projects/](JavaScript/projects/) | Small complete pages: a background changer and a favourites picker |
+| 🛠️ | [projects/](JavaScript/projects/) | Small complete pages: a background changer, a favourites picker, a password checker and an image viewer |
 
 > 💡 The JavaScript examples print to the **Console**. Open a folder's `index.html`,
 > press `F12`, and click the *Console* tab.

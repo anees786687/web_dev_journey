@@ -45,11 +45,11 @@ Follow the folders in this order. Each one only uses ideas from the folders befo
 | 2 | [if_else/](if_else/) | `if` / `else if` / `else`, `&&` `\|\|` `!`, truthy and falsy values | [if_else.js](if_else/if_else.js) |
 | 3 | [seq_n_iterations/](seq_n_iterations/) | Arrays, `while`, `for`, `for...of`, `break` / `continue`, spread and destructuring | [seq_n_iteration.js](seq_n_iterations/seq_n_iteration.js) |
 | 4 | [functions/](functions/) | Defining and calling functions, IIFEs, rest parameters, arrow functions, returning objects, callbacks, higher-order functions, closures | [function.js](functions/function.js) |
-| 5 | [JS_and_DOM/](JS_and_DOM/) | Objects, object spread and destructuring, `bind()`, `window` and `document`, `querySelector` / `querySelectorAll`, click events, script timing, `parentElement` / `children`, `textContent` vs `innerHTML` vs `innerText`, `classList` (`add`, `remove`, `contains`, `toggle(class, force)`), attributes (`get` / `set` / `has` / `removeAttribute`) | [objects.js](JS_and_DOM/objects.js) |
+| 5 | [JS_and_DOM/](JS_and_DOM/) | Objects, object spread and destructuring, `bind()`, `window` and `document`, `querySelector` / `querySelectorAll`, click events, script timing, `parentElement` / `children`, `textContent` vs `innerHTML` vs `innerText`, `classList` (`add`, `remove`, `contains`, `toggle(class, force)`), attributes (`get` / `set` / `has` / `removeAttribute`), form inputs and the `submit` event | [objects.js](JS_and_DOM/objects.js) |
 | 6 | [nullish_coalescing/](nullish_coalescing/) | `??`, `?.`, `??=`, default parameters | [nullish_coalescing.js](nullish_coalescing/nullish_coalescing.js) |
 | 7 | [call_stacks/](call_stacks/) | The call stack, reading stack traces, `console.trace()`, the `debugger` statement and DevTools | [call_stacks.js](call_stacks/call_stacks.js) |
 | 8 | [this_keyword/](this_keyword/) | `this` in regular methods vs arrow functions, and arrow callbacks inside methods | [script.js](this_keyword/script.js) |
-| 🛠️ | [projects/](projects/) | Small complete pages: a background changer and a favourites picker | [projects/README.md](projects/README.md) |
+| 🛠️ | [projects/](projects/) | Small complete pages: a background changer, a favourites picker, a password checker and an image viewer | [projects/README.md](projects/README.md) |
 
 Each folder has its own `README.md` with the file list, key ideas and practice exercises.
 
@@ -131,6 +131,10 @@ btn.setAttribute('disabled', '');                   // set any attribute
 btn.removeAttribute('disabled');                    // the only way to undo a boolean attribute
 parseInt(img.getAttribute('width'), 10);            // attribute values are strings: convert before maths
 btn.addEventListener('click', handleClick);         // run handleClick on every click
+form.addEventListener('submit', (e) => {            // forms: listen for 'submit' on the FORM
+  e.preventDefault();                               // stop the page reloading
+  const name = nameInput.value;                     // read values when the event happens
+});
 ```
 
 ### Safe access and defaults
@@ -217,6 +221,7 @@ panel grows when you step in and shrinks when you step out.
 | Using a property on the `null` that `querySelector` returns when nothing matches | [dom_basics.js](JS_and_DOM/dom_basics.js) |
 | Writing `classList.add('.selected')` with a dot (the class name is `selected`), or `className = '...'`, which replaces every class | [modifying_classlist/](JS_and_DOM/modifying_classlist/) |
 | Doing maths on `getAttribute(...)` without converting (`'200' + 10` is `'20010'`), or `setAttribute('disabled', false)` (still disabled) | [changing_attributes/](JS_and_DOM/changing_attributes/) |
+| Reading `.value` at page load (always empty), listening for `submit` on the button instead of the form, or forgetting `preventDefault()` | [working_with_inputs/](JS_and_DOM/working_with_inputs/) |
 | Putting user input into `innerHTML`, which allows cross-site scripting (XSS). Use `textContent` | [changing_text_n_html_content/](JS_and_DOM/changing_text_n_html_content/) |
 | Writing `const copy = arr` (that's the same array, not a copy) | [seq_n_iteration.js](seq_n_iterations/seq_n_iteration.js) |
 | Expecting `{...obj}` to copy nested objects too (it's a shallow copy) | [objects.js](JS_and_DOM/objects.js) |

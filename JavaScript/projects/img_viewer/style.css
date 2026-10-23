@@ -1,0 +1,78 @@
+body{
+    margin: 0;
+}
+
+p.final_msg{
+    text-align: center;
+    font-size: x-large;
+    font-weight: bolder;
+    margin: auto 0;
+    padding: 0;
+}
+/* The big image: a fixed 3:2 box that shrinks on small screens.
+   `contain` fits the whole picture inside it without stretching. */
+.current_animal img{
+    width: 100%;
+    max-width: 50rem;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+}
+
+
+/* Square thumbnails. `cover` fills the square and crops whatever doesn't fit. */
+.animal_thumbnails img{
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+}
+
+/* outline, not border: an outline takes up no space, so the thumbnails
+   don't shift around when it appears. */
+.animal_thumbnails img:hover{
+    outline: 2px solid blue;
+    outline-offset: 2px;
+    cursor: pointer;
+}
+
+.animal_thumbnails img.selected{
+    outline: 3px solid blue;
+    outline-offset: 3px;
+}
+/* A centred row of thumbnails that wraps onto new lines when it runs out of room. */
+.animal_thumbnails ul{
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    
+}
+
+
+.display_container {
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto auto;
+    row-gap: 1rem;
+}
+
+.display_container .current_animal {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.buttons button{
+    width: 15rem;
+    height: 5rem;
+}

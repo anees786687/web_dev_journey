@@ -16,6 +16,7 @@ your code react when the user does something, such as clicking a button.
 | 5 | [changing_text_n_html_content/](changing_text_n_html_content/) | A follow-up with its own page: `textContent` vs `innerHTML` vs `innerText`, and why putting user input into `innerHTML` causes XSS |
 | 6 | [modifying_classlist/](modifying_classlist/) | A follow-up with its own page: `classList.add` / `remove` / `contains` / `toggle`, and building a list where only one item can be selected with `toggle(class, force)` |
 | 7 | [changing_attributes/](changing_attributes/) | A follow-up with its own page: `getAttribute` / `setAttribute` / `hasAttribute` / `removeAttribute`, why attribute values are strings, boolean attributes like `disabled`, and swapping an image's `src` and `alt` |
+| 8 | [working_with_inputs/](working_with_inputs/) | A follow-up with its own page: reading a form's fields (`.value`, `.checked`, the selected radio), the form's `submit` event and `preventDefault()`, built-in validation, `focus()` / `select()` and `form.reset()` |
 | | [index.html](index.html) | Loads all three scripts with `defer`, and has the elements and the `.red` / `.blue_text` classes they use |
 
 ## How to run

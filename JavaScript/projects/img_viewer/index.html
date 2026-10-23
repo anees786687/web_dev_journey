@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image gallery</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- defer: run the script after the HTML is parsed, so querySelector can find the elements -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Image gallery</h1>
+    </header>
+    <hr>
+
+    <main>
+        <div class="display_container">
+            <!-- Empty until every image is removed (filled in by script.js) -->
+            <p class="final_msg"></p>
+            <!-- The big image. script.js copies src and alt here from the clicked thumbnail -->
+            <div class="current_animal">
+                <img src="images/cat.jpeg" alt="A cat">
+            </div>
+            <!-- The thumbnails. The one with class="selected" is the one shown above -->
+            <div class="animal_thumbnails">
+                <ul>
+                    <li><img src="images/cat.jpeg" alt="A cat"  class="selected"></li>
+
+                    <li><img src="images/dog.jpeg" alt="A dog" ></li>
+                    <li><img src="images/crow.jpeg" alt="A crow" ></li>
+                    <li><img src="images/leopard.jpeg" alt="A leopard" ></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="add">Add</button>
+            <!-- Hidden: the Add button opens it from script.js. `multiple` lets you pick several files at once -->
+            <input type="file" id="file_picker" accept="image/jpeg, image/png" multiple hidden>
+            <button class="remove">Remove</button>
+        </div>
+    </main>
+</body>
+</html>

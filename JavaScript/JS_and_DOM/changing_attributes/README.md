@@ -64,4 +64,4 @@ open to watch the attributes on `<img>` and `<button>` change as you click.
 
 ---
 
-[← 5d. Changing classes with classList](../modifying_classlist/) · [Back to 5. Objects, the DOM and events](../) · **Next:** [6. Nullish coalescing →](../../nullish_coalescing/)
+[← 5d. Changing classes with classList](../modifying_classlist/) · [Back to 5. Objects, the DOM and events](../) · **Next:** [5f. Working with form inputs →](../working_with_inputs/)

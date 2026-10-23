@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+    PROJECT: Password checker
+    Open this file in a browser and try logging in (for example abcd / 1234).
+    The valid usernames and passwords are listed at the top of script.js.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Checker</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- defer: run the script after the form below has been built -->
+    <script src="script.js" defer></script>
+    <style>
+        p {
+            text-align: center;
+            font-weight: bolder;
+            font-size: large;
+        }
+
+        .valid {
+            color: green;
+        }
+
+        .invalid {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="password_check_container">
+        <h2>Please validate your credentials</h2>
+        <form action="#" id="validation_form">
+            <!-- The fieldset is a 2-column grid (see style.css): labels on the left, inputs on the right -->
+            <fieldset>
+                <label for="username">
+                    <span>Username: </span>
+                </label>
+                <!-- required: the browser won't submit the form while this is empty -->
+                <input type="text" name="username" id="username" required>
+
+                <label for="pass">
+                    <span>Password: </span>
+                </label>
+                <!-- type="password" hides what's typed with dots -->
+                <input type="password" name="pass" id="pass" required>
+            </fieldset>
+            <!-- Called submit_btn, not submit: id="submit" would hide form.submit() -->
+            <button type="submit" id="submit_btn">Submit</button>
+        </form>
+        <p class="result"></p>
+    </div>
+</body>
+</html>
