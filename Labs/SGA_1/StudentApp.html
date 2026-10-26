@@ -1,0 +1,113 @@
+<!-- 
+ Name: Anees Alwani
+ ID: 2022ebcs008   
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2022ebcs008</title>
+
+    <style>
+        fieldset {
+            width: 20rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem 1rem;
+            place-content: center;
+        }
+
+        #age {
+            margin: 0;
+        }
+        [hidden] {
+            display: none !important;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+    </style>
+    <!-- <script src="StudentApp.js" defer></script> -->
+     <script src="stud_app_2.js" defer></script>
+
+</head>
+<body>
+    <form action="#">
+        <!-- 
+        Name
+
+        Date of birth
+
+        Age
+
+        Mobile number
+
+        Email ID 
+        -->
+        <fieldset>
+            <legend>Perosnal Details</legend>
+
+            <label for="name">
+                Name
+            </label>
+            <div class ="input_n_warning">
+                <input type="text" id="name" name="name">
+                <p></p>
+            </div>
+            
+            <label for="dob">
+                Date of Birth
+            </label>
+            <div class ="input_n_warning">
+                <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy">
+                <p></p>
+            </div>
+
+            <label for="age">
+                Age
+            </label>
+            
+            <p id = "age"></p>
+            
+            <label for="mobile_number">
+                Mobile number
+            </label>
+            <div class ="input_n_warning">
+                <input type="tel" name="mobile_number" id="mobile_number" maxlength="10">
+                <p></p>
+            </div>
+
+
+            <label for="email_id">
+                Email ID
+            </label>
+            <div class ="input_n_warning">
+                <input type="email" name="email_id" id="email_id">
+                <p></p>
+            </div>
+
+
+            <button type="submit" id="submit_btn" disabled>Submit</button>
+        </fieldset>
+
+    </form>
+
+    <!-- second page: shown after the form is submitted -->
+    <fieldset id="retrieve_page" hidden>
+        <legend>Retrieve Details</legend>
+
+        <label for="retrieve_mobile">
+            Mobile number
+        </label>
+        <input type="tel" name="retrieve_mobile" id="retrieve_mobile" maxlength="10">
+
+        <button type="button" id="retrieve">Retrieve Cookie</button>
+    </fieldset>
+</body>
+</html>

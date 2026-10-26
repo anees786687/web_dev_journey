@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#id_card {
+    border: 2px solid black;
+    width: 100%;
+    max-width: 50rem;
+    border-radius: 0.75rem;
+}
+
+#id_card_header {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 2px solid black;
+}
+
+#id_card_header img {
+    width: clamp(4rem, 15vw, 10rem);   /* min, preferred, max */
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 0.75rem;
+}
+
+#id_card_header h2 {
+    font-size: 2rem;
+    align-self: center;
+    width: 80%;
+}
+
+
+#id_card_body {
+    display: flex;
+    border-bottom: 1px solid black;
+
+}
+
+#student_info {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: auto 2fr;
+    place-items: center;
+}
+
+#student_infoi p{
+    overflow-wrap: anywhere;
+    margin: 0;
+}
+
+.info_tags {
+    object-fit: contain;
+    display: inline;
+    width: auto;
+    font-weight: 900;
+}
+
+#student_info p:not(.info_tags){
+    margin: 0;
+    margin-left: 10%;
+    place-self: center left;
+}
+
+#student_photo{
+    width: 10rem;
+    height: 12rem;
+    flex-shrink: 0;
+    align-self: center;
+    margin: 1rem;
+    border: 0.75px solid black;
+}
+
+#student_photo img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#id_card_footer p {
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    #id_card_header h2 {
+        font-size: 1.25rem;
+    }
+    #id_card_body {
+        flex-direction: column;     /* photo goes above/below the info, not beside it */
+        align-items: center;
+    }
+
+    #student_photo {
+        order: -1;                  /* put the photo on top */
+        align-self: center;
+    }
+
+    #student_info {
+        width: 100%;
+        grid-template-columns: 1fr; /* label above value */
+        place-items: start;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
+
+    #student_info p:not(.info_tags) {
+        margin-left: 0;
+        margin-bottom: 0.75rem;
+    }
+}
