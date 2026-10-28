@@ -1,0 +1,25 @@
+:root{
+  --font-space-mono-reg: normal 400 1rem "Space mono", monospace;
+  --font-space-mono-bold: normal 700 1rem "Space mono", monospace;
+  --font-space-mono-reg-italic: italic 400 1rem "Space mono", monospace;
+  --font-space-mono-bold-italic: italic 700 1rem "Space mono", monospace
+}
+body{
+  margin: 0;
+  background-color: #fdf9fd;
+  font: var(--font-space-mono-bold);
+}
+.cantilever-container {
+  width: 50vw;
+  margin: 90px;
+}
+
+.cantilever-container h1 {
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.shadow-artist{
+  text-shadow: 0px -3.25px 2px  #0c2ffb, 0 -6.5px 2px #2cfcfd, 0 3.25px 2px #fefc4b,0 6.5px 2px #fb203b ;
+}

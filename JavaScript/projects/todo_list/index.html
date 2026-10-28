@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+
+    <style>
+
+        body {
+            margin: 0;
+        }
+
+        header h1 {
+            text-align: center;
+        }
+
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+        }
+
+        .todo_container {
+            box-sizing: border-box;
+            width: min(100% - 2rem, 40rem);
+            padding: 1rem;
+            border: 2px solid black;
+            display: grid;
+            grid-template-rows: 0.5fr 1fr 2fr;
+            place-items: center;
+            row-gap: 3rem;
+        }
+
+        .todo_container h2{
+            font-size: 2rem;
+            margin: 0;
+        }
+        .todo_container ol{
+            padding: 0 0 0 1.5rem;
+            margin: 0;
+            width: 100%;
+            max-width: 25rem;
+
+        }
+
+        .todo_container form{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #todo_txtarea{
+            /* display: block; */
+            box-sizing: border-box; 
+            width: 100%;
+            align-self: center;
+            max-width: 30rem;
+            height: 3rem;
+            margin: 2rem 0;
+        }
+        label[for="todo_txtarea"]{
+            align-self: center;
+            font-size: 2rem;
+            font-size: clamp(1.25rem, 5vw, 2rem);
+        }
+        li div {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.25rem;
+            width: auto;
+            height: auto;
+            overflow-wrap: anywhere;
+        }
+
+        #buttons{
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            height: 2.5rem;
+        }
+
+        .button {
+            width: 7rem;
+            border-radius: 1rem;
+        }
+
+        #info {
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+            ToDo list V1
+        </h1>
+    </header>
+    <hr>
+
+    <main>
+        <div class="todo_container">
+            <h2>ToDos</h2>
+            <ol></ol>
+            <form action="#">
+                <label for="todo_txtarea">Add your ToDo here</label>
+                <textarea name="todo_txtarea" id="todo_txtarea" maxlength="100"></textarea>
+                <p id="info" hidden></p>
+                <div id="buttons">
+                    <button type="submit" id="submit_btn" class="button">Add ToDo</button>
+                    <button type="button" id="remove_btn" class="button">Remove ToDo</button>
+                    <button type="button" id="reset_btn" class="button">Reset ToDo list</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <hr>
+
+    <footer>
+        <p>Made by Anees Alwani</p>
+    </footer>
+</body>
+</html>

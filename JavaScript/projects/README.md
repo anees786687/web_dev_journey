@@ -12,6 +12,7 @@ projects use `querySelector` and `addEventListener`.
 | [picking_favorites/](picking_favorites/) | Tick programming languages from a list and print the chosen ones | Checkboxes and `<label>`, the `:checked` selector, `querySelectorAll`, `parentNode`, `for...of` |
 | [password_checker/](password_checker/) | A login form that checks the username and password against a list of users | Arrays of objects, `for...of` with `break`, the form `submit` event, `preventDefault()`, `.value`, `form.reset()`, Flexbox + Grid |
 | [img_viewer/](img_viewer/) | A big image with clickable thumbnails. Add your own pictures and remove the selected one | Event delegation with `event.target`, `createElement` / `appendChild` / `remove()`, file inputs and `URL.createObjectURL()`, the `hidden` attribute, `object-fit` |
+| [todo_list/](todo_list/) | A todo list that's saved in the browser, so it survives a refresh. Add todos, mark ticked ones complete, or reset the list | `localStorage`, `JSON.stringify` / `JSON.parse`, keeping one master array in sync with storage, `createElement`, `:checked`, `Array.find()`, `setTimeout`, responsive CSS with `max-width` and `clamp()` |
 
 ## How to run
 
