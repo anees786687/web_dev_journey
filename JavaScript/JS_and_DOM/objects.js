@@ -28,6 +28,8 @@
  *   - The spread syntax {...obj} copies an object's properties (section 7).
  *   - Destructuring copies properties into variables (section 8).
  *   - bind() fixes `this` when a method is used as a callback (section 9).
+ *   - A constructor function + `new` makes many objects of the same shape
+ *     (section 10).
  *
  * HOW TO RUN: open index.html in a browser and open the Console (F12),
  * or run `node objects.js`.
@@ -39,6 +41,7 @@
 // ============================================================
 // `const` means the variable can't point to a different object.
 // The object's properties can still be changed (see below).
+// This is known as an `object literal`
 const person = {
     name: 'Anees',
     age: 34
@@ -210,3 +213,48 @@ printTwice(boundIntroduce);      // I'm Riya and I study Web Programming (twice)
 // Fix 2: wrap the call in an arrow function, so it's still called as
 // student.introduce().
 printTwice(() => student.introduce());
+
+
+// ============================================================
+// 10. CONSTRUCTOR FUNCTIONS (making many objects of the same shape)
+// ============================================================
+// Writing out an object literal for every car by hand is repetitive and
+// easy to get wrong. A CONSTRUCTOR is a function that works as a blueprint:
+// call it with `new` and you get a fresh object with the same properties,
+// filled in with the values you pass.
+// By convention, constructor names start with a CAPITAL letter.
+console.log('------ Objects using constructors ------');
+
+function Car(name, year, speed) {
+    // `new` creates an empty object and makes `this` point to it.
+    this.name = name;
+    this.year = year;
+    this.speed = speed;
+
+    this.getDetails = function () {
+        return `Car name: ${this.name}, Make year: ${this.year}, Max speed: ${this.speed}`;
+    };
+    // `new` returns `this` automatically, so there's no return statement.
+}
+
+const maruti = new Car('Maruti 800', 2000, 120);
+const mercedes = new Car('Mercedes-Benz', 2005, 200);
+
+console.log(maruti);                 // Car { name: 'Maruti 800', year: 2000, speed: 120, getDetails: [Function] }
+console.log(maruti.getDetails());    // Car name: Maruti 800, Make year: 2000, Max speed: 120
+console.log(mercedes.getDetails());  // Car name: Mercedes-Benz, Make year: 2005, Max speed: 200
+
+// instanceof checks which constructor made an object.
+console.log(maruti instanceof Car);  // true
+
+// ⚠️ Forgetting `new`: Car runs like a normal function, `this` isn't a new
+// object, and nothing is returned.
+//   const oops = Car('Alto', 2010, 140);   // oops is undefined
+//   (In strict mode, `this` is undefined, so it throws a TypeError instead.)
+
+// Every Car above gets its OWN copy of getDetails, which wastes memory.
+// Prototypes and the `class` syntax fix this (see ../classes/).
+// TRY IT: write a Student(name, course) constructor with an introduce()
+// method, and create two students.
+
+

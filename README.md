@@ -104,7 +104,7 @@ README with key ideas and practice exercises.
 | 2 | [if_else/](JavaScript/if_else/) | `if` / `else if` / `else`, logical operators, truthy and falsy values |
 | 3 | [seq_n_iterations/](JavaScript/seq_n_iterations/) | Arrays, `while`, `for`, `for...of`, `break` and `continue`, spread `...` and destructuring |
 | 4 | [functions/](JavaScript/functions/) | Defining and calling functions, IIFEs, rest parameters, arrow functions, callbacks, higher-order functions, closures |
-| 5 | [JS_and_DOM/](JavaScript/JS_and_DOM/) | Objects, spread and destructuring, `bind()`, the `window` and `document` objects, finding and changing elements (`querySelector`, `classList`), click events, and moving around the DOM tree |
+| 5 | [JS_and_DOM/](JavaScript/JS_and_DOM/) | Objects, spread and destructuring, `bind()`, constructor functions, the `window` and `document` objects, finding and changing elements (`querySelector`, `classList`), click events, and moving around the DOM tree |
 | 6 | [nullish_coalescing/](JavaScript/nullish_coalescing/) | `??`, optional chaining `?.`, `??=`, and default parameters |
 | 7 | [call_stacks/](JavaScript/call_stacks/) | The call stack, reading stack traces, `console.trace()`, and pausing code with the debugger |
 | 8 | [this_keyword/](JavaScript/this_keyword/) | How `this` works in regular methods vs arrow functions |

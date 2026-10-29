@@ -45,7 +45,7 @@ Follow the folders in this order. Each one only uses ideas from the folders befo
 | 2 | [if_else/](if_else/) | `if` / `else if` / `else`, `&&` `\|\|` `!`, truthy and falsy values | [if_else.js](if_else/if_else.js) |
 | 3 | [seq_n_iterations/](seq_n_iterations/) | Arrays, `while`, `for`, `for...of`, `break` / `continue`, spread and destructuring | [seq_n_iteration.js](seq_n_iterations/seq_n_iteration.js) |
 | 4 | [functions/](functions/) | Defining and calling functions, IIFEs, rest parameters, arrow functions, returning objects, callbacks, higher-order functions, closures | [function.js](functions/function.js) |
-| 5 | [JS_and_DOM/](JS_and_DOM/) | Objects, object spread and destructuring, `bind()`, `window` and `document`, `querySelector` / `querySelectorAll`, click events, script timing, `parentElement` / `children`, `textContent` vs `innerHTML` vs `innerText`, `classList` (`add`, `remove`, `contains`, `toggle(class, force)`), attributes (`get` / `set` / `has` / `removeAttribute`), form inputs and the `submit` event | [objects.js](JS_and_DOM/objects.js) |
+| 5 | [JS_and_DOM/](JS_and_DOM/) | Objects, object spread and destructuring, `bind()`, constructor functions, `window` and `document`, `querySelector` / `querySelectorAll`, click events, script timing, `parentElement` / `children`, `textContent` vs `innerHTML` vs `innerText`, `classList` (`add`, `remove`, `contains`, `toggle(class, force)`), attributes (`get` / `set` / `has` / `removeAttribute`), form inputs and the `submit` event | [objects.js](JS_and_DOM/objects.js) |
 | 6 | [nullish_coalescing/](nullish_coalescing/) | `??`, `?.`, `??=`, default parameters | [nullish_coalescing.js](nullish_coalescing/nullish_coalescing.js) |
 | 7 | [call_stacks/](call_stacks/) | The call stack, reading stack traces, `console.trace()`, the `debugger` statement and DevTools | [call_stacks.js](call_stacks/call_stacks.js) |
 | 8 | [this_keyword/](this_keyword/) | `this` in regular methods vs arrow functions, and arrow callbacks inside methods | [script.js](this_keyword/script.js) |
@@ -96,6 +96,8 @@ user.city = 'Pune'; // add
 delete user.age;    // remove
 const { name, city: town } = user;          // destructure by key name (city renamed to town)
 const fn = obj.method.bind(obj);            // lock `this` before passing a method around
+function Car(name) { this.name = name; }    // constructor: a blueprint for objects
+const alto = new Car('Alto');               // don't forget `new`
 ```
 
 ### `this`
@@ -229,6 +231,7 @@ panel grows when you step in and shrinks when you step out.
 | Leaving a `debugger;` statement in finished code | [call_stacks.js](call_stacks/call_stacks.js) |
 | Destructuring with names that don't match the keys (`const { bookTitle } = book` gives `undefined`) | [objects.js](JS_and_DOM/objects.js) |
 | Passing a method as a callback without `bind`, so it loses `this` | [objects.js](JS_and_DOM/objects.js) |
+| Calling a constructor without `new` (`Car('Alto')` returns `undefined`) | [objects.js](JS_and_DOM/objects.js) |
 | Using an arrow function as an object method that needs `this` | [this_keyword/script.js](this_keyword/script.js) |
 | Writing `() => { x: 1 }` to return an object (it returns `undefined`) | [function.js](functions/function.js) |
 

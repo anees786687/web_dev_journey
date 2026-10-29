@@ -1,0 +1,86 @@
+body{
+    /* The text-transform CSS property specifies how to capitalize an element's text. It can be used to make text appear in all-uppercase or all-lowercase, or with each word capitalized. It also can help improve legibility for ruby. */
+    
+    /* text-transform: capitalize; */
+    
+    /* The text-decoration CSS shorthand property sets the appearance of decorative lines on text. It is a shorthand for text-decoration-line, text-decoration-color, text-decoration-style, and the newer text-decoration-thickness property. */
+
+    /* text-decoration: underline overline dashed red 3px; */
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration:  underline green 3px;
+    color: green;
+}
+
+a:visited{
+    color: red;
+}
+
+#summary{
+    /* Font shorthand property 
+    
+    
+            Shorthand font declarations
+
+            If font is specified as a shorthand for several font-related properties, then:
+
+                it must include values for:
+                    font-size
+                    font-family
+
+                it may optionally include values for:
+                    font-style
+                    font-variant
+                    font-weight
+                    font-width
+                    line-height
+                 
+
+            Shorthand property order
+
+            The order of some of the longhand values within the shorthand font declaration must follow a few rules:
+
+                Both the font-size and font-family components are required (except for system font declarations).
+
+                The font-style, font-variant and font-weight components must precede the font-size value.
+
+                A line-height can only be included if font-size is included. If present, the line-height must immediately follow the font-size, with the two values separated by a forward slash (/), for example: 16px / 3.
+
+                The font-family must be the last value specified.
+
+
+    */
+    font: italic 900 1.25em/3 sans-serif ;
+    background-color: gainsboro;
+}
+
+.cast {
+    background-color: red;
+}
+
+.reviews {
+    color: blue
+}
+
+#cast{
+    /* list-style-type: circle; */
+
+    /* custom style */
+    /* list-style-type: "* "; */
+
+    /* Use none for NAV BARS */
+
+    /* Position of marker */
+    /* Bullet point is the part of the li element */
+    
+    /* list-style-position: inside;  */
+
+    /* Bullet point is NOT the part of the li element */
+    
+    list-style-position: outside;
+}
