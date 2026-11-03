@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            gap: 10rem;
+        }
+        #box {
+            width: 20vw;
+            height: 5rem;
+            border: 2px solid black;
+            box-sizing: border-box;
+            text-align: center;
+            align-content: center;
+        }
+
+        
+
+        #keyboard-event {
+            text-align: center;
+            align-content: center;
+            height: 10rem;
+            border: 2px solid balck;
+        }
+
+        #mouse-event{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #img-size-changer{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="mouse-event">
+        <div id="box">
+            Click me!
+        </div>
+        <p id="result" hidden></p>
+    </div>
+    <div id="keyboard-event">
+        <input type="text">
+        <p hidden></p>
+    </div>
+    <div id="img-size-changer">
+        <img src="dog.jpeg" alt="" width="200px">
+        <p>Enter a number greater than 200 and less than 500</p>
+        <input type="text" name="scale-value" id="scale-value">
+        <p></p>
+    </div>
+</body>
+</html>

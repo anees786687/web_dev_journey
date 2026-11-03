@@ -14,7 +14,7 @@ keyword (see [../basics/](../basics/)) is built on.
 
 ## How to run
 
-- **Browser:** open `index.html` and press `F12` → *Console*. Expand the logged objects and look for `[[Prototype]]` to follow the chain.
+- **Browser:** open `index.html` and press `F12` → *Console*. Expand the logged objects and look for `[[Prototype]]` to follow the chain. The name Chrome shows after `[[Prototype]]:` can be misleading (see [section 10](#10-reading-the-browser-console-dont-trust-the-prototype-labels)).
 - **Node.js:** `node script.js`. Node prints `Object.prototype` as `[Object: null prototype] {}`.
 
 ## What the code covers
@@ -107,13 +107,72 @@ object that `new` creates.
 ```
 
 So `Student.prototype` does **not** mean "the prototype of `Student`". It means "the prototype
-`Student` gives to the objects it makes":
+`Student` gives to the objects it makes".
+
+**Pretend it had a different name.** Imagine JavaScript had called it `.toolboxForMyObjects`:
+
+```js
+Student.toolboxForMyObjects.getName = function () { return this.name; };
+```
+
+Now "is the toolbox the prototype of `Student`?" sounds odd. It's just something `Student`
+**carries** so it can hand it to its objects. That's all `Student.prototype` is. Whenever you read
+`Student.prototype`, say "Student's toolbox for its objects" in your head.
+
+**"Stored on" is not "inherits from."** Storing an object on another object doesn't make it a prototype:
+
+```js
+const anees = {};
+anees.car = { brand: 'Honda' };              // the car is STORED ON anees
+Object.getPrototypeOf(anees) === anees.car;  // false: anees doesn't inherit from the car
+```
+
+`Student.prototype` is just like `anees.car`: an object stored on `Student` under a property name
+that happens to be "prototype".
+
+**Three facts to keep separate:**
+
+1. `Student` **inherits from** `Function.prototype`. That's why `Student.call(...)` and `Student.bind(...)` work.
+2. `Student` **is itself an object**, so it can have properties, like `Student.prototype` and `Student.length`.
+3. Objects made with `new Student()` **inherit from** `Student.prototype`. That's why `student_2.getName()` works.
+
+```
+                 Student's REAL prototype
+                 (what Student inherits from)
+                          │
+                          ▼
+   Function.prototype  ◄───  Student  ───► Student.prototype
+   (call, bind, apply)      (function)     (just a property it carries;
+                                            handed to student_2 etc.)
+                                                   ▲
+                                                   │ inherits from
+                                               student_2
+```
+
+**Rule of thumb:**
+- `Object.getPrototypeOf(X)` = X's **real** prototype, the object X inherits from.
+- `X.prototype` = just a **property** on X, the object that things made with `new X()` will inherit from.
+
+Also, `this` has nothing to do with creating `Student.prototype`. It exists as soon as the
+function is **defined**, even an empty `function Empty() {}`. `this.x = ...` only adds **own**
+properties to each new object while the constructor runs. `.prototype` decides what an object
+**inherits**, and `this` decides what it **owns**.
+
+In code:
 
 ```js
 Object.getPrototypeOf(student_2) === Student.prototype;  // true:  student_2 inherits from Student.prototype
 Object.getPrototypeOf(Student) === Function.prototype;   // true:  Student is a function, so it inherits from Function.prototype
 Object.getPrototypeOf(student_2) === Student;            // false: the function itself isn't in student_2's chain
 ```
+
+**What's inside `Student.prototype`?** It's a plain object (`typeof Student.prototype` is
+`'object'`), not a function. A property of a function doesn't have to be a function, just as
+`student_2.name` is a string. JavaScript creates it automatically as `{ constructor: Student }`,
+and the script adds `getName`. Node's `console.log` hides `constructor` because it's
+non-enumerable, but `Student.prototype.constructor === Student` is `true`. It does **not**
+contain `name`, `age`, `profession` or `getDeets`: those are set on each instance by
+`this.x = ...`.
 
 `Student.prototype` and `Function.prototype` are separate objects, and neither is in the other's
 chain. They're like siblings: both have `Object.prototype` as their prototype.
@@ -175,6 +234,105 @@ fake instanceof Student; // true, even though Student() never ran and fake has n
 
 So "is a Student" means "inherits from `Student.prototype`", not "was built by `Student`".
 
+### 9. `new` vs `Object.create()`
+There are only two differences:
+
+1. **What you give it.** `new` takes a **function**. `Object.create` takes an **object**.
+2. **Whether setup code runs.** `new` runs the function, which fills in `name`, `age` and so on. `Object.create` runs nothing, so you get an empty object.
+
+```js
+const a = new Student('Fawaz', 34, 'Doctor');
+const b = Object.create(Employee);
+```
+
+| Step | `new Student(...)` | `Object.create(Employee)` |
+|---|---|---|
+| 1. Make an empty object | ✅ `{}` | ✅ `{}` |
+| 2. Set its prototype | to `Student.prototype` (looked up from the function) | to `Employee` (used directly) |
+| 3. Run setup code | ✅ runs `Student(...)` with `this` = the new object, which adds `name`, `age`, `profession`, `getDeets` | ❌ nothing runs |
+| Result | `{ name: 'Fawaz', age: 34, ... }` | `{}` |
+
+That's why `emp_1.getDeets()` first printed `undefined`. Nothing ever set `name` or `age`, so
+they had to be added by hand afterwards.
+
+`Employee` is a plain object, not a function, so it has no `.prototype` (`Employee.prototype`
+is `undefined`). Both lines below are `true`, but the prototype reached each object differently:
+
+```js
+Object.getPrototypeOf(student_2) === Student.prototype; // new: went through the function's .prototype
+Object.getPrototypeOf(emp_1) === Employee;              // Object.create: used the object it was given
+```
+
+**Analogy:** `new Student(...)` is ordering from a shop. The shop looks up its own manual
+(`Student.prototype`), links your item to it, and **assembles** the item with the details you gave.
+`Object.create(Employee)` is "give me an empty box linked to this manual". You hand over the
+manual yourself, and filling the box is up to you.
+
+`new` is essentially `Object.create` plus running the constructor:
+
+```js
+// these two produce the same kind of object:
+const a = new Student('Fawaz', 34, 'Doctor');
+
+const b = Object.create(Student.prototype);   // steps 1 and 2
+Student.call(b, 'Fawaz', 34, 'Doctor');       // step 3
+```
+
+**When to use which:**
+- Use `new` when you have a constructor (or a `class`) that should set up each object.
+- Use `Object.create` when you want a new object that inherits from an existing object (like `Employee`), or when you're linking prototypes for inheritance (`EngineeringStudent.prototype = Object.create(Student.prototype)`).
+
+### 10. Reading the browser console: don't trust the `[[Prototype]]` labels
+Expanding `lala` in Chrome's console shows something like this:
+
+```
+EngineeringStudent {name: 'lala', ...}       ← lala itself
+  age, name, profession, stream               ← own properties (from this.x = ... and Student.call)
+  getDeets, getStream                         ← own properties (arrow functions created in the constructors)
+
+  [[Prototype]]: Student                      ← this object is EngineeringStudent.prototype
+     constructor: ƒ EngineeringStudent(...)   ← the constructor fix line
+     [[Prototype]]: Object                    ← this object is Student.prototype
+```
+
+The word after each `[[Prototype]]:` is **Chrome's guess at a name**, not the real name of the object.
+
+**1. `[[Prototype]]: Student` is really `EngineeringStudent.prototype`.** Its contents give it
+away: it holds `constructor: EngineeringStudent`, which we set with
+`EngineeringStudent.prototype.constructor = EngineeringStudent`. Chrome labels it "Student"
+because of how it was made: `Object.create(Student.prototype)`. At that moment the only
+`constructor` it could reach through its chain was `Student`. It is **not** the `Student` function
+and **not** `Student.prototype`.
+
+**2. `[[Prototype]]: Object` underneath is really `Student.prototype`.** Chrome calls it "Object"
+because JavaScript created it as a plain object when `function Student` was defined. Expand it
+and `getName` appears. That's why `getName` isn't visible at the first level:
+
+```
+[[Prototype]]: Object             ← Student.prototype
+   getName: ƒ ()
+   constructor: ƒ Student(...)
+   [[Prototype]]: Object          ← the real Object.prototype (toString, hasOwnProperty, …)
+```
+
+So the console shows the same chain as before, just with confusing labels:
+
+```
+lala → EngineeringStudent.prototype → Student.prototype → Object.prototype → null
+         (Chrome says "Student")       (Chrome says "Object")
+```
+
+Check it in the console instead of trusting the labels:
+
+```js
+Object.getPrototypeOf(lala) === EngineeringStudent.prototype;                  // true
+Object.getPrototypeOf(Object.getPrototypeOf(lala)) === Student.prototype;      // true
+Object.getPrototypeOf(Object.getPrototypeOf(lala)).hasOwnProperty('getName');  // true
+```
+
+When a label and the contents seem to disagree, trust the contents (especially `constructor`),
+or check with `Object.getPrototypeOf`.
+
 ## Fixes made to the original code
 
 | Problem | Fix |
@@ -196,6 +354,7 @@ So "is a Student" means "inherits from `Student.prototype`", not "was built by `
 - Put shared methods on `Constructor.prototype`, not inside the constructor, so they're stored once.
 - Use regular `function`s for prototype methods. An arrow function doesn't get its own `this`, so `this` won't refer to the calling object.
 - `Object.create(proto)` makes an object with a prototype you choose.
+- `new F()` = make an object + link it to `F.prototype` + run `F`. `Object.create(obj)` only makes the object and links it to `obj`, with no setup code.
 - Inheritance with constructors needs `Parent.call(this, ...)`, `Child.prototype = Object.create(Parent.prototype)`, and a restored `constructor`.
 - `class Child extends Parent` does all of this for you behind the scenes.
 

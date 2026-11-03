@@ -69,15 +69,46 @@ console.log(student.doesNotExist);                    // undefined -> searched t
 /**
  * 3. Constructor functions and Constructor.prototype
  *
- * Every regular function gets a `prototype` property (an object) for free.
- * When we call a function with `new`, the newly created object's [[Prototype]]
- * is set to that function's `prototype` object.
+ * Careful: the word "prototype" means two different things here.
  *
- * So objects made with `new Student(...)` have the chain:
+ *   - An object's prototype (shown as [[Prototype]] in the console) is the object it INHERITS from.
+ *     Read it with Object.getPrototypeOf(obj).
+ *   - A function's `.prototype` is just a PROPERTY stored on the function, like any other property.
+ *
+ * Step 1: when we write `function Student(...) {}`, JS automatically creates a new, plain object
+ *         and stores it on the function as Student.prototype. Think of it as an empty "toolbox".
+ *         (Only regular functions and classes get this. Arrow functions do not.)
+ *
+ * Step 2: when we call `new Student(...)`, JS creates a new object and makes it inherit from
+ *         that toolbox. In other words: Object.getPrototypeOf(student_2) === Student.prototype
+ *
+ * So anything we put in the toolbox (Student.prototype) is shared by every student.
+ *
+ * Objects made with `new Student(...)` have the chain:
  *     student_2 -> Student.prototype -> Object.prototype -> null
  *
  * NOTE: `Student.prototype` is NOT the prototype of the Student function itself.
- * It is the object that will become the prototype of every instance created with `new Student()`.
+ * The name is misleading. Pretend it was called `Student.toolboxForMyObjects` instead:
+ * it's just something Student CARRIES (a property) so it can hand it to the objects it creates.
+ * Storing an object on Student doesn't make Student inherit from it, just like
+ * `anees.car = {...}` doesn't make anees inherit from the car.
+ *
+ * Three facts to keep separate:
+ *   1. Student INHERITS from Function.prototype  -> that's why Student.call(...) and Student.bind(...) work
+ *        Object.getPrototypeOf(Student) === Function.prototype
+ *   2. Student is itself an OBJECT, so it can have properties, like Student.prototype (and Student.length)
+ *        typeof Student.prototype === 'object'
+ *   3. Objects made with `new Student()` INHERIT from Student.prototype -> that's why student_2.getName() works
+ *        Object.getPrototypeOf(student_2) === Student.prototype
+ *
+ *     Function.prototype  <---  Student  ---> Student.prototype   <---  student_2
+ *     (call, bind, apply)     (function)     (getName; the toolbox)    (inherits from it)
+ *       ^ Student's REAL                      ^ just a property Student carries
+ *         prototype
+ *
+ * Rule of thumb:
+ *   Object.getPrototypeOf(X) = X's real prototype (what X inherits from)
+ *   X.prototype              = a property on X; what objects made with `new X()` will inherit from
  */
 function Student(name, age, profession){
     // these are OWN properties: every instance gets its own copy
@@ -105,14 +136,14 @@ const student_2 = new Student('Fawaz', 34, 'Doctor');
 
 // __proto__ is another (older) way to get the prototype of an object.
 // It works in browsers, but it's deprecated; prefer Object.getPrototypeOf().
-console.log(student_2.__proto__);
+console.log(student_2);
 console.log(Object.getPrototypeOf(student_2) === Student.prototype); // true
 
 // getName is not on student_2, so JS walks up the chain and finds it on Student.prototype
 console.log(student_2.getName());                 // Fawaz
 console.log(student_2.hasOwnProperty('getName')); // false -> it's inherited
 console.log(student_2.hasOwnProperty('getDeets'));// true  -> it was created inside the constructor
-
+console.log(Object.getPrototypeOf(student_2) === Student.prototype);
 // Visualising the prototype chain by walking up it until we reach null.
 // Expected output (in order): Student.prototype, Object.prototype, null
 let object = student_2;
@@ -178,6 +209,8 @@ const Employee = {
 const emp_1 = Object.create(Employee);
 console.log(emp_1);                                         // {} -> an empty object (no own properties yet)
 console.log(Object.getPrototypeOf(emp_1) === Employee);     // true
+console.log(Object.getPrototypeOf(Object.getPrototypeOf(emp_1)) === Object.prototype);     // true
+
 console.log(emp_1.slogan());                                // works: slogan is found on Employee
 console.log(emp_1.getDeets()); // name and age are undefined, because neither emp_1 nor Employee has them
 

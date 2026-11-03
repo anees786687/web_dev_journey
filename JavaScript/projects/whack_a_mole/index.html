@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+    <style>
+        #mole-grid-container{
+            width: max-content;
+            display: grid;
+            grid-template-columns: repeat(4,100px);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        .mole-container{
+            height: 100px;
+            width: 100px;
+            background-color: grey;
+            border: 2px solid black;
+            object-fit: contain;
+        }
+
+        .img-size{
+            height: 100px;
+            width: 100px;
+            background-color: white;
+        }
+
+        .mole-container:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Whack-a-Mole</h1>
+    </header>
+
+    <div id="mole-grid-container">
+        <div class="mole-container" id="1"></div>
+        <div class="mole-container" id="2"></div>
+        <div class="mole-container" id="3"></div>
+        <div class="mole-container" id="4"></div>
+        <div class="mole-container" id="5"></div>
+        <div class="mole-container" id="6"></div>
+        <div class="mole-container" id="7"></div>
+        <div class="mole-container" id="8"></div>
+        <div class="mole-container" id="9"></div>
+        <div class="mole-container" id="10"></div>
+        <div class="mole-container" id="11"></div>
+        <div class="mole-container" id="12"></div>
+        <div class="mole-container" id="13"></div>
+        <div class="mole-container" id="14"></div>
+        <div class="mole-container" id="15"></div>
+        <div class="mole-container" id="16"></div>
+    </div>
+
+    <p id="scoreboard"></p>
+</body>
+</html>

@@ -13,6 +13,7 @@ projects use `querySelector` and `addEventListener`.
 | [password_checker/](password_checker/) | A login form that checks the username and password against a list of users | Arrays of objects, `for...of` with `break`, the form `submit` event, `preventDefault()`, `.value`, `form.reset()`, Flexbox + Grid |
 | [img_viewer/](img_viewer/) | A big image with clickable thumbnails. Add your own pictures and remove the selected one | Event delegation with `event.target`, `createElement` / `appendChild` / `remove()`, file inputs and `URL.createObjectURL()`, the `hidden` attribute, `object-fit` |
 | [todo_list/](todo_list/) | A todo list that's saved in the browser, so it survives a refresh. Add todos, mark ticked ones complete, or reset the list | `localStorage`, `JSON.stringify` / `JSON.parse`, keeping one master array in sync with storage, `createElement`, `:checked`, `Array.find()`, `setTimeout`, responsive CSS with `max-width` and `clamp()` |
+| [whack_a_mole/](whack_a_mole/) | Moles pop up at random in a 4×4 grid. Click them before they hide to score | `setInterval` / `setTimeout` / `clearTimeout`, event delegation, `data-*` attributes and `dataset`, `element.remove()`, CSS Grid |
 
 ## How to run
 
