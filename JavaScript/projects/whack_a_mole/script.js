@@ -5,7 +5,7 @@ const moleContainersArray = [...moleContainers];
 const MIN_MOLE_CONTAINER = 1;
 const MAX_MOLE_CONTAINER = 16;
 
-let timeoutIDArray = new Array(16).fill(0);
+let timeoutIDArray = new Array(MAX_MOLE_CONTAINER).fill(0);
 let score = 0;
 
 moleGrid.addEventListener('click',(event)=>{
@@ -46,6 +46,8 @@ function moleSurfaced(){
         // once you got that container 
         if(divID === Number(container.id)){
             // add the mole image to that container
+
+            // if the container already has a mole then dont do anything
             if(container.querySelector('img')){
                 return;
             }
